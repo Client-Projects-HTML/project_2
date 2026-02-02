@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NovaSite | Premium IT Solutions & Technology Consulting</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cyber: {
+                            blue: '#00e5ff',
+                            purple: '#6366f1',
+                            dark: '#020617',
+                            card: '#0f172a'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body class="bg-cyber-dark selection:bg-cyber-blue selection:text-black mesh-bg relative min-h-screen">
+
+    <!-- Ambient Glows -->
+    <div class="fixed top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
+        <div
+            class="absolute -top-[10%] -left-[10%] w-[50%] h-[50%] bg-cyber-blue/20 rounded-full blur-[120px] animate-pulse">
+        </div>
+        <div class="absolute top-[20%] -right-[10%] w-[40%] h-[40%] bg-cyber-purple/20 rounded-full blur-[100px] animate-pulse"
+            style="animation-delay: 2s;"></div>
+        <div class="absolute -bottom-[10%] left-[20%] w-[30%] h-[30%] bg-cyber-blue/10 rounded-full blur-[80px] animate-pulse"
+            style="animation-delay: 4s;"></div>
+    </div>
+
+    <!-- Hex Background Overlay -->
+    <div class="fixed inset-0 pointer-events-none opacity-10 z-0">
+        <svg class="h-full w-full" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <pattern id="hexagons" width="50" height="43.4" patternUnits="userSpaceOnUse"
+                    patternTransform="scale(2)">
+                    <path d="M25 0 L50 14.4 L50 43.4 L25 57.8 L0 43.4 L0 14.4 Z" fill="none" stroke="#00f2ff"
+                        stroke-width="0.5" />
+                </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#hexagons)" />
+        </svg>
+    </div>
+
+
+    <!-- Navigation -->
+    <header class="header-main fixed top-0 w-full z-50 py-6 transition-all duration-300">
+        <nav class="container mx-auto px-6 flex items-center justify-between">
+            <a href="index.html" class="flex items-center space-x-2">
+                <div class="w-10 h-10 border-2 border-cyber-blue flex items-center justify-center rotate-45">
+                    <span class="text-cyber-blue font-black -rotate-45">NS</span>
+                </div>
+                <span class="text-2xl font-black tracking-tighter text-white uppercase">NOVASITE</span>
+            </a>
+
+            <div
+                class="hidden lg:flex items-center space-x-10 text-sm font-bold uppercase tracking-widest text-gray-400">
+                <a href="#" class="text-white border-b-2 border-cyber-blue pb-1">Home</a>
+                <a href="services.html" class="hover:text-cyber-blue transition-colors">Services</a>
+                <a href="solutions.html" class="hover:text-cyber-blue transition-colors">Solutions</a>
+                <a href="about.html" class="hover:text-cyber-blue transition-colors">Company</a>
+            </div>
+
+            <div class="flex items-center space-x-6">
+                <a href="contact.html" class="btn-cyber hidden sm:block">Launch Project</a>
+                <button id="menu-btn" class="lg:hidden text-cyber-blue text-2xl">
+                    <i class="fa-solid fa-bars-staggered"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="relative min-h-screen flex items-center pt-20">
+            <div class="container mx-auto px-6 relative z-10">
+                <div class="max-w-4xl">
+                    <div class="flex items-center space-x-4 mb-8">
+                        <div class="h-[1px] w-12 bg-cyber-blue"></div>
+                        <span class="text-cyber-blue font-bold tracking-[0.3em] uppercase text-xs">Modern Digital
+                            Architecture</span>
+                    </div>
+                    <h1 class="text-6xl lg:text-8xl font-black mb-8 leading-[1.05] text-white">
+                        THE NEXT <span class="text-neon italic">GENERATION</span> OF WEB.
+                    </h1>
+                    <p class="text-xl text-gray-400 mb-12 max-w-2xl leading-relaxed">
+                        NovaSite empowers visionary companies to redefine their digital footprint with resilient
+                        infrastructure and high-performance design.
+                    </p>
+                    <div class="flex flex-col sm:flex-row items-start sm:items-center gap-6">
+                        <button class="btn-cyber !px-12 !py-5 text-lg">Our Vision</button>
+                        <div class="flex -space-x-3 transition-all hover:space-x-1">
+                            <img src="https://ui-avatars.com/api/?name=User+1&background=00e5ff&color=000"
+                                class="w-12 h-12 rounded-full border-2 border-cyber-dark" alt="User">
+                            <img src="https://ui-avatars.com/api/?name=User+2&background=6366f1&color=fff"
+                                class="w-12 h-12 rounded-full border-2 border-cyber-dark" alt="User">
+                            <img src="https://ui-avatars.com/api/?name=User+3&background=f43f5e&color=fff"
+                                class="w-12 h-12 rounded-full border-2 border-cyber-dark" alt="User">
+                            <div
+                                class="w-12 h-12 rounded-full bg-cyber-card border-2 border-cyber-dark flex items-center justify-center text-xs font-bold text-white">
+                                +3.1k</div>
+                        </div>
+                        <p class="text-sm text-gray-500 font-medium">Leading the 2026 Web Evolution</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dashboard Preview -->
+            <div
+                class="absolute right-10 top-1/4 hidden xl:block w-96 p-1 glass-vivid rounded-3xl animate-pulse-slow z-10">
+                <div class="bg-cyber-dark/60 p-8 rounded-[1.4rem]">
+                    <div class="flex items-center justify-between mb-8">
+                        <span
+                            class="text-xs font-black text-cyber-blue drop-shadow-[0_0_8px_var(--primary-glow)]">SITE_ANALYTICS</span>
+                        <div class="flex space-x-1">
+                            <div class="w-1.5 h-1.5 rounded-full bg-cyber-blue"></div>
+                            <div class="w-1.5 h-1.5 rounded-full bg-cyber-blue animate-ping"></div>
+                        </div>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="h-2 bg-white/5 rounded-full w-full"></div>
+                        <div class="h-2 bg-white/5 rounded-full w-3/4"></div>
+                        <div class="h-8 bg-cyber-blue/10 rounded-lg flex items-center px-3">
+                            <div class="w-full h-1 bg-cyber-blue/20 rounded-full overflow-hidden">
+                                <div class="w-4/5 h-full bg-cyber-blue"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Grid -->
+        <section class="py-24 border-y border-white/5">
+            <div class="container mx-auto px-6">
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-12">
+                    <div class="text-center lg:text-left">
+                        <p class="text-4xl lg:text-6xl font-black text-white mb-2 font-mono"><span class="stat-number"
+                                data-target="99">0</span>%</p>
+                        <p class="text-xs font-bold uppercase tracking-widest text-cyber-blue">Optimization Score</p>
+                    </div>
+                    <div class="text-center lg:text-left">
+                        <p class="text-4xl lg:text-6xl font-black text-white mb-2 font-mono"><span class="stat-number"
+                                data-target="500">0</span>+</p>
+                        <p class="text-xs font-bold uppercase tracking-widest text-cyber-blue">Nodes Deployed</p>
+                    </div>
+                    <div class="text-center lg:text-left">
+                        <p class="text-4xl lg:text-6xl font-black text-white mb-2 font-mono"><span class="stat-number"
+                                data-target="24">0</span>M</p>
+                        <p class="text-xs font-bold uppercase tracking-widest text-cyber-blue">Requests / Hr</p>
+                    </div>
+                    <div class="text-center lg:text-left">
+                        <p class="text-4xl lg:text-6xl font-black text-white mb-2 font-mono"><span class="stat-number"
+                                data-target="100">0</span>%</p>
+                        <p class="text-xs font-bold uppercase tracking-widest text-cyber-blue">Asset Security</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-20 bg-cyber-dark border-t border-white/5 relative overflow-hidden">
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-20">
+                <div class="lg:col-span-2">
+                    <a href="index.html" class="flex items-center space-x-2 mb-8">
+                        <div class="w-12 h-12 border-2 border-cyber-blue flex items-center justify-center rotate-45">
+                            <span class="text-cyber-blue font-black -rotate-45 text-xl">NS</span>
+                        </div>
+                        <span class="text-3xl font-black tracking-tighter text-white uppercase">NOVASITE</span>
+                    </a>
+                    <p class="text-gray-500 max-w-sm mb-10 text-lg">Architecting the digital future with precision,
+                        speed, and absolute scale.</p>
+                </div>
+                <div>
+                    <h4 class="text-xs font-black uppercase tracking-[0.3em] text-cyber-blue mb-8">Navigation</h4>
+                    <ul class="space-y-4 font-bold text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">Framework</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Case Studies</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Engineering</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-xs font-black uppercase tracking-[0.3em] text-cyber-blue mb-8">Contact</h4>
+                    <p class="text-gray-400 font-bold mb-2">hello@novasite.tech</p>
+                    <p class="text-gray-500 text-sm">Tech Hub 01 • SFO</p>
+                </div>
+            </div>
+            <div
+                class="pt-10 border-t border-white/5 flex items-center justify-between text-[10px] font-bold text-gray-600 uppercase tracking-widest">
+                <p>© 2026 NovaSite Systems. All rights reserved.</p>
+                <div class="flex space-x-6">
+                    <a href="#">Security</a>
+                    <a href="#">Privacy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>

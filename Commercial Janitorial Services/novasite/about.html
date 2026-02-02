@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | NovaSite Engineering Culture</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cyber: {
+                            blue: '#00e5ff',
+                            dark: '#020617',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body class="bg-cyber-dark text-gray-400">
+
+    <header class="fixed top-0 w-full z-50 py-6 glass">
+        <nav class="container mx-auto px-6 flex items-center justify-between">
+            <a href="index.html" class="flex items-center space-x-2">
+                <div class="w-10 h-10 border-2 border-cyber-blue flex items-center justify-center rotate-45">
+                    <span class="text-cyber-blue font-black -rotate-45">NS</span>
+                </div>
+                <span class="text-2xl font-black tracking-tighter text-white uppercase">NOVASITE</span>
+            </a>
+            <a href="contact.html" class="btn-cyber !px-6 !py-3 !text-[10px]">Work_with_us</a>
+        </nav>
+    </header>
+
+    <main class="pt-40 pb-20">
+        <section class="container mx-auto px-6 text-center max-w-4xl">
+            <span
+                class="text-cyber-blue font-bold tracking-[0.4em] uppercase text-xs mb-6 inline-block">OUR_APPROACH</span>
+            <h1 class="text-5xl lg:text-7xl font-black text-white mb-10 leading-tight">WE BUILD THE <span
+                    class="text-neon">PLATFORMS</span> OF TOMORROW.</h1>
+            <p class="text-xl text-gray-400 mb-20">NovaSite was born out of a desire to create a more resilient, faster,
+                and beautiful web. Our team of architects and designers push the boundaries of what's possible with
+                modern primitives.</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="p-12 glass rounded-[3rem] text-left">
+                    <h3 class="text-3xl font-black text-white mb-6">01_DESIGN</h3>
+                    <p class="text-gray-500">Aesthetics that inspire trust and drive interaction. Every pixel serves a
+                        purpose in our layout philosophy.</p>
+                </div>
+                <div class="p-12 glass rounded-[3rem] text-left">
+                    <h3 class="text-3xl font-black text-white mb-6">02_CODE</h3>
+                    <p class="text-gray-500">Engineered for speed. We use next-generation protocols to ensure your site
+                        is live and responsive at all times.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="py-20 text-center border-t border-white/5">
+        <p class="text-xs font-bold text-gray-600 uppercase tracking-widest">© 2026 NovaSite Systems.</p>
+    </footer>
+
+</body>
+
+</html>

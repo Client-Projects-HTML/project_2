@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - NovaSite</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff', 100: '#dbeafe', 200: '#bfdbfe', 300: '#93c5fd', 400: '#60a5fa', 500: '#3b82f6', 600: '#2563eb', 700: '#1d4ed8', 800: '#1e40af', 900: '#1e3a8a',
+                        },
+                        dark: {
+                            card: '#1e293b',
+                            body: '#0f172a',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body
+    class="bg-gray-50 dark:bg-dark-body min-h-screen flex items-center justify-center p-6 selection:bg-primary-500 selection:text-white">
+
+    <div class="w-full max-w-md">
+        <!-- Logo -->
+        <div class="text-center mb-8">
+            <a href="index.html" class="inline-flex items-center space-x-2">
+                <div
+                    class="w-12 h-12 logo-box rounded-xl flex items-center justify-center text-white text-2xl font-bold">
+                    N</div>
+                <span class="text-3xl font-bold font-heading dark:text-white">NovaSite</span>
+            </a>
+        </div>
+
+        <!-- Card -->
+        <div
+            class="bg-white dark:bg-dark-card rounded-[2rem] shadow-2xl p-8 md:p-10 border border-gray-100 dark:border-gray-700">
+            <h1 class="text-2xl font-bold font-heading mb-2 dark:text-white">Welcome Back!</h1>
+            <p class="text-gray-500 dark:text-gray-400 mb-8">Please enter your details to sign in.</p>
+
+            <form action="client/index.html" class="space-y-6">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Email Address</label>
+                    <div class="relative">
+                        <i class="fa-solid fa-envelope absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                        <input type="email" required placeholder="name@company.com"
+                            class="w-full pl-11 pr-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-800 border-none focus:ring-2 focus:ring-primary-500 dark:text-white outline-none">
+                    </div>
+                </div>
+
+                <div>
+                    <div class="flex items-center justify-between mb-2">
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Password</label>
+                        <a href="#" class="text-sm font-semibold text-primary-500 hover:text-primary-600">Forgot?</a>
+                    </div>
+                    <div class="relative">
+                        <i class="fa-solid fa-lock absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                        <input type="password" required placeholder="••••••••"
+                            class="w-full pl-11 pr-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-800 border-none focus:ring-2 focus:ring-primary-500 dark:text-white outline-none">
+                        <button type="button"
+                            class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
+                            <i class="fa-solid fa-eye text-sm"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="flex items-center">
+                    <input type="checkbox" id="remember"
+                        class="w-4 h-4 text-primary-600 bg-gray-100 border-gray-300 rounded focus:ring-primary-500">
+                    <label for="remember" class="ml-2 text-sm text-gray-600 dark:text-gray-400">Remember me for 30
+                        days</label>
+                </div>
+
+                <button type="submit"
+                    class="w-full py-4 gradient-primary text-white font-bold rounded-xl shadow-lg shadow-primary-500/30 hover:shadow-primary-500/50 hover:scale-[1.02] transition-all">Sign
+                    In</button>
+            </form>
+
+            <div class="mt-8 relative text-center">
+                <div class="absolute inset-0 flex items-center">
+                    <div class="w-full border-t border-gray-100 dark:border-gray-800"></div>
+                </div>
+                <span class="relative bg-white dark:bg-dark-card px-4 text-sm text-gray-500">Select Your Portal</span>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4 mt-8">
+                <a href="admin/index.html"
+                    class="flex items-center justify-center space-x-2 py-3 border border-gray-100 dark:border-gray-700 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800 dark:text-white transition-all">
+                    <i class="fa-solid fa-user-shield text-primary-500"></i>
+                    <span class="font-medium text-sm">Admin Login</span>
+                </a>
+                <a href="client/index.html"
+                    class="flex items-center justify-center space-x-2 py-3 border border-gray-100 dark:border-gray-700 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800 dark:text-white transition-all">
+                    <i class="fa-solid fa-user-tie text-primary-500"></i>
+                    <span class="font-medium text-sm">Client Login</span>
+                </a>
+            </div>
+
+            <p class="mt-8 text-center text-sm text-gray-600 dark:text-gray-400">
+                Don't have an account? <a href="register.html"
+                    class="font-bold text-primary-500 hover:text-primary-600">Sign Up</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Theme Toggle -->
+    <button id="theme-toggle"
+        class="fixed bottom-6 right-6 w-12 h-12 flex items-center justify-center rounded-2xl bg-white dark:bg-dark-card shadow-2xl dark:text-white transition-all">
+        <i class="fa-solid fa-moon dark:hidden"></i>
+        <i class="fa-solid fa-sun hidden dark:block"></i>
+    </button>
+
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>

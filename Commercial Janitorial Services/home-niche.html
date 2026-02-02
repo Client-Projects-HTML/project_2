@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Agency - NovaSite Niche Layout</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f5f3ff', 100: '#ede9fe', 200: '#ddd6fe', 300: '#c4b5fd', 400: '#a78bfa', 500: '#8b5cf6', 600: '#7c3aed', 700: '#6d28d9', 800: '#5b21b6', 900: '#4c1d95',
+                        },
+                        dark: {
+                            card: '#1e293b',
+                            body: '#0f172a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body class="selection:bg-primary-500 selection:text-white bg-dark-body text-gray-300">
+
+    <!-- Agency Navigation -->
+    <header class="fixed top-0 w-full z-50 bg-dark-body/80 backdrop-blur-xl border-b border-white/5">
+        <nav class="container mx-auto px-6 py-4 flex items-center justify-between">
+            <a href="index.html" class="flex items-center space-x-2">
+                <div
+                    class="w-10 h-10 bg-primary-600 rounded-full flex items-center justify-center text-white text-xl font-bold">
+                    N</div>
+                <span class="text-2xl font-bold font-heading text-white">NovaSite</span>
+            </a>
+            <div class="hidden lg:flex items-center space-x-10">
+                <a href="#" class="text-white font-medium hover:text-primary-400 transition-colors">Work</a>
+                <a href="#" class="font-medium hover:text-primary-400 transition-colors">Services</a>
+                <a href="#" class="font-medium hover:text-primary-400 transition-colors">Process</a>
+                <a href="#" class="font-medium hover:text-primary-400 transition-colors">Blog</a>
+            </div>
+            <a href="contact.html"
+                class="px-8 py-3 bg-white text-black rounded-full font-bold hover:bg-primary-500 hover:text-white transition-all">Let's
+                Talk</a>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Agency Hero -->
+        <section class="min-h-screen flex items-center justify-center relative pt-20 overflow-hidden">
+            <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-primary-600/20 rounded-full blur-[120px]"></div>
+            <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-600/20 rounded-full blur-[120px]"></div>
+
+            <div class="container mx-auto px-6 text-center relative z-10">
+                <span
+                    class="px-4 py-1.5 border border-white/10 rounded-full text-xs font-bold uppercase tracking-widest text-primary-400 mb-8 inline-block">Creative
+                    Mindset • Data Driven</span>
+                <h1 class="text-6xl lg:text-8xl font-black font-heading text-white mb-8 leading-[1.1]">
+                    Crafting <span
+                        class="text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-blue-400 italic">Digital</span>
+                    Experiences.
+                </h1>
+                <p class="text-xl text-gray-400 max-w-2xl mx-auto mb-12">
+                    We help innovative brands scale their impact through high-end design and performance-first
+                    development.
+                </p>
+                <div class="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6">
+                    <button
+                        class="px-10 py-5 bg-primary-600 text-white rounded-full font-bold text-lg hover:bg-primary-700 hover:scale-105 transition-all shadow-xl shadow-primary-600/25">View
+                        Our Work</button>
+                    <button class="flex items-center space-x-3 text-white font-bold group">
+                        <span
+                            class="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center group-hover:bg-white group-hover:text-black transition-all">
+                            <i class="fa-solid fa-play ml-1"></i>
+                        </span>
+                        <span>Showreel 2026</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Marquee -->
+        <div class="py-12 border-y border-white/5 bg-white/[0.02] overflow-hidden whitespace-nowrap">
+            <div class="flex animate-[marquee_20s_linear_infinite] space-x-12 px-6">
+                <span class="text-4xl lg:text-6xl font-black text-white/10 uppercase font-heading">Digital
+                    Strategy</span>
+                <span class="text-4xl lg:text-6xl font-black text-white/10 uppercase font-heading">•</span>
+                <span class="text-4xl lg:text-6xl font-black text-white/10 uppercase font-heading">UI/UX Design</span>
+                <span class="text-4xl lg:text-6xl font-black text-white/10 uppercase font-heading">•</span>
+                <span class="text-4xl lg:text-6xl font-black text-white/10 uppercase font-heading">Web3
+                    Development</span>
+                <span class="text-4xl lg:text-6xl font-black text-white/10 uppercase font-heading">•</span>
+                <span class="text-4xl lg:text-6xl font-black text-white/10 uppercase font-heading">Growth
+                    Marketing</span>
+            </div>
+        </div>
+
+        <style>
+            @keyframes marquee {
+                0% {
+                    transform: translateX(0);
+                }
+
+                100% {
+                    transform: translateX(-50%);
+                }
+            }
+        </style>
+
+        <!-- Work Showcase -->
+        <section class="py-24">
+            <div class="container mx-auto px-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                    <div class="group cursor-pointer">
+                        <div class="relative overflow-hidden rounded-[2.5rem] mb-6">
+                            <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                                alt="Work"
+                                class="w-full h-[500px] object-cover group-hover:scale-110 transition-transform duration-700">
+                            <div
+                                class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity p-10 flex flex-col justify-end">
+                                <span class="text-white/60 text-sm mb-2 font-bold uppercase tracking-widest">E-commerce
+                                    • Branding</span>
+                                <h3 class="text-3xl font-bold text-white">Nebula Fashion Store</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="group cursor-pointer">
+                        <div class="relative overflow-hidden rounded-[2.5rem] mb-6">
+                            <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                                alt="Work"
+                                class="w-full h-[500px] object-cover group-hover:scale-110 transition-transform duration-700">
+                            <div
+                                class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity p-10 flex flex-col justify-end">
+                                <span class="text-white/60 text-sm mb-2 font-bold uppercase tracking-widest">App Design
+                                    • Fintech</span>
+                                <h3 class="text-3xl font-bold text-white">Quantum Pay Mobile</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="py-20 bg-black text-center">
+        <h2 class="text-4xl lg:text-6xl font-bold text-white mb-10">Have a Great Idea?</h2>
+        <a href="mailto:hello@novasite.agency"
+            class="text-3xl font-black text-primary-500 hover:text-white transition-colors">hello@novasite.agency</a>
+    </footer>
+
+</body>
+
+</html>

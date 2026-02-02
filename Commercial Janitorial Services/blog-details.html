@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Details - NovaSite</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff', 100: '#dbeafe', 200: '#bfdbfe', 300: '#93c5fd', 400: '#60a5fa', 500: '#3b82f6', 600: '#2563eb', 700: '#1d4ed8', 800: '#1e40af', 900: '#1e3a8a',
+                        },
+                        dark: {
+                            card: '#1e293b',
+                            body: '#0f172a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body class="selection:bg-primary-500 selection:text-white dark:bg-dark-body">
+
+    <!-- Header Navigation -->
+    <header class="fixed top-0 w-full z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md shadow-sm">
+        <nav class="container mx-auto px-6 py-4 flex items-center justify-between">
+            <a href="index.html" class="flex items-center space-x-2">
+                <div
+                    class="w-10 h-10 logo-box rounded-xl flex items-center justify-center text-white text-xl font-bold transition-transform hover:scale-105">
+                    N</div>
+                <span class="text-2xl font-bold font-heading dark:text-white">NovaSite</span>
+            </a>
+            <div class="hidden lg:flex items-center gap-8">
+                <a href="index.html" class="hover:text-primary-500 transition-colors dark:text-gray-300">Home</a>
+                <a href="about.html" class="hover:text-primary-500 transition-colors dark:text-gray-300">About</a>
+                <a href="services.html" class="hover:text-primary-500 transition-colors dark:text-gray-300">Services</a>
+                <a href="blog.html" class="text-primary-600 font-medium">Blog</a>
+                <a href="pricing.html" class="hover:text-primary-500 transition-colors dark:text-gray-300">Pricing</a>
+                <a href="contact.html" class="hover:text-primary-500 transition-colors dark:text-gray-300">Contact</a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button id="theme-toggle"
+                    class="w-11 h-11 flex items-center justify-center rounded-xl bg-gray-100 dark:bg-gray-800 dark:text-white transition-all hover:bg-gray-200 dark:hover:bg-gray-700 shadow-sm">
+                    <i class="fa-solid fa-moon dark:hidden text-lg"></i>
+                    <i class="fa-solid fa-sun hidden dark:block text-lg"></i>
+                </button>
+                <button id="rtl-toggle"
+                    class="w-11 h-11 flex items-center justify-center rounded-xl bg-gray-100 dark:bg-gray-800 dark:text-white transition-all hover:bg-gray-200 dark:hover:bg-gray-700 shadow-sm font-bold text-xs">
+                    RTL
+                </button>
+                <button id="mobile-menu-btn"
+                    class="lg:hidden w-11 h-11 flex items-center justify-center rounded-xl bg-gray-100 dark:bg-gray-800 dark:text-white transition-all hover:bg-gray-200 dark:hover:bg-gray-700 shadow-sm">
+                    <i class="fa-solid fa-bars text-lg"></i>
+                </button>
+                <a href="login.html"
+                    class="hidden lg:flex px-8 py-2.5 bg-nova-blue hover:bg-blue-600 text-white rounded-xl font-bold shadow-lg shadow-blue-500/30 transition-all active:scale-95 items-center space-x-2">
+                    <span>Login</span>
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="fixed inset-0 z-[60] hidden">
+        <div class="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
+        <div class="absolute right-0 top-0 h-full w-4/5 max-w-sm bg-white dark:bg-dark-body p-8 shadow-2xl">
+            <div class="flex items-center justify-between mb-8">
+                <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 logo-box rounded-lg flex items-center justify-center text-white font-bold">
+                        N</div>
+                    <span class="text-xl font-bold font-heading dark:text-white">NovaSite</span>
+                </div>
+                <button id="mobile-menu-close" class="text-gray-500 dark:text-gray-400">
+                    <i class="fa-solid fa-xmark text-2xl"></i>
+                </button>
+            </div>
+            <div class="space-y-4">
+                <a href="index.html" class="block text-lg font-medium dark:text-gray-300">Home</a>
+                <a href="about.html" class="block text-lg font-medium dark:text-gray-300">About</a>
+                <a href="services.html" class="block text-lg font-medium dark:text-gray-300">Services</a>
+                <a href="blog.html" class="block text-lg font-medium text-primary-500">Blog</a>
+                <a href="pricing.html" class="block text-lg font-medium dark:text-gray-300">Pricing</a>
+                <a href="contact.html" class="block text-lg font-medium dark:text-gray-300">Contact</a>
+                <hr class="border-gray-100 dark:border-gray-800">
+                <a href="login.html"
+                    class="block w-full py-3 text-center bg-nova-blue text-white rounded-xl font-bold">Login</a>
+            </div>
+        </div>
+    </div>
+
+    <main class="pt-32 pb-20 relative overflow-hidden">
+        <!-- Background Blobs -->
+        <div
+            class="absolute top-[5%] right-[-10%] w-[400px] h-[400px] bg-pink-400 rounded-full gradient-blob animate-float">
+        </div>
+        <div class="absolute top-[30%] left-[-10%] w-[400px] h-[400px] bg-blue-400 rounded-full gradient-blob animate-float"
+            style="animation-delay: -2s"></div>
+
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col lg:flex-row gap-12">
+                <!-- Blog Content -->
+                <div class="lg:w-2/3">
+                    <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6958?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
+                        alt="Clean Office Workspace"
+                        class="w-full aspect-video object-cover rounded-[2.5rem] mb-10 shadow-xl">
+
+                    <div class="flex items-center space-x-4 mb-6">
+                        <span
+                            class="px-3 py-1 bg-primary-100 dark:bg-primary-900/30 text-primary-600 rounded-lg text-xs font-bold uppercase tracking-wider">Business
+                            Strategy</span>
+                        <span class="text-sm text-gray-500">Oct 15, 2025</span>
+                    </div>
+
+                    <h1 class="text-4xl lg:text-5xl font-bold font-heading mb-8 dark:text-white leading-tight">How
+                        Professional Cleaning Boosts Employee Morale</h1>
+
+                    <div class="prose prose-lg dark:prose-invert max-w-none text-gray-600 dark:text-gray-400">
+                        <p class="mb-6 leading-relaxed">
+                            A clean workspace is more than just aesthetics; it's a key driver for productivity and
+                            mental health in the workplace. Research consistently shows that employees working in
+                            sanitized and organized environments feel more valued and exhibit lower stress levels.
+                        </p>
+                        <blockquote
+                            class="border-l-4 border-primary-500 pl-6 my-10 italic text-2xl text-gray-800 dark:text-white font-medium">
+                            "The cleanliness of a workspace is a direct reflection of a company's commitment to its most
+                            valuable asset: its people."
+                        </blockquote>
+                        <h3 class="text-2xl font-bold mt-10 mb-6 dark:text-white font-heading">The Psychological Impact
+                        </h3>
+                        <p class="mb-6">
+                            Clutter and dirt can subconsciously cause anxiety. When an employee walks into a fresh,
+                            lemon-scented office with sparkling floors, their "fight or flight" response diminishes,
+                            allowing for deeper focus and creative thinking.
+                        </p>
+                        <img src="https://images.unsplash.com/photo-1556761175-4b46a572b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                            alt="Detail" class="rounded-3xl my-10 w-full">
+                        <p class="mb-6">
+                            Furthermore, professional cleaning reduces the spread of seasonal illnesses, leading to
+                            fewer sick days and a more consistent workflow across teams.
+                        </p>
+                    </div>
+
+                    <!-- Tags & Social Share -->
+                    <div
+                        class="mt-16 pt-10 border-t border-gray-100 dark:border-gray-800 flex flex-col sm:flex-row items-center justify-between gap-6">
+                        <div class="flex items-center space-x-3">
+                            <span class="text-sm font-bold dark:text-white">Tags:</span>
+                            <a href="#"
+                                class="px-4 py-1.5 bg-gray-50 dark:bg-gray-800 rounded-xl text-xs text-gray-500 dark:text-gray-400 hover:bg-primary-500 hover:text-white transition-all">Cleaning</a>
+                            <a href="#"
+                                class="px-4 py-1.5 bg-gray-50 dark:bg-gray-800 rounded-xl text-xs text-gray-500 dark:text-gray-400 hover:bg-primary-500 hover:text-white transition-all">Office</a>
+                            <a href="#"
+                                class="px-4 py-1.5 bg-gray-50 dark:bg-gray-800 rounded-xl text-xs text-gray-500 dark:text-gray-400 hover:bg-primary-500 hover:text-white transition-all">HR</a>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <span class="text-sm font-bold dark:text-white">Share:</span>
+                            <div class="flex space-x-3">
+                                <a href="#"
+                                    class="w-10 h-10 rounded-full bg-gray-50 dark:bg-gray-800 flex items-center justify-center hover:bg-primary-500 hover:text-white transition-all"><i
+                                        class="fa-brands fa-facebook-f text-sm"></i></a>
+                                <a href="#"
+                                    class="w-10 h-10 rounded-full bg-gray-50 dark:bg-gray-800 flex items-center justify-center hover:bg-primary-500 hover:text-white transition-all"><i
+                                        class="fa-brands fa-twitter text-sm"></i></a>
+                                <a href="#"
+                                    class="w-10 h-10 rounded-full bg-gray-50 dark:bg-gray-800 flex items-center justify-center hover:bg-primary-500 hover:text-white transition-all"><i
+                                        class="fa-brands fa-linkedin-in text-sm"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Author Section -->
+                    <div class="mt-16 p-8 bg-gray-50 dark:bg-gray-800 rounded-[2rem] flex items-center space-x-6">
+                        <img src="https://ui-avatars.com/api/?name=Alex+Morgan&background=3b82f6&color=fff" alt="Author"
+                            class="w-20 h-20 rounded-2xl shadow-lg">
+                        <div>
+                            <h4 class="text-xl font-bold dark:text-white mb-2">Alex Morgan</h4>
+                            <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">CEO and founder of
+                                NovaSite. Alex has over 15 years of experience in commercial facility management and
+                                business optimization.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Blog Sidebar -->
+                <aside class="lg:w-1/3">
+                    <div class="sticky top-32 space-y-10">
+                        <!-- Search Widget -->
+                        <div
+                            class="p-8 bg-white dark:bg-dark-card rounded-[2rem] border border-gray-100 dark:border-gray-800 shadow-sm">
+                            <h4 class="text-xl font-bold mb-6 dark:text-white">Search</h4>
+                            <div class="relative">
+                                <i
+                                    class="fa-solid fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                                <input type="text" placeholder="Type here..."
+                                    class="w-full pl-11 pr-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-800 border-none outline-none dark:text-white focus:ring-2 focus:ring-primary-500">
+                            </div>
+                        </div>
+
+                        <!-- Categories -->
+                        <div
+                            class="p-8 bg-white dark:bg-dark-card rounded-[2rem] border border-gray-100 dark:border-gray-800 shadow-sm">
+                            <h4 class="text-xl font-bold mb-6 dark:text-white">Categories</h4>
+                            <ul class="space-y-4">
+                                <li><a href="#"
+                                        class="flex items-center justify-between text-gray-500 dark:text-gray-400 hover:text-primary-500 transition-colors"><span>Business</span>
+                                        <span
+                                            class="text-xs bg-gray-50 dark:bg-gray-800 px-2 py-1 rounded">12</span></a>
+                                </li>
+                                <li><a href="#"
+                                        class="flex items-center justify-between text-gray-500 dark:text-gray-400 hover:text-primary-500 transition-colors"><span>Cleaning
+                                            Tips</span> <span
+                                            class="text-xs bg-gray-50 dark:bg-gray-800 px-2 py-1 rounded">08</span></a>
+                                </li>
+                                <li><a href="#"
+                                        class="flex items-center justify-between text-gray-500 dark:text-gray-400 hover:text-primary-500 transition-colors"><span>Sustainability</span>
+                                        <span
+                                            class="text-xs bg-gray-50 dark:bg-gray-800 px-2 py-1 rounded">05</span></a>
+                                </li>
+                                <li><a href="#"
+                                        class="flex items-center justify-between text-gray-500 dark:text-gray-400 hover:text-primary-500 transition-colors"><span>Management</span>
+                                        <span
+                                            class="text-xs bg-gray-50 dark:bg-gray-800 px-2 py-1 rounded">10</span></a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Newsletter Widget -->
+                        <div class="p-8 gradient-primary rounded-[2rem] text-white shadow-xl">
+                            <h4 class="text-xl font-bold mb-4">Newsletter</h4>
+                            <p class="text-primary-50 mb-6 text-sm">Join 5,000+ professionals receiving weekly business
+                                insights.</p>
+                            <form class="space-y-3">
+                                <input type="email" placeholder="Email address"
+                                    class="w-full px-4 py-3 rounded-xl bg-white/10 border-white/20 text-white placeholder-primary-200 outline-none focus:bg-white/20">
+                                <button
+                                    class="w-full py-3 bg-white text-primary-600 font-bold rounded-xl shadow-lg hover:bg-primary-50 transition-all">Subscribe</button>
+                            </form>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="pt-20 pb-10 bg-white dark:bg-dark-body border-t border-gray-100 dark:border-gray-800">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+                <div>
+                    <a href="index.html" class="flex items-center space-x-2 mb-6">
+                        <div
+                            class="w-10 h-10 logo-box rounded-xl flex items-center justify-center text-white text-xl font-bold transition-transform hover:scale-105">
+                            N</div>
+                        <span class="text-2xl font-bold font-heading dark:text-white">NovaSite</span>
+                    </a>
+                    <p class="text-gray-500 dark:text-gray-400 mb-6">Leading provider of professional commercial
+                        janitorial services, ensuring a clean and healthy environment for your business.</p>
+                    <div class="flex space-x-4">
+                        <a href="#"
+                            class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center hover:bg-nova-blue hover:text-white transition-all text-gray-600 dark:text-gray-400">
+                            <i class="fa-brands fa-facebook-f"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center hover:bg-nova-blue hover:text-white transition-all text-gray-600 dark:text-gray-400">
+                            <i class="fa-brands fa-twitter"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center hover:bg-nova-blue hover:text-white transition-all text-gray-600 dark:text-gray-400">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-6 dark:text-white">Quick Links</h4>
+                    <ul class="space-y-4">
+                        <li><a href="about.html"
+                                class="text-gray-500 dark:text-gray-400 hover:text-nova-blue transition-colors">About
+                                Us</a></li>
+                        <li><a href="services.html"
+                                class="text-gray-500 dark:text-gray-400 hover:text-nova-blue transition-colors">Services</a>
+                        </li>
+                        <li><a href="blog.html"
+                                class="text-gray-500 dark:text-gray-400 hover:text-nova-blue transition-colors">Blog</a>
+                        </li>
+                        <li><a href="contact.html"
+                                class="text-gray-500 dark:text-gray-400 hover:text-nova-blue transition-colors">Contact
+                                Us</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-6 dark:text-white">Services</h4>
+                    <ul class="space-y-4">
+                        <li><a href="services.html"
+                                class="text-gray-500 dark:text-gray-400 hover:text-nova-blue transition-colors">Office
+                                Cleaning</a></li>
+                        <li><a href="industrial-cleaning.html"
+                                class="text-gray-500 dark:text-gray-400 hover:text-nova-blue transition-colors">Industrial
+                                Cleaning</a>
+                        </li>
+                        <li><a href="404.html"
+                                class="text-gray-500 dark:text-gray-400 hover:text-nova-blue transition-colors">Sanitization</a>
+                        </li>
+                        <li><a href="coming-soon.html"
+                                class="text-gray-500 dark:text-gray-400 hover:text-nova-blue transition-colors">Window
+                                Cleaning</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-6 dark:text-white">Newsletter</h4>
+                    <p class="text-gray-500 dark:text-gray-400 mb-4">Subscribe to our newsletter for latest updates.</p>
+                    <form class="relative">
+                        <input type="email" placeholder="Email Address"
+                            class="w-full px-4 py-3 rounded-xl bg-gray-100 dark:bg-gray-800 border-none focus:ring-2 focus:ring-nova-blue dark:text-white outline-none">
+                        <button type="submit"
+                            class="absolute right-2 top-2 w-10 h-10 bg-nova-blue text-white rounded-lg flex items-center justify-center shadow-lg shadow-blue-500/30">
+                            <i class="fa-solid fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div class="pt-8 border-t border-gray-100 dark:border-gray-800 text-center">
+                <p class="text-gray-500 dark:text-gray-400">&copy; 2026 NovaSite. All rights reserved by Abhivorn
+                    Technologies.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>

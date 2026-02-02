@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NovaSite - Modern Service Business HTML Template</title>
+    <meta name="description"
+        content="Premium multipurpose HTML template for service-based businesses. Modern, responsive, and SEO optimized.">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff', 100: '#dbeafe', 200: '#bfdbfe', 300: '#93c5fd', 400: '#60a5fa', 500: '#3b82f6', 600: '#2563eb', 700: '#1d4ed8', 800: '#1e40af', 900: '#1e3a8a',
+                        },
+                        dark: {
+                            card: '#1e293b',
+                            body: '#0f172a',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head>
+
+<body class="selection:bg-primary-500 selection:text-white">
+
+    <!-- Header Navigation -->
+    <header class="fixed top-0 w-full z-50 transition-all duration-300">
+        <nav class="container mx-auto px-6 py-4 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-2">
+                <div
+                    class="w-10 h-10 logo-box rounded-xl flex items-center justify-center text-white text-xl font-bold transition-transform hover:scale-105">
+                    N</div>
+                <span class="text-2xl font-bold font-heading dark:text-white">NovaSite</span>
+            </a>
+
+            <!-- Desktop Menu -->
+            <div class="hidden lg:flex items-center gap-8">
+                <a href="index.html" class="text-primary-600 font-medium">Home</a>
+                <a href="about.html" class="hover:text-primary-500 transition-colors dark:text-gray-300">About</a>
+                <a href="services.html" class="hover:text-primary-500 transition-colors dark:text-gray-300">Services</a>
+                <a href="blog.html" class="hover:text-primary-500 transition-colors dark:text-gray-300">Blog</a>
+                <a href="pricing.html" class="hover:text-primary-500 transition-colors dark:text-gray-300">Pricing</a>
+                <a href="contact.html" class="hover:text-primary-500 transition-colors dark:text-gray-300">Contact</a>
+            </div>
+
+            <!-- Right Side Actions -->
+            <div class="flex items-center gap-4">
+                <a href="login.html"
+                    class="hidden lg:flex px-8 py-2.5 bg-nova-blue hover:bg-blue-600 text-white rounded-xl font-bold shadow-lg shadow-blue-500/30 transition-all active:scale-95 items-center space-x-2">
+                    <span>Login</span>
+                </a>
+                <button id="rtl-toggle"
+                    class="w-11 h-11 flex items-center justify-center rounded-xl bg-gray-100 dark:bg-gray-800 dark:text-white transition-all hover:bg-gray-200 dark:hover:bg-gray-700 shadow-sm font-bold text-xs">
+                    RTL
+                </button>
+                <button id="theme-toggle"
+                    class="w-11 h-11 flex items-center justify-center rounded-xl bg-gray-100 dark:bg-gray-800 dark:text-white transition-all hover:bg-gray-200 dark:hover:bg-gray-700 shadow-sm">
+                    <i class="fa-solid fa-moon dark:hidden text-lg"></i>
+                    <i class="fa-solid fa-sun hidden dark:block text-lg"></i>
+                </button>
+                <button id="mobile-menu-btn"
+                    class="lg:hidden w-11 h-11 flex items-center justify-center rounded-xl bg-gray-100 dark:bg-gray-800 dark:text-white transition-all hover:bg-gray-200 dark:hover:bg-gray-700 shadow-sm">
+                    <i class="fa-solid fa-bars text-lg"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="fixed inset-0 z-[60] hidden">
+        <div class="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
+        <div class="absolute right-0 top-0 h-full w-4/5 max-w-sm bg-white dark:bg-dark-body p-8 shadow-2xl">
+            <div class="flex items-center justify-between mb-8">
+                <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 logo-box rounded-lg flex items-center justify-center text-white font-bold">
+                        N</div>
+                    <span class="text-xl font-bold font-heading dark:text-white">NovaSite</span>
+                </div>
+                <button id="mobile-menu-close" class="text-gray-500 dark:text-gray-400">
+                    <i class="fa-solid fa-xmark text-2xl"></i>
+                </button>
+            </div>
+            <div class="space-y-4">
+                <a href="index.html" class="block text-lg font-medium text-primary-500">Home</a>
+                <a href="about.html" class="block text-lg font-medium dark:text-gray-300">About</a>
+                <a href="services.html" class="block text-lg font-medium dark:text-gray-300">Services</a>
+                <a href="blog.html" class="block text-lg font-medium dark:text-gray-300">Blog</a>
+                <a href="pricing.html" class="block text-lg font-medium dark:text-gray-300">Pricing</a>
+                <a href="contact.html" class="block text-lg font-medium dark:text-gray-300">Contact</a>
+                <hr class="border-gray-100 dark:border-gray-800">
+                <a href="login.html"
+                    class="block w-full py-3 text-center bg-nova-blue text-white rounded-xl font-bold">Login</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden hero-bg-main">
+        <!-- Background Decorations (Subtle) -->
+        <div class="absolute top-0 -left-20 w-96 h-96 bg-primary-500/10 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-0 -right-20 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"></div>
+
+        <!-- Animated Blobs for "Colourful Design" -->
+        <div
+            class="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-blue-400 rounded-full gradient-blob animate-float">
+        </div>
+        <div class="absolute bottom-[10%] left-[-5%] w-[400px] h-[400px] bg-purple-400 rounded-full gradient-blob animate-float"
+            style="animation-delay: -3s"></div>
+        <div class="absolute top-[40%] right-[15%] w-[300px] h-[300px] bg-pink-400 rounded-full gradient-blob animate-float"
+            style="animation-delay: -6s"></div>
+
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="max-w-4xl mx-auto text-center" data-aos="fade-up">
+                <h1
+                    class="text-5xl lg:text-7xl font-black font-heading tracking-tight mb-8 leading-[1.1] text-gray-900 dark:text-white">
+                    Pristine Spaces, <br> Professional Excellence
+                </h1>
+                <p class="text-xl text-gray-600 dark:text-gray-400 mb-12 max-w-3xl mx-auto leading-relaxed">
+                    Apex Janitorial provides top-tier commercial cleaning solutions designed for modern offices,
+                    warehouses, and industrial facilities. Reliable, thorough, and ready for 2026.
+                </p>
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <a href="services.html"
+                        class="w-full sm:w-auto px-8 py-4 gradient-primary text-white rounded-2xl font-semibold shadow-xl shadow-primary-500/40 hover:scale-105 transition-transform">Get
+                        Started Now</a>
+                    <a href="https://vimeo.com/"
+                        class="w-full sm:w-auto px-8 py-4 bg-white dark:bg-white/10 dark:text-white border border-gray-100 dark:border-gray-800 rounded-2xl font-semibold hover:bg-gray-50 dark:hover:bg-white/20 transition-all flex items-center justify-center space-x-2">
+                        <i class="fa-solid fa-circle-play text-primary-500"></i>
+                        <span>Watch Demo</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Hero Mockup/Image -->
+            <div class="mt-20 relative p-4 bg-white/30 dark:bg-white/5 backdrop-blur-xl border border-white/20 dark:border-white/5 rounded-[2rem] shadow-2xl"
+                data-aos="zoom-in" data-aos-delay="200">
+                <img src="assets/images/hero_cleaning.png" alt="Professional Cleaning Team"
+                    class="rounded-3xl shadow-lg w-full h-[500px] object-cover">
+                <!-- Floating Elements -->
+                <div
+                    class="absolute -top-10 -right-10 hidden xl:block p-6 bg-white dark:bg-dark-card rounded-2xl shadow-2xl border border-gray-100 dark:border-gray-700 animate-bounce transition-all duration-1000">
+                    <div class="flex items-center space-x-4">
+                        <div
+                            class="w-12 h-12 rounded-full bg-yellow-100 flex items-center justify-center text-yellow-600">
+                            <i class="fa-solid fa-star text-xl"></i>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-500">Satisfaction Rate</p>
+                            <p class="text-xl font-bold dark:text-white">99.9%</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="py-20 bg-gray-50 dark:bg-gray-900/50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-3xl lg:text-4xl font-bold font-heading mb-4 dark:text-white">Our Core Services</h2>
+                <div class="w-20 h-1.5 gradient-primary mx-auto rounded-full mb-6"></div>
+                <p class="text-gray-600 dark:text-gray-400 max-w-xl mx-auto">We provide comprehensive cleaning solutions
+                    for
+                    modern businesses looking for excellence in sanitation and maintenance.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="group p-8 bg-white dark:bg-dark-card rounded-3xl shadow-sm hover:shadow-2xl transition-all duration-300 border border-gray-100 dark:border-gray-700 hover:-translate-y-2"
+                    data-aos="fade-up" data-aos-delay="100">
+                    <div class="relative overflow-hidden rounded-2xl mb-6 h-48">
+                        <img src="assets/images/office_cleaning.png" alt="Office Cleaning"
+                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 dark:text-white">Office Cleaning</h3>
+                    <p class="text-gray-500 dark:text-gray-400 mb-6 leading-relaxed">Daily and weekly specialized
+                        cleaning for corporate spaces, ensuring a hygienic workspace for your employees.</p>
+                    <a href="service-details.html"
+                        class="flex items-center space-x-2 text-primary-600 font-semibold group-hover:space-x-3 transition-all">
+                        <span>Read More</span>
+                        <i class="fa-solid fa-arrow-right-long"></i>
+                    </a>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="group p-8 bg-white dark:bg-dark-card rounded-3xl shadow-sm hover:shadow-2xl transition-all duration-300 border border-gray-100 dark:border-gray-700 hover:-translate-y-2"
+                    data-aos="fade-up" data-aos-delay="200">
+                    <div class="relative overflow-hidden rounded-2xl mb-6 h-48">
+                        <img src="assets/images/industrial_cleaning.png" alt="Industrial Cleaning"
+                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 dark:text-white">Industrial Cleaning</h3>
+                    <p class="text-gray-500 dark:text-gray-400 mb-6 leading-relaxed">Heavy-duty cleaning for warehouses
+                        and factories using industry-grade equipment and safety protocols.</p>
+                    <a href="industrial-cleaning.html"
+                        class="flex items-center space-x-2 text-purple-600 font-semibold group-hover:space-x-3 transition-all">
+                        <span>Read More</span>
+                        <i class="fa-solid fa-arrow-right-long"></i>
+                    </a>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="group p-8 bg-white dark:bg-dark-card rounded-3xl shadow-sm hover:shadow-2xl transition-all duration-300 border border-gray-100 dark:border-gray-700 hover:-translate-y-2"
+                    data-aos="fade-up" data-aos-delay="300">
+                    <div class="relative overflow-hidden rounded-2xl mb-6 h-48">
+                        <img src="assets/images/sanitization.png" alt="Sanitization Services"
+                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 dark:text-white">Sanitization Services</h3>
+                    <p class="text-gray-500 dark:text-gray-400 mb-6 leading-relaxed">Advanced disinfection and
+                        sanitization services using hospital-grade products for maximum safety.</p>
+                    <a href="service-details.html"
+                        class="flex items-center space-x-2 text-orange-600 font-semibold group-hover:space-x-3 transition-all">
+                        <span>Read More</span>
+                        <i class="fa-solid fa-arrow-right-long"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTW / Stats -->
+    <section class="py-20 gradient-primary text-white overflow-hidden relative">
+        <div class="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -mr-32 -mt-32"></div>
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+                <div data-aos="zoom-in" data-aos-delay="100">
+                    <p class="text-4xl lg:text-5xl font-bold font-heading mb-2">10k+</p>
+                    <p class="text-primary-100">Active Clients</p>
+                </div>
+                <div data-aos="zoom-in" data-aos-delay="200">
+                    <p class="text-4xl lg:text-5xl font-bold font-heading mb-2">99%</p>
+                    <p class="text-primary-100">Client Satisfaction</p>
+                </div>
+                <div data-aos="zoom-in" data-aos-delay="300">
+                    <p class="text-4xl lg:text-5xl font-bold font-heading mb-2">24/7</p>
+                    <p class="text-primary-100">Expert Support</p>
+                </div>
+                <div data-aos="zoom-in" data-aos-delay="400">
+                    <p class="text-4xl lg:text-5xl font-bold font-heading mb-2">150+</p>
+                    <p class="text-primary-100">Sites Maintained</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="pt-20 pb-10 bg-white dark:bg-dark-body border-t border-gray-100 dark:border-gray-800">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+                <div>
+                    <a href="index.html" class="flex items-center gap-2 mb-6">
+                        <div
+                            class="w-10 h-10 logo-box rounded-xl flex items-center justify-center text-white text-xl font-bold transition-transform hover:scale-105">
+                            N</div>
+                        <span class="text-2xl font-bold font-heading dark:text-white">NovaSite</span>
+                    </a>
+                    <p class="text-gray-500 dark:text-gray-400 mb-6">Leading provider of professional commercial
+                        janitorial services, ensuring a clean and healthy environment for your business.</p>
+                    <div class="flex space-x-4">
+                        <a href="#"
+                            class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center hover:bg-nova-blue hover:text-white transition-all text-gray-600 dark:text-gray-400">
+                            <i class="fa-brands fa-facebook-f"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center hover:bg-nova-blue hover:text-white transition-all text-gray-600 dark:text-gray-400">
+                            <i class="fa-brands fa-twitter"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center hover:bg-nova-blue hover:text-white transition-all text-gray-600 dark:text-gray-400">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-6 dark:text-white">Quick Links</h4>
+                    <ul class="space-y-4">
+                        <li><a href="about.html"
+                                class="text-gray-500 dark:text-gray-400 hover:text-nova-blue transition-colors">About
+                                Us</a></li>
+                        <li><a href="services.html"
+                                class="text-gray-500 dark:text-gray-400 hover:text-nova-blue transition-colors">Services</a>
+                        </li>
+                        <li><a href="blog.html"
+                                class="text-gray-500 dark:text-gray-400 hover:text-nova-blue transition-colors">Blog</a>
+                        </li>
+                        <li><a href="contact.html"
+                                class="text-gray-500 dark:text-gray-400 hover:text-nova-blue transition-colors">Contact
+                                Us</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-6 dark:text-white">Services</h4>
+                    <ul class="space-y-4">
+                        <li><a href="services.html"
+                                class="text-gray-500 dark:text-gray-400 hover:text-nova-blue transition-colors">Office
+                                Cleaning</a></li>
+                        <li><a href="industrial-cleaning.html"
+                                class="text-gray-500 dark:text-gray-400 hover:text-nova-blue transition-colors">Industrial
+                                Cleaning</a>
+                        </li>
+                        <li><a href="404.html"
+                                class="text-gray-500 dark:text-gray-400 hover:text-nova-blue transition-colors">Sanitization</a>
+                        </li>
+                        <li><a href="coming-soon.html"
+                                class="text-gray-500 dark:text-gray-400 hover:text-nova-blue transition-colors">Window
+                                Cleaning</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-6 dark:text-white">Newsletter</h4>
+                    <p class="text-gray-500 dark:text-gray-400 mb-4">Subscribe to our newsletter for latest updates.</p>
+                    <form class="relative">
+                        <input type="email" placeholder="Email Address"
+                            class="w-full px-4 py-3 rounded-xl bg-gray-100 dark:bg-gray-800 border-none focus:ring-2 focus:ring-nova-blue dark:text-white outline-none">
+                        <button type="submit"
+                            class="absolute right-2 top-2 w-10 h-10 bg-nova-blue text-white rounded-lg flex items-center justify-center shadow-lg shadow-blue-500/30">
+                            <i class="fa-solid fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div class="pt-8 border-t border-gray-100 dark:border-gray-800 text-center">
+                <p class="text-gray-500 dark:text-gray-400">&copy; 2026 NovaSite. All rights reserved by Abhivorn
+                    Technologies.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script>
+        AOS.init();
+    </script>
+</body>
+
+</html>

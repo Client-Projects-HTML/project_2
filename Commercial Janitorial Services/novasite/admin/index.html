@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | NovaSite Operations</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        cyber: {
+                            blue: '#00e5ff',
+                            purple: '#6366f1',
+                            dark: '#020617',
+                            card: '#0f172a',
+                            border: 'rgba(255, 255, 255, 0.05)'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body class="bg-cyber-dark text-gray-400 font-sans selection:bg-cyber-blue selection:text-black">
+
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        <aside
+            class="w-20 lg:w-64 h-full bg-cyber-card border-r border-cyber-border flex flex-col transition-all duration-300">
+            <div class="p-6 flex items-center space-x-3 mb-8">
+                <div
+                    class="w-10 h-10 border-2 border-cyber-blue flex items-center justify-center rotate-45 flex-shrink-0">
+                    <span class="text-cyber-blue font-black -rotate-45">NS</span>
+                </div>
+                <span class="hidden lg:block text-xl font-black text-white tracking-tighter">NOVASITE</span>
+            </div>
+
+            <nav class="flex-1 px-4 space-y-2">
+                <a href="#" class="flex items-center space-x-4 p-4 bg-cyber-blue/10 text-cyber-blue rounded-2xl">
+                    <i class="fa-solid fa-gauge-high w-6 text-xl"></i>
+                    <span class="hidden lg:block font-bold text-sm uppercase tracking-widest">Main Node</span>
+                </a>
+                <a href="#"
+                    class="flex items-center space-x-4 p-4 text-gray-500 hover:bg-white/5 rounded-2xl transition-all">
+                    <i class="fa-solid fa-layer-group w-6 text-xl"></i>
+                    <span class="hidden lg:block font-bold text-sm uppercase tracking-widest">Components</span>
+                </a>
+                <a href="#"
+                    class="flex items-center space-x-4 p-4 text-gray-500 hover:bg-white/5 rounded-2xl transition-all">
+                    <i class="fa-solid fa-code w-6 text-xl"></i>
+                    <span class="hidden lg:block font-bold text-sm uppercase tracking-widest">Assets</span>
+                </a>
+            </nav>
+
+            <div class="p-6 border-t border-cyber-border text-center lg:text-left">
+                <span class="hidden lg:inline text-[10px] font-black text-gray-500 uppercase tracking-widest">Version
+                    2.0.4</span>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 overflow-y-auto p-6 lg:p-10">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12">
+                <div>
+                    <h1 class="text-3xl font-black text-white mb-1 uppercase">Site_Performance</h1>
+                    <p class="text-xs font-bold text-cyber-blue tracking-[0.2em] uppercase">Core: Nova-1 System</p>
+                </div>
+            </div>
+
+            <!-- Stats Row -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+                <div class="p-8 glass rounded-3xl border-white/5">
+                    <p class="text-[10px] font-black text-gray-500 uppercase tracking-widest mb-4">Success Rate</p>
+                    <h3 class="text-4xl font-black text-white">99.98%</h3>
+                </div>
+                <div class="p-8 glass rounded-3xl border-white/5">
+                    <p class="text-[10px] font-black text-gray-500 uppercase tracking-widest mb-4">Response Time</p>
+                    <h3 class="text-4xl font-black text-white">124ms</h3>
+                </div>
+                <div class="p-8 glass rounded-3xl border-cyber-blue relative overflow-hidden">
+                    <div class="relative z-10">
+                        <p class="text-[10px] font-black text-cyber-blue uppercase tracking-widest mb-4">Traffic Balance
+                        </p>
+                        <h3 class="text-4xl font-black text-white">Stable</h3>
+                    </div>
+                    <div class="absolute -right-4 -bottom-4 opacity-10">
+                        <i class="fa-solid fa-wave-square text-8xl text-cyber-blue"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="p-8 glass rounded-[2.5rem] border-white/5">
+                    <h4 class="text-sm font-black text-white uppercase tracking-widest mb-8">Node_Distribution</h4>
+                    <canvas id="novaChart" height="300"></canvas>
+                </div>
+                <div class="p-8 glass rounded-[2.5rem] border-white/5">
+                    <h4 class="text-sm font-black text-white uppercase tracking-widest mb-8">Recent_Actions</h4>
+                    <div class="space-y-6">
+                        <div class="flex items-center justify-between p-4 bg-white/5 rounded-2xl">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-2 h-2 rounded-full bg-cyber-blue"></div>
+                                <span class="text-xs font-bold text-white uppercase tracking-wider">Asset Updated</span>
+                            </div>
+                            <span class="text-[10px] text-gray-500">2m ago</span>
+                        </div>
+                        <div class="flex items-center justify-between p-4 bg-white/5 rounded-2xl">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-2 h-2 rounded-full bg-cyber-purple"></div>
+                                <span class="text-xs font-bold text-white uppercase tracking-wider">Cache Purged</span>
+                            </div>
+                            <span class="text-[10px] text-gray-500">12m ago</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const ctx = document.getElementById('novaChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['NA', 'EU', 'AS', 'AU', 'SA', 'AF'],
+                datasets: [{
+                    label: 'Latent Traffic',
+                    data: [120, 150, 80, 45, 60, 30],
+                    backgroundColor: '#00e5ff',
+                    borderRadius: 10
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#64748b' } },
+                    x: { grid: { display: false }, ticks: { color: '#64748b' } }
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

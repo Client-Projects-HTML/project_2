@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Area | NovaSite Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cyber: {
+                            blue: '#00e5ff',
+                            dark: '#020617',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body class="bg-cyber-dark text-gray-400">
+
+    <header class="fixed top-0 w-full z-50 py-6 glass">
+        <nav class="container mx-auto px-6 flex items-center justify-between">
+            <a href="index.html" class="flex items-center space-x-2">
+                <div class="w-10 h-10 border-2 border-cyber-blue flex items-center justify-center rotate-45">
+                    <span class="text-cyber-blue font-black -rotate-45">NS</span>
+                </div>
+                <span class="text-2xl font-black tracking-tighter text-white uppercase">NOVASITE</span>
+            </a>
+            <a href="index.html"
+                class="font-bold uppercase tracking-widest text-xs hover:text-cyber-blue transition-colors">Abort_Area</a>
+        </nav>
+    </header>
+
+    <main class="pt-40 pb-20">
+        <div class="container mx-auto px-6 max-w-5xl">
+            <div class="glass p-12 md:p-20 rounded-[4rem] text-center border-white/5 relative overflow-hidden">
+                <div class="absolute -top-20 -left-20 w-64 h-64 bg-cyber-blue/10 rounded-full blur-[100px]"></div>
+
+                <h1 class="text-5xl md:text-7xl font-black text-white mb-8">SYNC_YOUR <br> VISION.</h1>
+                <p class="text-lg text-gray-400 mb-16 max-w-2xl mx-auto">Our architects are ready to help you scale.
+                    Drop your details below and we'll establish a secure communication line.</p>
+
+                <form class="space-y-6 text-left">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <input type="text" placeholder="IDENTITY"
+                            class="w-full px-8 py-5 rounded-3xl bg-white/5 border border-white/5 text-white outline-none focus:border-cyber-blue transition-all">
+                        <input type="email" placeholder="ENCRYPTED_EMAIL"
+                            class="w-full px-8 py-5 rounded-3xl bg-white/5 border border-white/5 text-white outline-none focus:border-cyber-blue transition-all">
+                    </div>
+                    <textarea rows="5" placeholder="PROJECT_SPECIFICATIONS"
+                        class="w-full px-8 py-5 rounded-[2.5rem] bg-white/5 border border-white/5 text-white outline-none focus:border-cyber-blue transition-all"></textarea>
+                    <button class="btn-cyber !w-full !py-6 !text-xl">INITIATE_HANDSHAKE</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+</body>
+
+</html>

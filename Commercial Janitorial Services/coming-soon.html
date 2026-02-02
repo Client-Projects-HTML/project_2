@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="dark" class="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coming Soon - NovaSite</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: { 500: '#3b82f6' },
+                        dark: { card: '#1e293b', body: '#0f172a' }
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body class="bg-dark-body text-white min-h-screen flex items-center justify-center p-6 relative overflow-hidden">
+
+    <!-- Background Decoration -->
+    <div class="absolute top-0 left-0 w-full h-full opacity-10">
+        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-primary-500 rounded-full blur-[150px]"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500 rounded-full blur-[150px]"></div>
+    </div>
+
+    <div class="text-center relative z-10 max-w-2xl">
+        <div class="flex items-center justify-center space-x-3 mb-12">
+            <div
+                class="w-12 h-12 gradient-vivid rounded-2xl flex items-center justify-center text-white text-2xl font-bold">
+                N</div>
+            <span class="text-4xl font-bold font-heading">NovaSite</span>
+        </div>
+
+        <h1 class="text-5xl lg:text-7xl font-black font-heading mb-8">We're Launching <br><span
+                class="text-transparent bg-clip-text gradient-primary">Very Soon</span></h1>
+        <p class="text-lg text-gray-400 mb-12">Our new service management platform is almost ready. Sign up to get
+            notified when we go live and receive an exclusive early-bird discount.</p>
+
+        <!-- Countdown Placeholder -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
+            <div class="p-6 bg-white/5 backdrop-blur-md rounded-3xl border border-white/10">
+                <span class="text-4xl font-bold block">14</span>
+                <span class="text-xs text-gray-500 uppercase font-bold tracking-widest">Days</span>
+            </div>
+            <div class="p-6 bg-white/5 backdrop-blur-md rounded-3xl border border-white/10">
+                <span class="text-4xl font-bold block">08</span>
+                <span class="text-xs text-gray-500 uppercase font-bold tracking-widest">Hours</span>
+            </div>
+            <div class="p-6 bg-white/5 backdrop-blur-md rounded-3xl border border-white/10">
+                <span class="text-4xl font-bold block">25</span>
+                <span class="text-xs text-gray-500 uppercase font-bold tracking-widest">Minutes</span>
+            </div>
+            <div class="p-6 bg-white/5 backdrop-blur-md rounded-3xl border border-white/10">
+                <span class="text-4xl font-bold block">44</span>
+                <span class="text-xs text-gray-500 uppercase font-bold tracking-widest">Seconds</span>
+            </div>
+        </div>
+
+        <form class="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <input type="email" placeholder="Enter your email"
+                class="w-full sm:w-80 px-6 py-4 rounded-2xl bg-white/10 border-white/10 text-white outline-none focus:ring-2 focus:ring-primary-500 transition-all">
+            <button
+                class="w-full sm:w-auto px-10 py-4 gradient-primary text-white font-bold rounded-2xl shadow-xl shadow-primary-500/30 hover:scale-105 transition-all">Notify
+                Me</button>
+        </form>
+    </div>
+
+</body>
+
+</html>
