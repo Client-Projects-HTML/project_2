@@ -1,10 +1,28 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr" data-theme="dark" class="dark">
+<html lang="en" dir="ltr" data-theme="dark">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cleaning Schedule - NovaSite Admin</title>
+
+    <!-- FOUC Prevention - Apply theme and RTL immediately -->
+    <script>
+        (function () {
+            // Apply theme
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const theme = savedTheme || (prefersDark ? 'dark' : 'light');
+            document.documentElement.classList.add(theme);
+            document.documentElement.setAttribute('data-theme', theme);
+
+            // Apply RTL direction
+            const savedDir = localStorage.getItem('dir') || 'ltr';
+            document.documentElement.setAttribute('dir', savedDir);
+        })();
+    </script>
+
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -38,10 +56,10 @@
     <div class="flex h-screen overflow-hidden">
         <!-- Sidebar (Reused from dashboard) -->
         <aside id="sidebar"
-            class="fixed inset-y-0 left-0 z-50 w-64 bg-white dark:bg-dark-sidebar border-r border-gray-100 dark:border-gray-800 lg:translate-x-0 transition-transform duration-300 transform">
+            class="fixed inset-y-0 left-0 rtl:left-auto rtl:right-0 z-50 w-64 bg-white dark:bg-dark-sidebar border-e rtl:border-e-0 rtl:border-l border-gray-100 dark:border-gray-800 transition-transform duration-300 transform lg:translate-x-0 rtl:lg:translate-x-0 -translate-x-full rtl:translate-x-full">
             <div class="flex flex-col h-full">
                 <div class="p-6">
-                    <a href="../index.html" class="flex items-center space-x-3">
+                    <a href="../index.html" class="flex items-center gap-3">
                         <div
                             class="w-10 h-10 logo-box rounded-xl flex items-center justify-center text-white text-xl font-bold">
                             N</div>
@@ -92,30 +110,22 @@
         </aside>
 
         <!-- Main Content -->
-        <main class="flex-1 flex flex-col min-w-0 lg:ml-64">
+        <main class="flex-1 flex flex-col min-w-0 lg:ms-64 transition-all duration-300">
             <header
                 class="h-16 flex items-center justify-between px-6 bg-white dark:bg-dark-sidebar border-b border-gray-100 dark:border-gray-800">
                 <div class="flex items-center lg:hidden">
                     <button id="toggleSidebar" class="p-2 text-gray-500 hover:text-primary-500">
-                        <i class="fa-solid fa-bars-staggered text-xl"></i>
+                        <i class="fa-solid fa-bars-staggered text-xl rtl-flip"></i>
                     </button>
-                    <span class="ml-4 font-bold font-heading dark:text-white">NovaSite</span>
+                    <span class="ms-4 font-bold font-heading dark:text-white">NovaSite</span>
                 </div>
 
-                <div class="hidden md:flex items-center flex-1 max-w-md ml-4">
-                    <div class="relative w-full">
-                        <i
-                            class="fa-solid fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i>
-                        <input type="text" placeholder="Search shifts, staff..."
-                            class="w-full pl-11 pr-4 py-2 bg-gray-50 dark:bg-gray-800 border-none rounded-xl focus:ring-2 focus:ring-primary-500 text-sm dark:text-white outline-none">
-                    </div>
-                </div>
-
-                <div class="flex items-center space-x-3 sm:space-x-4">
-                    <a href="settings.html" id="settings-btn"
+                <div class="ms-auto flex items-center gap-5 sm:gap-8">
+                    <button id="theme-toggle"
                         class="w-10 h-10 flex items-center justify-center rounded-xl bg-gray-50 dark:bg-gray-800 dark:text-white hover:bg-gray-100 transition-colors">
-                        <i class="fa-solid fa-gear"></i>
-                    </a>
+                        <i class="fa-solid fa-moon dark:hidden"></i>
+                        <i class="fa-solid fa-sun hidden dark:block"></i>
+                    </button>
                     <button id="rtl-toggle"
                         class="w-10 h-10 flex items-center justify-center rounded-xl bg-gray-50 dark:bg-gray-800 dark:text-white hover:bg-gray-100 transition-colors font-bold text-xs">
                         RTL
@@ -177,7 +187,7 @@
                     </div>
                     <div class="h-8 w-px bg-gray-100 dark:bg-gray-800 mx-1 hidden sm:block"></div>
 
-                    <div class="flex items-center space-x-3 pl-2">
+                    <div class="flex items-center gap-3 ps-2">
                         <div class="text-right hidden sm:block">
                             <p class="text-sm font-bold dark:text-white leading-none">John Doe</p>
                             <p class="text-[10px] text-gray-500 leading-none mt-1">Administrator</p>
@@ -193,23 +203,27 @@
                 <!-- Calendar/Schedule View UI -->
                 <div
                     class="bg-white dark:bg-dark-card rounded-3xl border border-gray-100 dark:border-gray-800 shadow-sm overflow-hidden">
-                    <div class="p-6 border-b border-gray-50 dark:border-gray-800 flex items-center justify-between">
-                        <div class="flex items-center space-x-4">
+                    <div
+                        class="p-4 sm:p-6 border-b border-gray-100 dark:border-gray-800 flex flex-col sm:flex-row items-center justify-between gap-4">
+                        <div class="flex items-center justify-between sm:justify-start w-full sm:w-auto gap-4">
                             <button id="prevMonth"
-                                class="w-10 h-10 rounded-xl bg-gray-50 dark:bg-gray-800 flex items-center justify-center dark:text-white hover:bg-gray-100">
+                                class="w-10 h-10 flex-shrink-0 rounded-xl bg-gray-50 dark:bg-gray-800 flex items-center justify-center dark:text-white hover:bg-gray-100">
                                 <i class="fa-solid fa-chevron-left"></i>
                             </button>
-                            <h2 id="currentDateDisplay" class="text-lg font-bold dark:text-white">October 2025</h2>
+                            <h2 id="currentDateDisplay"
+                                class="text-base sm:text-lg font-bold dark:text-white text-center whitespace-nowrap px-2">
+                                October 2025</h2>
                             <button id="nextMonth"
-                                class="w-10 h-10 rounded-xl bg-gray-50 dark:bg-gray-800 flex items-center justify-center dark:text-white hover:bg-gray-100">
+                                class="w-10 h-10 flex-shrink-0 rounded-xl bg-gray-50 dark:bg-gray-800 flex items-center justify-center dark:text-white hover:bg-gray-100">
                                 <i class="fa-solid fa-chevron-right"></i>
                             </button>
                         </div>
-                        <div class="flex items-center bg-gray-50 dark:bg-gray-800 p-1 rounded-xl">
+                        <div
+                            class="flex items-center bg-gray-50 dark:bg-gray-800 p-1 rounded-xl w-full sm:w-auto justify-center">
                             <button id="viewWeek"
-                                class="px-4 py-2 bg-white dark:bg-dark-card rounded-lg text-sm font-bold shadow-sm dark:text-white transition-all">Week</button>
+                                class="flex-1 sm:flex-none px-4 py-2 bg-white dark:bg-dark-card rounded-lg text-sm font-bold shadow-sm dark:text-white transition-all">Week</button>
                             <button id="viewMonth"
-                                class="px-4 py-2 rounded-lg text-sm font-bold text-gray-500 transition-all">Month</button>
+                                class="flex-1 sm:flex-none px-4 py-2 rounded-lg text-sm font-bold text-gray-500 transition-all">Month</button>
                         </div>
                     </div>
 
@@ -218,29 +232,29 @@
                             <thead>
                                 <tr class="bg-gray-50 dark:bg-gray-800/50">
                                     <th
-                                        class="px-4 py-3 border-r border-gray-100 dark:border-gray-800 text-xs font-bold text-gray-500 uppercase">
+                                        class="px-4 py-3 border-e border-gray-100 dark:border-gray-800 text-xs font-bold text-gray-500 uppercase">
                                         Cleaner / Site</th>
                                     <th
-                                        class="px-4 py-3 border-r border-gray-100 dark:border-gray-800 text-xs font-bold text-gray-500 uppercase">
+                                        class="px-4 py-3 border-e border-gray-100 dark:border-gray-800 text-xs font-bold text-gray-500 uppercase">
                                         Mon 24</th>
                                     <th
-                                        class="px-4 py-3 border-r border-gray-100 dark:border-gray-800 text-xs font-bold text-gray-500 uppercase">
+                                        class="px-4 py-3 border-e border-gray-100 dark:border-gray-800 text-xs font-bold text-gray-500 uppercase">
                                         Tue 25</th>
                                     <th
-                                        class="px-4 py-3 border-r border-gray-100 dark:border-gray-800 text-xs font-bold text-gray-500 uppercase">
+                                        class="px-4 py-3 border-e border-gray-100 dark:border-gray-800 text-xs font-bold text-gray-500 uppercase">
                                         Wed 26</th>
                                     <th
-                                        class="px-4 py-3 border-r border-gray-100 dark:border-gray-800 text-xs font-bold text-gray-500 uppercase">
+                                        class="px-4 py-3 border-e border-gray-100 dark:border-gray-800 text-xs font-bold text-gray-500 uppercase">
                                         Thu 27</th>
                                     <th
-                                        class="px-4 py-3 border-r border-gray-100 dark:border-gray-800 text-xs font-bold text-gray-500 uppercase">
+                                        class="px-4 py-3 border-e border-gray-100 dark:border-gray-800 text-xs font-bold text-gray-500 uppercase">
                                         Fri 28</th>
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
                                 <tr>
-                                    <td class="p-4 border-r border-gray-100 dark:border-gray-800">
-                                        <div class="flex items-center space-x-3">
+                                    <td class="p-4 border-e border-gray-100 dark:border-gray-800">
+                                        <div class="flex items-center gap-3">
                                             <img src="https://ui-avatars.com/api/?name=Mike+Ross&background=60a5fa&color=fff"
                                                 class="w-8 h-8 rounded-lg" alt="Cleaner">
                                             <div>
@@ -250,27 +264,27 @@
                                             </div>
                                         </div>
                                     </td>
-                                    <td class="p-2 border-r border-gray-100 dark:border-gray-800">
+                                    <td class="p-2 border-e border-gray-100 dark:border-gray-800">
                                         <div
-                                            class="px-3 py-2 bg-blue-50 dark:bg-blue-900/30 border-l-4 border-blue-500 rounded-lg">
+                                            class="px-3 py-2 bg-blue-50 dark:bg-blue-900/30 border-s-4 border-blue-500 rounded-lg">
                                             <p class="text-[10px] font-bold text-blue-600 dark:text-blue-400">06:00 PM -
                                                 10:00 PM</p>
                                             <p class="text-[10px] text-blue-800 dark:text-blue-200">Standard Office
                                                 Clean</p>
                                         </div>
                                     </td>
-                                    <td class="p-2 border-r border-gray-100 dark:border-gray-800"></td>
-                                    <td class="p-2 border-r border-gray-100 dark:border-gray-800">
+                                    <td class="p-2 border-e border-gray-100 dark:border-gray-800"></td>
+                                    <td class="p-2 border-e border-gray-100 dark:border-gray-800">
                                         <div
-                                            class="px-3 py-2 bg-purple-50 dark:bg-purple-900/30 border-l-4 border-purple-500 rounded-lg">
+                                            class="px-3 py-2 bg-purple-50 dark:bg-purple-900/30 border-s-4 border-purple-500 rounded-lg">
                                             <p class="text-[10px] font-bold text-purple-600 dark:text-purple-400">06:00
                                                 PM - 10:00 PM</p>
                                         </div>
                                     </td>
-                                    <td class="p-2 border-r border-gray-100 dark:border-gray-800"></td>
-                                    <td class="p-2 border-r border-gray-100 dark:border-gray-800 text-center">
+                                    <td class="p-2 border-e border-gray-100 dark:border-gray-800"></td>
+                                    <td class="p-2 border-e border-gray-100 dark:border-gray-800 text-center">
                                         <div
-                                            class="px-3 py-2 bg-green-50 dark:bg-green-900/30 border-l-4 border-green-500 rounded-lg">
+                                            class="px-3 py-2 bg-green-50 dark:bg-green-900/30 border-s-4 border-green-500 rounded-lg">
                                             <p class="text-[10px] font-bold text-green-600 dark:text-green-400">Deep
                                                 Clean Event</p>
                                         </div>
@@ -278,8 +292,8 @@
                                 </tr>
                                 <!-- More rows... -->
                                 <tr>
-                                    <td class="p-4 border-r border-gray-100 dark:border-gray-800">
-                                        <div class="flex items-center space-x-3">
+                                    <td class="p-4 border-e border-gray-100 dark:border-gray-800">
+                                        <div class="flex items-center gap-3">
                                             <img src="https://ui-avatars.com/api/?name=Anna+Bell&background=f59e0b&color=fff"
                                                 class="w-8 h-8 rounded-lg" alt="Cleaner">
                                             <div>
@@ -289,23 +303,23 @@
                                             </div>
                                         </div>
                                     </td>
-                                    <td class="p-2 border-r border-gray-100 dark:border-gray-800"></td>
-                                    <td class="p-2 border-r border-gray-100 dark:border-gray-800 text-center">
+                                    <td class="p-2 border-e border-gray-100 dark:border-gray-800"></td>
+                                    <td class="p-2 border-e border-gray-100 dark:border-gray-800 text-center">
                                         <div
-                                            class="px-3 py-2 bg-orange-50 dark:bg-orange-900/30 border-l-4 border-orange-500 rounded-lg">
+                                            class="px-3 py-2 bg-orange-50 dark:bg-orange-900/30 border-s-4 border-orange-500 rounded-lg">
                                             <p class="text-[10px] font-bold text-orange-600 dark:text-orange-400">08:00
                                                 AM - 04:00 PM</p>
                                         </div>
                                     </td>
-                                    <td class="p-2 border-r border-gray-100 dark:border-gray-800"></td>
-                                    <td class="p-2 border-r border-gray-100 dark:border-gray-800">
+                                    <td class="p-2 border-e border-gray-100 dark:border-gray-800"></td>
+                                    <td class="p-2 border-e border-gray-100 dark:border-gray-800">
                                         <div
-                                            class="px-3 py-2 bg-orange-50 dark:bg-orange-900/30 border-l-4 border-orange-500 rounded-lg">
+                                            class="px-3 py-2 bg-orange-50 dark:bg-orange-900/30 border-s-4 border-orange-500 rounded-lg">
                                             <p class="text-[10px] font-bold text-orange-600 dark:text-orange-400">08:00
                                                 AM - 04:00 PM</p>
                                         </div>
                                     </td>
-                                    <td class="p-2 border-r border-gray-100 dark:border-gray-800"></td>
+                                    <td class="p-2 border-e border-gray-100 dark:border-gray-800"></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -316,60 +330,77 @@
     </div>
 
     <script>
-        // Sidebar Toggle for Mobile
-        const sidebar = document.getElementById('sidebar');
-        const toggleSidebar = document.getElementById('toggleSidebar');
-        const themeToggleBtn = document.getElementById('theme-toggle');
-
-        if (toggleSidebar) {
-            toggleSidebar.addEventListener('click', (e) => {
-                e.stopPropagation();
-                sidebar.classList.toggle('-translate-x-full');
-            });
-        }
-
-        // Close sidebar when clicking outside on mobile
-        document.addEventListener('click', (e) => {
-            if (window.innerWidth < 1024 && sidebar && !sidebar.contains(e.target) && !toggleSidebar.contains(e.target)) {
-                sidebar.classList.add('-translate-x-full');
+        // Sample Schedule Data
+        const scheduleData = [
+            {
+                cleaner: 'Mike Ross',
+                site: 'TechCorp Plaza',
+                avatar: 'https://ui-avatars.com/api/?name=Mike+Ross&background=60a5fa&color=fff',
+                shifts: [
+                    { date: '2026-02-03', time: '06:00 PM - 10:00 PM', service: 'Standard Office Clean', color: 'blue' },
+                    { date: '2026-02-05', time: '06:00 PM - 10:00 PM', service: 'Deep Clean', color: 'purple' },
+                    { date: '2026-02-07', time: '06:00 PM - 10:00 PM', service: 'Deep Clean Event', color: 'green' },
+                    { date: '2026-01-20', time: '06:00 PM - 10:00 PM', service: 'Standard Office Clean', color: 'blue' },
+                    { date: '2026-01-22', time: '06:00 PM - 10:00 PM', service: 'Window Cleaning', color: 'cyan' }
+                ]
+            },
+            {
+                cleaner: 'Anna Bell',
+                site: 'Central Hospital',
+                avatar: 'https://ui-avatars.com/api/?name=Anna+Bell&background=f59e0b&color=fff',
+                shifts: [
+                    { date: '2026-02-04', time: '08:00 AM - 04:00 PM', service: 'Hospital Sanitization', color: 'orange' },
+                    { date: '2026-02-06', time: '08:00 AM - 04:00 PM', service: 'Hospital Sanitization', color: 'orange' },
+                    { date: '2026-01-21', time: '08:00 AM - 04:00 PM', service: 'Hospital Sanitization', color: 'orange' },
+                    { date: '2026-01-23', time: '08:00 AM - 04:00 PM', service: 'Hospital Sanitization', color: 'orange' }
+                ]
+            },
+            {
+                cleaner: 'Sarah Johnson',
+                site: 'Downtown Mall',
+                avatar: 'https://ui-avatars.com/api/?name=Sarah+Johnson&background=ec4899&color=fff',
+                shifts: [
+                    { date: '2026-02-03', time: '10:00 PM - 06:00 AM', service: 'Night Shift Clean', color: 'pink' },
+                    { date: '2026-02-05', time: '10:00 PM - 06:00 AM', service: 'Night Shift Clean', color: 'pink' },
+                    { date: '2026-02-08', time: '10:00 PM - 06:00 AM', service: 'Floor Waxing', color: 'yellow' },
+                    { date: '2026-01-19', time: '10:00 PM - 06:00 AM', service: 'Night Shift Clean', color: 'pink' }
+                ]
+            },
+            {
+                cleaner: 'David Chen',
+                site: 'Tech Startup Hub',
+                avatar: 'https://ui-avatars.com/api/?name=David+Chen&background=10b981&color=fff',
+                shifts: [
+                    { date: '2026-02-04', time: '07:00 AM - 03:00 PM', service: 'Daily Maintenance', color: 'green' },
+                    { date: '2026-02-06', time: '07:00 AM - 03:00 PM', service: 'Daily Maintenance', color: 'green' },
+                    { date: '2026-02-09', time: '07:00 AM - 03:00 PM', service: 'Carpet Cleaning', color: 'indigo' },
+                    { date: '2026-01-20', time: '07:00 AM - 03:00 PM', service: 'Daily Maintenance', color: 'green' }
+                ]
             }
-        });
+        ];
 
-        // Theme Toggle
-        if (themeToggleBtn) {
-            themeToggleBtn.addEventListener('click', () => {
-                document.documentElement.classList.toggle('dark');
-            });
-        }
-
-        // RTL Toggle
-        const rtlToggleBtn = document.getElementById('rtl-toggle');
-        if (rtlToggleBtn) {
-            rtlToggleBtn.addEventListener('click', () => {
-                const html = document.documentElement;
-                const currentDir = html.getAttribute('dir');
-
-                if (currentDir === 'rtl') {
-                    html.setAttribute('dir', 'ltr');
-                    rtlToggleBtn.textContent = 'RTL';
-                } else {
-                    html.setAttribute('dir', 'rtl');
-                    rtlToggleBtn.textContent = 'LTR';
-                }
-            });
-        }
-
-        // Notifications Dropdown Toggle
+        // DOM Elements
         const notificationsToggle = document.getElementById('notifications-toggle');
         const notificationsDropdown = document.getElementById('notifications-dropdown-schedule');
+        const dateDisplay = document.getElementById('currentDateDisplay');
+        const tableHead = document.querySelector('thead tr');
+        const tableBody = document.querySelector('tbody');
+        const viewWeekBtn = document.getElementById('viewWeek');
+        const viewMonthBtn = document.getElementById('viewMonth');
 
+        // State
+        const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        let currentMonthIdx = 1; // February (0-indexed)
+        let currentYear = 2026;
+        let currentView = 'week'; // 'week' or 'month'
+        let currentWeekStart = new Date(2026, 1, 2); // Feb 2, 2026 (Monday)
+
+        // Notifications Dropdown
         if (notificationsToggle && notificationsDropdown) {
             notificationsToggle.addEventListener('click', (e) => {
                 e.stopPropagation();
                 notificationsDropdown.classList.toggle('hidden');
             });
-
-            // Close dropdown when clicking outside
             document.addEventListener('click', (e) => {
                 if (!notificationsToggle.contains(e.target) && !notificationsDropdown.contains(e.target)) {
                     notificationsDropdown.classList.add('hidden');
@@ -377,40 +408,161 @@
             });
         }
 
-        // Calendar Navigation Logic
-        const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-        let currentMonthIdx = 9; // October
-        let currentYear = 2025;
-        const dateDisplay = document.getElementById('currentDateDisplay');
+        // Helper Functions
+        function formatDate(date) {
+            return date.toISOString().split('T')[0];
+        }
 
-        document.getElementById('prevMonth')?.addEventListener('click', () => {
-            currentMonthIdx--;
-            if (currentMonthIdx < 0) {
-                currentMonthIdx = 11;
-                currentYear--;
+        function getWeekDates(startDate) {
+            const dates = [];
+            for (let i = 0; i < 5; i++) { // Mon-Fri
+                const date = new Date(startDate);
+                date.setDate(startDate.getDate() + i);
+                dates.push(date);
             }
-            updateDateDisplay();
-        });
+            return dates;
+        }
 
-        document.getElementById('nextMonth')?.addEventListener('click', () => {
-            currentMonthIdx++;
-            if (currentMonthIdx > 11) {
-                currentMonthIdx = 0;
-                currentYear++;
+        function getMonthDates(year, month) {
+            const dates = [];
+            const firstDay = new Date(year, month, 1);
+            const lastDay = new Date(year, month + 1, 0);
+
+            // Get first Monday of the month or before
+            let current = new Date(firstDay);
+            while (current.getDay() !== 1) {
+                current.setDate(current.getDate() - 1);
             }
-            updateDateDisplay();
-        });
+
+            // Get dates for 4 weeks
+            for (let i = 0; i < 20; i++) { // 4 weeks = 20 weekdays
+                if (current.getDay() !== 0 && current.getDay() !== 6) { // Skip weekends
+                    dates.push(new Date(current));
+                }
+                current.setDate(current.getDate() + 1);
+            }
+
+            return dates.slice(0, 20); // Limit to 20 days
+        }
+
+        function getDayName(date) {
+            return ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][date.getDay()];
+        }
+
+        function renderTableHeaders(dates) {
+            const headers = dates.map(date => {
+                const day = getDayName(date);
+                const dateNum = date.getDate();
+                return `<th class="px-4 py-3 border-e border-gray-100 dark:border-gray-800 text-xs font-bold text-gray-500 uppercase">${day} ${dateNum}</th>`;
+            }).join('');
+
+            tableHead.innerHTML = `
+                <th class="px-4 py-3 border-e border-gray-100 dark:border-gray-800 text-xs font-bold text-gray-500 uppercase">Cleaner / Site</th>
+                ${headers}
+            `;
+        }
+
+        function getShiftForDate(shifts, dateStr) {
+            return shifts.find(shift => shift.date === dateStr);
+        }
+
+        function renderShiftCell(shift) {
+            if (!shift) {
+                return '<td class="p-2 border-e border-gray-100 dark:border-gray-800"></td>';
+            }
+
+            return `
+                <td class="p-2 border-e border-gray-100 dark:border-gray-800">
+                    <div class="px-3 py-2 bg-${shift.color}-50 dark:bg-${shift.color}-900/30 border-s-4 border-${shift.color}-500 rounded-lg">
+                        <p class="text-[10px] font-bold text-${shift.color}-600 dark:text-${shift.color}-400">${shift.time}</p>
+                        ${shift.service ? `<p class="text-[10px] text-${shift.color}-800 dark:text-${shift.color}-200">${shift.service}</p>` : ''}
+                    </div>
+                </td>
+            `;
+        }
+
+        function renderSchedule() {
+            const dates = currentView === 'week'
+                ? getWeekDates(currentWeekStart)
+                : getMonthDates(currentYear, currentMonthIdx);
+
+            renderTableHeaders(dates);
+
+            const rows = scheduleData.map(cleaner => {
+                const cells = dates.map(date => {
+                    const dateStr = formatDate(date);
+                    const shift = getShiftForDate(cleaner.shifts, dateStr);
+                    return renderShiftCell(shift);
+                }).join('');
+
+                return `
+                    <tr>
+                        <td class="p-4 border-e border-gray-100 dark:border-gray-800">
+                            <div class="flex items-center gap-3">
+                                <img src="${cleaner.avatar}" class="w-8 h-8 rounded-lg" alt="${cleaner.cleaner}">
+                                <div>
+                                    <p class="text-sm font-bold dark:text-white">${cleaner.cleaner}</p>
+                                    <p class="text-[10px] text-gray-500 uppercase font-bold">${cleaner.site}</p>
+                                </div>
+                            </div>
+                        </td>
+                        ${cells}
+                    </tr>
+                `;
+            }).join('');
+
+            tableBody.innerHTML = rows;
+        }
 
         function updateDateDisplay() {
-            if (dateDisplay) {
+            if (currentView === 'week') {
+                const weekEnd = new Date(currentWeekStart);
+                weekEnd.setDate(currentWeekStart.getDate() + 4);
+                const monthName = months[currentWeekStart.getMonth()];
+                dateDisplay.innerText = `${monthName} ${currentYear} (Week ${currentWeekStart.getDate()}-${weekEnd.getDate()})`;
+            } else {
                 dateDisplay.innerText = `${months[currentMonthIdx]} ${currentYear}`;
             }
         }
 
-        // Week/Month View Toggle
-        const viewWeekBtn = document.getElementById('viewWeek');
-        const viewMonthBtn = document.getElementById('viewMonth');
+        // Navigation
+        document.getElementById('prevMonth')?.addEventListener('click', () => {
+            if (currentView === 'week') {
+                currentWeekStart.setDate(currentWeekStart.getDate() - 7);
+                if (currentWeekStart.getMonth() !== currentMonthIdx) {
+                    currentMonthIdx = currentWeekStart.getMonth();
+                    currentYear = currentWeekStart.getFullYear();
+                }
+            } else {
+                currentMonthIdx--;
+                if (currentMonthIdx < 0) {
+                    currentMonthIdx = 11;
+                    currentYear--;
+                }
+            }
+            updateDateDisplay();
+            renderSchedule();
+        });
 
+        document.getElementById('nextMonth')?.addEventListener('click', () => {
+            if (currentView === 'week') {
+                currentWeekStart.setDate(currentWeekStart.getDate() + 7);
+                if (currentWeekStart.getMonth() !== currentMonthIdx) {
+                    currentMonthIdx = currentWeekStart.getMonth();
+                    currentYear = currentWeekStart.getFullYear();
+                }
+            } else {
+                currentMonthIdx++;
+                if (currentMonthIdx > 11) {
+                    currentMonthIdx = 0;
+                    currentYear++;
+                }
+            }
+            updateDateDisplay();
+            renderSchedule();
+        });
+
+        // View Toggle
         function toggleView(activeBtn, inactiveBtn) {
             activeBtn.classList.add('bg-white', 'dark:bg-dark-card', 'shadow-sm', 'dark:text-white');
             activeBtn.classList.remove('text-gray-500');
@@ -418,9 +570,27 @@
             inactiveBtn.classList.add('text-gray-500');
         }
 
-        viewWeekBtn?.addEventListener('click', () => toggleView(viewWeekBtn, viewMonthBtn));
-        viewMonthBtn?.addEventListener('click', () => toggleView(viewMonthBtn, viewWeekBtn));
+        viewWeekBtn?.addEventListener('click', () => {
+            currentView = 'week';
+            toggleView(viewWeekBtn, viewMonthBtn);
+            updateDateDisplay();
+            renderSchedule();
+        });
+
+        viewMonthBtn?.addEventListener('click', () => {
+            currentView = 'month';
+            toggleView(viewMonthBtn, viewWeekBtn);
+            currentMonthIdx = currentWeekStart.getMonth();
+            currentYear = currentWeekStart.getFullYear();
+            updateDateDisplay();
+            renderSchedule();
+        });
+
+        // Initialize
+        updateDateDisplay();
+        renderSchedule();
     </script>
+    <script src="../assets/js/main.js"></script>
 </body>
 
 </html>

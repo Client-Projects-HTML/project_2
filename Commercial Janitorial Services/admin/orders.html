@@ -1,10 +1,28 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr" data-theme="light" class="dark">
+<html lang="en" dir="ltr" data-theme="light">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Service Orders - NovaSite Admin</title>
+
+    <!-- FOUC Prevention - Apply theme and RTL immediately -->
+    <script>
+        (function () {
+            // Apply theme
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const theme = savedTheme || (prefersDark ? 'dark' : 'light');
+            document.documentElement.classList.add(theme);
+            document.documentElement.setAttribute('data-theme', theme);
+
+            // Apply RTL direction
+            const savedDir = localStorage.getItem('dir') || 'ltr';
+            document.documentElement.setAttribute('dir', savedDir);
+        })();
+    </script>
+
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -38,7 +56,7 @@
     <div class="flex h-screen overflow-hidden">
         <!-- Sidebar -->
         <aside id="sidebar"
-            class="fixed inset-y-0 left-0 z-50 w-64 bg-white dark:bg-dark-sidebar border-r border-gray-100 dark:border-gray-800 transition-transform duration-300 transform lg:translate-x-0 -translate-x-full">
+            class="fixed inset-y-0 left-0 rtl:left-auto rtl:right-0 z-50 w-64 bg-white dark:bg-dark-sidebar border-r rtl:border-r-0 rtl:border-l border-gray-100 dark:border-gray-800 transition-transform duration-300 transform lg:translate-x-0 rtl:lg:translate-x-0 -translate-x-full rtl:translate-x-full">
             <div class="flex flex-col h-full">
                 <!-- Brand -->
                 <div class="p-6">
@@ -95,31 +113,23 @@
         </aside>
 
         <!-- Main Content -->
-        <main class="flex-1 flex flex-col min-w-0 lg:ml-64 transition-all duration-300">
+        <main class="flex-1 flex flex-col min-w-0 lg:ms-64 transition-all duration-300">
             <!-- Header -->
             <header
                 class="h-16 flex items-center justify-between px-6 bg-white dark:bg-dark-sidebar border-b border-gray-100 dark:border-gray-800">
                 <div class="flex items-center lg:hidden">
                     <button id="toggleSidebar" class="p-2 text-gray-500 hover:text-primary-500">
-                        <i class="fa-solid fa-bars-staggered text-xl"></i>
+                        <i class="fa-solid fa-bars-staggered text-xl rtl-flip"></i>
                     </button>
-                    <span class="ml-4 font-bold font-heading dark:text-white">NovaSite</span>
+                    <span class="ms-4 font-bold font-heading dark:text-white">NovaSite</span>
                 </div>
 
-                <div class="hidden md:flex items-center flex-1 max-w-md ml-4">
-                    <div class="relative w-full">
-                        <i
-                            class="fa-solid fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i>
-                        <input type="text" placeholder="Search orders, customers..."
-                            class="w-full pl-11 pr-4 py-2 bg-gray-50 dark:bg-gray-800 border-none rounded-xl focus:ring-2 focus:ring-primary-500 text-sm dark:text-white outline-none">
-                    </div>
-                </div>
-
-                <div class="flex items-center space-x-3 sm:space-x-4">
-                    <a href="settings.html" id="settings-btn"
+                <div class="ms-auto flex items-center gap-5 sm:gap-8">
+                    <button id="theme-toggle"
                         class="w-10 h-10 flex items-center justify-center rounded-xl bg-gray-50 dark:bg-gray-800 dark:text-white hover:bg-gray-100 transition-colors">
-                        <i class="fa-solid fa-gear"></i>
-                    </a>
+                        <i class="fa-solid fa-moon dark:hidden"></i>
+                        <i class="fa-solid fa-sun hidden dark:block"></i>
+                    </button>
                     <button id="rtl-toggle"
                         class="w-10 h-10 flex items-center justify-center rounded-xl bg-gray-50 dark:bg-gray-800 dark:text-white hover:bg-gray-100 transition-colors font-bold text-xs">
                         RTL
@@ -181,7 +191,7 @@
                     </div>
                     <div class="h-8 w-px bg-gray-100 dark:bg-gray-800 mx-1 hidden sm:block"></div>
 
-                    <div class="flex items-center space-x-3 pl-2">
+                    <div class="flex items-center gap-3 ps-2">
                         <div class="text-right hidden sm:block">
                             <p class="text-sm font-bold dark:text-white leading-none">John Doe</p>
                             <p class="text-[10px] text-gray-500 leading-none mt-1">Administrator</p>
@@ -196,13 +206,14 @@
             <!-- Scrollable Content -->
             <div class="flex-1 overflow-y-auto p-6">
                 <div class="max-w-6xl mx-auto">
-                    <div class="flex items-center justify-between mb-8">
+                    <div
+                        class="flex flex-col sm:flex-row items-center justify-between mb-8 gap-4 text-center sm:text-start">
                         <div>
                             <h2 class="text-2xl font-bold font-heading dark:text-white">Service Orders</h2>
                             <p class="text-sm text-gray-500">Manage and track all cleaning service requests</p>
                         </div>
                         <button id="createOrderBtn"
-                            class="px-6 py-3 gradient-primary text-white font-bold rounded-xl shadow-lg shadow-primary-500/30 hover:scale-[1.02] transition-all">
+                            class="w-full sm:w-auto px-6 py-3 gradient-primary text-white font-bold rounded-xl shadow-lg shadow-primary-500/30 hover:scale-[1.02] transition-all">
                             + Create New Order
                         </button>
                     </div>
@@ -210,26 +221,34 @@
                     <!-- Filters -->
                     <div
                         class="bg-white dark:bg-dark-card p-4 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm mb-6 flex flex-wrap gap-4">
-                        <select
+                        <select id="statusFilter"
                             class="px-4 py-2 rounded-xl bg-gray-50 dark:bg-gray-800 border-none outline-none text-sm dark:text-white focus:ring-2 focus:ring-primary-500">
-                            <option>All Status</option>
-                            <option>Completed</option>
-                            <option>Pending</option>
-                            <option>In Progress</option>
+                            <option value="all">All Status</option>
+                            <option value="completed">Completed</option>
+                            <option value="pending">Pending</option>
+                            <option value="in-progress">In Progress</option>
                         </select>
-                        <select
+                        <select id="dateFilter"
                             class="px-4 py-2 rounded-xl bg-gray-50 dark:bg-gray-800 border-none outline-none text-sm dark:text-white focus:ring-2 focus:ring-primary-500">
-                            <option>Last 30 Days</option>
-                            <option>Last 6 Months</option>
-                            <option>This Year</option>
+                            <option value="7">Last 7 Days</option>
+                            <option value="30">Last 30 Days</option>
+                            <option value="90">Last 3 Months</option>
+                            <option value="180">Last 6 Months</option>
+                            <option value="365">This Year</option>
                         </select>
+                        <input type="month" id="monthFilter"
+                            class="px-4 py-2 rounded-xl bg-gray-50 dark:bg-gray-800 border-none outline-none text-sm dark:text-white focus:ring-2 focus:ring-primary-500"
+                            style="max-width: 180px;">
+                        <input type="week" id="weekFilter"
+                            class="px-4 py-2 rounded-xl bg-gray-50 dark:bg-gray-800 border-none outline-none text-sm dark:text-white focus:ring-2 focus:ring-primary-500"
+                            style="max-width: 160px;">
                     </div>
 
                     <!-- Orders Table -->
                     <div
                         class="bg-white dark:bg-dark-card rounded-3xl border border-gray-100 dark:border-gray-800 shadow-sm overflow-hidden">
                         <div class="overflow-x-auto">
-                            <table class="w-full text-left">
+                            <table class="w-full text-start">
                                 <thead>
                                     <tr class="bg-gray-50 dark:bg-gray-800/50">
                                         <th class="px-6 py-4 text-xs font-bold text-gray-500 uppercase">Order ID</th>
@@ -243,79 +262,20 @@
                                     </tr>
                                 </thead>
                                 <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
-                                    <tr class="hover:bg-gray-50/50 dark:hover:bg-gray-800/30 transition-colors">
-                                        <td class="px-6 py-5 dark:text-gray-300">#ORD-2584</td>
-                                        <td class="px-6 py-5 flex items-center">
-                                            <div
-                                                class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-bold text-xs mr-3">
-                                                JD</div>
-                                            <span class="dark:text-white">James Dean</span>
-                                        </td>
-                                        <td class="px-6 py-5 dark:text-gray-400 text-sm">Office Deep Clean</td>
-                                        <td class="px-6 py-5">
-                                            <span
-                                                class="px-3 py-1 bg-green-50 dark:bg-green-900/30 text-green-600 text-[10px] font-bold rounded-full">Completed</span>
-                                        </td>
-                                        <td class="px-6 py-5 text-gray-500 text-sm">Oct 24, 2025</td>
-                                        <td class="px-6 py-5 font-bold dark:text-white">$1,240.00</td>
-                                        <td class="px-6 py-5">
-                                            <button class="text-gray-400 hover:text-primary-500 transition-colors"><i
-                                                    class="fa-solid fa-ellipsis-vertical"></i></button>
-                                        </td>
-                                    </tr>
-                                    <tr class="hover:bg-gray-50/50 dark:hover:bg-gray-800/30 transition-colors">
-                                        <td class="px-6 py-5 dark:text-gray-300">#ORD-2585</td>
-                                        <td class="px-6 py-5 flex items-center">
-                                            <div
-                                                class="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 font-bold text-xs mr-3">
-                                                SW</div>
-                                            <span class="dark:text-white">Sarah Wilson</span>
-                                        </td>
-                                        <td class="px-6 py-5 dark:text-gray-400 text-sm">Window Sanitization</td>
-                                        <td class="px-6 py-5">
-                                            <span
-                                                class="px-3 py-1 bg-yellow-50 dark:bg-yellow-900/30 text-yellow-600 text-[10px] font-bold rounded-full">Pending</span>
-                                        </td>
-                                        <td class="px-6 py-5 text-gray-500 text-sm">Oct 25, 2025</td>
-                                        <td class="px-6 py-5 font-bold dark:text-white">$850.00</td>
-                                        <td class="px-6 py-5">
-                                            <button class="text-gray-400 hover:text-primary-500 transition-colors"><i
-                                                    class="fa-solid fa-ellipsis-vertical"></i></button>
-                                        </td>
-                                    </tr>
-                                    <tr class="hover:bg-gray-50/50 dark:hover:bg-gray-800/30 transition-colors">
-                                        <td class="px-6 py-5 dark:text-gray-300">#ORD-2586</td>
-                                        <td class="px-6 py-5 flex items-center">
-                                            <div
-                                                class="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center text-orange-600 font-bold text-xs mr-3">
-                                                MK</div>
-                                            <span class="dark:text-white">Mike Kaiser</span>
-                                        </td>
-                                        <td class="px-6 py-5 dark:text-gray-400 text-sm">Carpet Steam Clean</td>
-                                        <td class="px-6 py-5">
-                                            <span
-                                                class="px-3 py-1 bg-blue-50 dark:bg-blue-900/30 text-blue-600 text-[10px] font-bold rounded-full">In
-                                                Progress</span>
-                                        </td>
-                                        <td class="px-6 py-5 text-gray-500 text-sm">Oct 26, 2025</td>
-                                        <td class="px-6 py-5 font-bold dark:text-white">$420.00</td>
-                                        <td class="px-6 py-5">
-                                            <button class="text-gray-400 hover:text-primary-500 transition-colors"><i
-                                                    class="fa-solid fa-ellipsis-vertical"></i></button>
-                                        </td>
-                                    </tr>
                                 </tbody>
                             </table>
                         </div>
                         <div class="p-6 border-t border-gray-50 dark:border-gray-800 flex items-center justify-between">
-                            <p class="text-sm text-gray-500">Showing 3 of 528 orders</p>
-                            <div class="flex space-x-2">
+                            <p class="text-sm text-gray-500">Showing 1-3 of 15 orders</p>
+                            <div class="flex gap-2">
                                 <button id="prevPage"
-                                    class="w-10 h-10 rounded-xl border border-gray-100 dark:border-gray-800 flex items-center justify-center text-gray-500 hover:bg-gray-50 dark:hover:bg-gray-800 transition-all"><i
-                                        class="fa-solid fa-chevron-left"></i></button>
+                                    class="w-10 h-10 rounded-xl border border-gray-100 dark:border-gray-800 flex items-center justify-center text-gray-500 hover:bg-gray-50 dark:hover:bg-gray-800 transition-all disabled:opacity-50 disabled:cursor-not-allowed">
+                                    <i class="fa-solid fa-chevron-left"></i>
+                                </button>
                                 <button id="nextPage"
-                                    class="w-10 h-10 rounded-xl border border-gray-100 dark:border-gray-800 flex items-center justify-center text-gray-500 hover:bg-gray-50 dark:hover:bg-gray-800 transition-all"><i
-                                        class="fa-solid fa-chevron-right"></i></button>
+                                    class="w-10 h-10 rounded-xl border border-gray-100 dark:border-gray-800 flex items-center justify-center text-gray-500 hover:bg-gray-50 dark:hover:bg-gray-800 transition-all disabled:opacity-50 disabled:cursor-not-allowed">
+                                    <i class="fa-solid fa-chevron-right"></i>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -387,60 +347,178 @@
     </div>
 
     <script>
-        // Sidebar Toggle for Mobile
-        const sidebar = document.getElementById('sidebar');
-        const toggleSidebar = document.getElementById('toggleSidebar');
-        const themeToggleBtn = document.getElementById('theme-toggle');
+        // Sample Orders Data
+        const ordersData = [
+            { id: 'ORD-2584', customer: 'James Dean', initials: 'JD', color: 'blue', service: 'Office Deep Clean', status: 'completed', date: '2026-02-05', amount: 1240 },
+            { id: 'ORD-2585', customer: 'Sarah Wilson', initials: 'SW', color: 'purple', service: 'Window Sanitization', status: 'pending', date: '2026-02-08', amount: 850 },
+            { id: 'ORD-2586', customer: 'Mike Kaiser', initials: 'MK', color: 'orange', service: 'Carpet Steam Clean', status: 'in-progress', date: '2026-02-07', amount: 420 },
+            { id: 'ORD-2587', customer: 'Emily Brown', initials: 'EB', color: 'green', service: 'Office Deep Clean', status: 'completed', date: '2026-01-28', amount: 1100 },
+            { id: 'ORD-2588', customer: 'David Lee', initials: 'DL', color: 'red', service: 'Regular Maintenance', status: 'pending', date: '2026-02-01', amount: 350 },
+            { id: 'ORD-2589', customer: 'Lisa Chen', initials: 'LC', color: 'cyan', service: 'Post Construction', status: 'in-progress', date: '2026-01-25', amount: 2500 },
+            { id: 'ORD-2590', customer: 'Tom Wilson', initials: 'TW', color: 'yellow', service: 'Floor Waxing', status: 'completed', date: '2026-01-20', amount: 780 },
+            { id: 'ORD-2591', customer: 'Anna Martinez', initials: 'AM', color: 'pink', service: 'Carpet Steam Clean', status: 'pending', date: '2026-02-09', amount: 560 },
+            { id: 'ORD-2592', customer: 'Chris Johnson', initials: 'CJ', color: 'indigo', service: 'Sanitization', status: 'in-progress', date: '2026-01-30', amount: 920 },
+            { id: 'ORD-2593', customer: 'Maria Garcia', initials: 'MG', color: 'teal', service: 'Window Cleaning', status: 'completed', date: '2026-01-15', amount: 420 },
+            { id: 'ORD-2594', customer: 'Robert Taylor', initials: 'RT', color: 'gray', service: 'Deep Clean', status: 'pending', date: '2026-02-03', amount: 1800 },
+            { id: 'ORD-2595', customer: 'Jennifer White', initials: 'JW', color: 'amber', service: 'Regular Maintenance', status: 'completed', date: '2026-01-10', amount: 290 },
+            { id: 'ORD-2596', customer: 'William Harris', initials: 'WH', color: 'lime', service: 'Carpet Clean', status: 'in-progress', date: '2026-01-05', amount: 680 },
+            { id: 'ORD-2597', customer: 'Patricia Clark', initials: 'PC', color: 'rose', service: 'Office Clean', status: 'completed', date: '2025-12-20', amount: 950 },
+            { id: 'ORD-2598', customer: 'Charles Lewis', initials: 'CL', color: 'sky', service: 'Sanitization', status: 'pending', date: '2025-12-15', amount: 1100 }
+        ];
 
-        if (toggleSidebar) {
-            toggleSidebar.addEventListener('click', (e) => {
-                e.stopPropagation();
-                sidebar.classList.toggle('-translate-x-full');
-            });
-        }
-
-        // Close sidebar when clicking outside on mobile
-        document.addEventListener('click', (e) => {
-            if (window.innerWidth < 1024 && sidebar && !sidebar.contains(e.target) && !toggleSidebar.contains(e.target)) {
-                sidebar.classList.add('-translate-x-full');
-            }
-        });
-
-        // Theme Toggle
-        if (themeToggleBtn) {
-            themeToggleBtn.addEventListener('click', () => {
-                document.documentElement.classList.toggle('dark');
-            });
-        }
-
-        // RTL Toggle
-        const rtlToggleBtn = document.getElementById('rtl-toggle');
-        if (rtlToggleBtn) {
-            rtlToggleBtn.addEventListener('click', () => {
-                const html = document.documentElement;
-                const currentDir = html.getAttribute('dir');
-
-                if (currentDir === 'rtl') {
-                    html.setAttribute('dir', 'ltr');
-                    rtlToggleBtn.textContent = 'RTL';
-                } else {
-                    html.setAttribute('dir', 'rtl');
-                    rtlToggleBtn.textContent = 'LTR';
-                }
-            });
-        }
-
-        // Notifications Dropdown Toggle
+        // DOM Elements
+        const statusFilter = document.getElementById('statusFilter');
+        const dateFilter = document.getElementById('dateFilter');
+        const monthFilter = document.getElementById('monthFilter');
+        const weekFilter = document.getElementById('weekFilter');
+        const tableBody = document.querySelector('tbody');
+        const prevPage = document.getElementById('prevPage');
+        const nextPage = document.getElementById('nextPage');
+        const showingText = document.querySelector('.p-6.border-t p');
         const notificationsToggle = document.getElementById('notifications-toggle');
         const notificationsDropdown = document.getElementById('notifications-dropdown-orders');
+        const modal = document.getElementById('orderModal');
+        const createBtn = document.getElementById('createOrderBtn');
+        const closeBtn = document.getElementById('closeModal');
+        const cancelBtn = document.getElementById('cancelBtn');
 
+        // Pagination State
+        let currentPage = 1;
+        const itemsPerPage = 3;
+        let filteredOrders = [...ordersData];
+
+        // Helper Functions
+        function getStatusBadge(status) {
+            const badges = {
+                'completed': '<span class="px-3 py-1 bg-green-50 dark:bg-green-900/30 text-green-600 text-[10px] font-bold rounded-full">Completed</span>',
+                'pending': '<span class="px-3 py-1 bg-yellow-50 dark:bg-yellow-900/30 text-yellow-600 text-[10px] font-bold rounded-full">Pending</span>',
+                'in-progress': '<span class="px-3 py-1 bg-blue-50 dark:bg-blue-900/30 text-blue-600 text-[10px] font-bold rounded-full">In Progress</span>'
+            };
+            return badges[status] || '';
+        }
+
+        function formatDate(dateStr) {
+            const date = new Date(dateStr);
+            return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+        }
+
+        function formatCurrency(amount) {
+            return '$' + amount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
+
+        // Filter and Render Functions
+        function applyFilters() {
+            const status = statusFilter.value;
+            const monthValue = monthFilter.value;
+            const weekValue = weekFilter.value;
+
+            const today = new Date();
+            let filtered = [...ordersData];
+
+            // Apply status filter
+            if (status !== 'all') {
+                filtered = filtered.filter(order => order.status === status);
+            }
+
+            // Apply month filter (clears date range and week)
+            if (monthValue) {
+                const [year, month] = monthValue.split('-');
+                filtered = filtered.filter(order => {
+                    const orderDate = new Date(order.date);
+                    return orderDate.getFullYear() === parseInt(year) &&
+                        (orderDate.getMonth() + 1) === parseInt(month);
+                });
+            }
+            // Apply week filter (clears date range)
+            else if (weekValue) {
+                const [year, yearWeek] = weekValue.split('-W');
+                const weekNum = parseInt(yearWeek);
+                const weekYear = parseInt(year);
+                filtered = filtered.filter(order => {
+                    const orderDate = new Date(order.date);
+                    // Get ISO week number
+                    const d = new Date(orderDate);
+                    d.setHours(0, 0, 0, 0);
+                    d.setDate(d.getDate() + 4 - (d.getDay() || 7));
+                    const yearStart = new Date(d.getFullYear(), 0, 1);
+                    const weekNo = Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
+                    return weekNo === weekNum && d.getFullYear() === weekYear;
+                });
+            }
+            // Apply date range filter
+            else {
+                const dateRange = parseInt(dateFilter.value);
+                const cutoffDate = new Date(today);
+                cutoffDate.setDate(today.getDate() - dateRange);
+                filtered = filtered.filter(order => {
+                    const orderDate = new Date(order.date);
+                    return orderDate >= cutoffDate;
+                });
+            }
+
+            filteredOrders = filtered;
+            currentPage = 1;
+            renderOrders();
+            updatePagination();
+        }
+
+        function renderOrders() {
+            const start = (currentPage - 1) * itemsPerPage;
+            const end = start + itemsPerPage;
+            const pageOrders = filteredOrders.slice(start, end);
+
+            if (pageOrders.length === 0) {
+                tableBody.innerHTML = '<tr><td colspan="7" class="px-6 py-8 text-center text-gray-500">No orders found</td></tr>';
+                return;
+            }
+
+            tableBody.innerHTML = pageOrders.map(order => `
+                <tr class="hover:bg-gray-50/50 dark:hover:bg-gray-800/30 transition-colors">
+                    <td class="px-6 py-5 dark:text-gray-300">${order.id}</td>
+                    <td class="px-6 py-5 flex items-center">
+                        <div class="w-8 h-8 rounded-full bg-${order.color}-100 flex items-center justify-center text-${order.color}-600 font-bold text-xs mr-3">
+                            ${order.initials}
+                        </div>
+                        <span class="dark:text-white">${order.customer}</span>
+                    </td>
+                    <td class="px-6 py-5 dark:text-gray-400 text-sm">${order.service}</td>
+                    <td class="px-6 py-5">${getStatusBadge(order.status)}</td>
+                    <td class="px-6 py-5 text-gray-500 text-sm">${formatDate(order.date)}</td>
+                    <td class="px-6 py-5 font-bold dark:text-white">${formatCurrency(order.amount)}</td>
+                    <td class="px-6 py-5">
+                        <div class="flex gap-2">
+                            <button class="view-btn text-gray-400 hover:text-primary-500 transition-colors" title="View" onclick="viewOrder('${order.id}')"><i class="fa-solid fa-eye"></i></button>
+                            <button class="edit-btn text-gray-400 hover:text-yellow-500 transition-colors" title="Edit" onclick="editOrder('${order.id}')"><i class="fa-solid fa-pen-to-square"></i></button>
+                            <button class="delete-btn text-gray-400 hover:text-red-500 transition-colors" title="Delete" onclick="deleteOrder('${order.id}')"><i class="fa-solid fa-trash"></i></button>
+                        </div>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function updatePagination() {
+            const totalFiltered = filteredOrders.length;
+            const totalPages = Math.ceil(totalFiltered / itemsPerPage);
+            const start = (currentPage - 1) * itemsPerPage + 1;
+            const end = Math.min(currentPage * itemsPerPage, totalFiltered);
+
+            if (totalFiltered === 0) {
+                showingText.textContent = 'No orders found';
+            } else {
+                showingText.textContent = `Showing ${start} to ${end} of ${totalFiltered} orders`;
+            }
+
+            prevPage.disabled = currentPage === 1;
+            nextPage.disabled = currentPage >= totalPages;
+        }
+
+        // Notifications Dropdown
         if (notificationsToggle && notificationsDropdown) {
             notificationsToggle.addEventListener('click', (e) => {
                 e.stopPropagation();
                 notificationsDropdown.classList.toggle('hidden');
             });
 
-            // Close dropdown when clicking outside
             document.addEventListener('click', (e) => {
                 if (!notificationsToggle.contains(e.target) && !notificationsDropdown.contains(e.target)) {
                     notificationsDropdown.classList.add('hidden');
@@ -448,12 +526,7 @@
             });
         }
 
-        // Modal Logic
-        const modal = document.getElementById('orderModal');
-        const createBtn = document.getElementById('createOrderBtn');
-        const closeBtn = document.getElementById('closeModal');
-        const cancelBtn = document.getElementById('cancelBtn');
-
+        // Modal Functions
         function openModal() {
             modal.classList.remove('hidden');
             document.body.style.overflow = 'hidden';
@@ -468,52 +541,90 @@
         closeBtn?.addEventListener('click', closeModal);
         cancelBtn?.addEventListener('click', closeModal);
 
-        // Close modal on backdrop click
         modal?.addEventListener('click', (e) => {
             if (e.target === modal) closeModal();
         });
 
-        // Pagination Logic (Simulated)
-        const prevPage = document.getElementById('prevPage');
-        const nextPage = document.getElementById('nextPage');
-        const showingText = document.querySelector('.p-6.border-t p');
-        const tableBody = document.querySelector('tbody');
+        // Filter Event Listeners
+        statusFilter?.addEventListener('change', applyFilters);
 
-        let currentPage = 1;
-        const itemsPerPage = 3;
-        const totalItems = 528;
+        dateFilter?.addEventListener('change', () => {
+            // Clear month and week when date range changes
+            monthFilter.value = '';
+            weekFilter.value = '';
+            applyFilters();
+        });
 
-        function updatePagination() {
-            // Show loading flicker
-            tableBody.style.opacity = '0.3';
-            setTimeout(() => {
-                tableBody.style.opacity = '1';
-                const start = (currentPage - 1) * itemsPerPage + 1;
-                const end = Math.min(currentPage * itemsPerPage, totalItems);
-                showingText.innerText = `Showing ${start} to ${end} of ${totalItems} orders`;
-            }, 200);
-        }
+        monthFilter?.addEventListener('change', () => {
+            // Clear date range and week when month changes
+            if (monthFilter.value) {
+                dateFilter.value = '365';
+                weekFilter.value = '';
+            }
+            applyFilters();
+        });
 
+        weekFilter?.addEventListener('change', () => {
+            // Clear date range and month when week changes
+            if (weekFilter.value) {
+                dateFilter.value = '365';
+                monthFilter.value = '';
+            }
+            applyFilters();
+        });
+
+        // Pagination Event Listeners
         prevPage?.addEventListener('click', () => {
             if (currentPage > 1) {
                 currentPage--;
+                renderOrders();
                 updatePagination();
+                prevPage.classList.add('scale-95');
+                setTimeout(() => prevPage.classList.remove('scale-95'), 100);
             }
-            // Feedback animation
-            prevPage.classList.add('scale-95');
-            setTimeout(() => prevPage.classList.remove('scale-95'), 100);
         });
 
         nextPage?.addEventListener('click', () => {
-            if (currentPage < Math.ceil(totalItems / itemsPerPage)) {
+            const totalPages = Math.ceil(filteredOrders.length / itemsPerPage);
+            if (currentPage < totalPages) {
                 currentPage++;
+                renderOrders();
                 updatePagination();
+                nextPage.classList.add('scale-95');
+                setTimeout(() => nextPage.classList.remove('scale-95'), 100);
             }
-            // Feedback animation
-            nextPage.classList.add('scale-95');
-            setTimeout(() => nextPage.classList.remove('scale-95'), 100);
         });
+
+        // Action Button Functions
+        window.viewOrder = function (orderId) {
+            const order = ordersData.find(o => o.id === orderId);
+            if (order) {
+                alert('Viewing Order: ' + order.id + '\n\nCustomer: ' + order.customer + '\nService: ' + order.service + '\nStatus: ' + order.status + '\nDate: ' + formatDate(order.date) + '\nAmount: ' + formatCurrency(order.amount));
+            }
+        };
+
+        window.editOrder = function (orderId) {
+            const order = ordersData.find(o => o.id === orderId);
+            if (order) {
+                console.log('Edit order:', order);
+            }
+        };
+
+        window.deleteOrder = function (orderId) {
+            if (confirm('Are you sure you want to delete this order?')) {
+                const index = ordersData.findIndex(o => o.id === orderId);
+                if (index > -1) {
+                    ordersData.splice(index, 1);
+                    applyFilters();
+                    console.log('Order deleted:', orderId);
+                }
+            }
+        };
+
+        // Initialize
+        applyFilters();
     </script>
+    <script src="../assets/js/main.js"></script>
 </body>
 
 </html>

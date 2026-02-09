@@ -1,10 +1,28 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr" data-theme="light" class="dark">
+<html lang="en" dir="ltr" data-theme="light">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Services - NovaSite Client</title>
+
+    <!-- FOUC Prevention - Apply theme and RTL immediately -->
+    <script>
+        (function () {
+            // Apply theme
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const theme = savedTheme || (prefersDark ? 'dark' : 'light');
+            document.documentElement.classList.add(theme);
+            document.documentElement.setAttribute('data-theme', theme);
+
+            // Apply RTL direction
+            const savedDir = localStorage.getItem('dir') || 'ltr';
+            document.documentElement.setAttribute('dir', savedDir);
+        })();
+    </script>
+
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -38,7 +56,7 @@
     <div class="flex h-screen overflow-hidden">
         <!-- Sidebar -->
         <aside id="sidebar"
-            class="fixed inset-y-0 left-0 z-50 w-64 bg-white dark:bg-dark-sidebar border-r border-gray-100 dark:border-gray-800 transition-transform duration-300 transform lg:translate-x-0 -translate-x-full">
+            class="fixed inset-y-0 left-0 rtl:left-auto rtl:right-0 z-50 w-64 bg-white dark:bg-dark-sidebar border-r rtl:border-r-0 rtl:border-l border-gray-100 dark:border-gray-800 transition-transform duration-300 transform lg:translate-x-0 rtl:lg:translate-x-0 -translate-x-full rtl:translate-x-full">
             <div class="flex flex-col h-full">
                 <!-- Brand -->
                 <div class="p-6">
@@ -62,6 +80,11 @@
                         class="flex items-center px-4 py-3 bg-primary-50 dark:bg-primary-900/20 text-primary-600 dark:text-primary-400 rounded-xl font-semibold">
                         <i class="fa-solid fa-sparkles w-6"></i>
                         <span>My Services</span>
+                    </a>
+                    <a href="history.html"
+                        class="flex items-center px-4 py-3 text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800/50 rounded-xl transition-all">
+                        <i class="fa-solid fa-clock-rotate-left w-6"></i>
+                        <span>History</span>
                     </a>
                     <a href="billing.html"
                         class="flex items-center px-4 py-3 text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800/50 rounded-xl transition-all">
@@ -90,18 +113,18 @@
         </aside>
 
         <!-- Main Content -->
-        <main class="flex-1 flex flex-col min-w-0 lg:ml-64 transition-all duration-300">
+        <main class="flex-1 flex flex-col min-w-0 lg:ms-64 transition-all duration-300">
             <!-- Header -->
             <header
                 class="h-16 flex items-center justify-between px-6 bg-white dark:bg-dark-sidebar border-b border-gray-100 dark:border-gray-800">
                 <div class="flex items-center lg:hidden">
                     <button id="toggleSidebar" class="p-2 text-gray-500 hover:text-primary-500">
-                        <i class="fa-solid fa-bars-staggered text-xl"></i>
+                        <i class="fa-solid fa-bars-staggered text-xl rtl:-scale-x-100"></i>
                     </button>
-                    <span class="ml-4 font-bold font-heading dark:text-white">NovaSite</span>
+                    <span class="ms-4 font-bold font-heading dark:text-white">NovaSite</span>
                 </div>
 
-                <div class="ml-auto flex items-center space-x-3 sm:space-x-4">
+                <div class="ms-auto flex items-center gap-5 sm:gap-8">
                     <button id="theme-toggle"
                         class="w-10 h-10 flex items-center justify-center rounded-xl bg-gray-50 dark:bg-gray-800 dark:text-white hover:bg-gray-100 transition-colors">
                         <i class="fa-solid fa-moon dark:hidden"></i>
@@ -172,7 +195,7 @@
 
                     <div class="h-8 w-px bg-gray-100 dark:bg-gray-800 mx-1 hidden sm:block"></div>
 
-                    <div class="flex items-center space-x-3 pl-2">
+                    <div class="flex items-center gap-3 ps-2">
                         <div class="text-right hidden sm:block">
                             <p class="text-sm font-bold dark:text-white leading-none">Robert Smith</p>
                             <p class="text-[10px] text-gray-500 leading-none mt-1">TechCorp Plaza</p>
@@ -192,7 +215,7 @@
                             <h2 class="text-2xl font-bold font-heading dark:text-white">My Services</h2>
                             <p class="text-sm text-gray-500">Manage your cleaning subscriptions and schedules</p>
                         </div>
-                        <button
+                        <button onclick="openBookServiceModal()"
                             class="px-6 py-3 gradient-primary text-white font-bold rounded-xl shadow-lg shadow-primary-500/30 hover:scale-105 transition-all">
                             + Book New Service
                         </button>
@@ -219,9 +242,10 @@
                             </div>
                             <div class="flex space-x-2">
                                 <button
+                                    onclick="viewCalendar('Office Deep Cleaning', 'Twice Weekly', 'TechCorp Plaza - Floor 12, Suite 400')"
                                     class="p-3 rounded-xl bg-gray-50 dark:bg-gray-800 text-gray-400 hover:text-primary-500 transition-all"><i
                                         class="fa-solid fa-calendar-day"></i></button>
-                                <button
+                                <button onclick="confirmDelete('Office Deep Cleaning', this)"
                                     class="p-3 rounded-xl bg-gray-50 dark:bg-gray-800 text-gray-400 hover:text-red-500 transition-all"><i
                                         class="fa-solid fa-trash-can"></i></button>
                             </div>
@@ -246,9 +270,10 @@
                             </div>
                             <div class="flex space-x-2">
                                 <button
+                                    onclick="viewCalendar('Window Sanitization', 'One-time', 'TechCorp Plaza - Main Lobby')"
                                     class="p-3 rounded-xl bg-gray-50 dark:bg-gray-800 text-gray-400 hover:text-primary-500 transition-all"><i
                                         class="fa-solid fa-calendar-day"></i></button>
-                                <button
+                                <button onclick="confirmDelete('Window Sanitization', this)"
                                     class="p-3 rounded-xl bg-gray-50 dark:bg-gray-800 text-gray-400 hover:text-red-500 transition-all"><i
                                         class="fa-solid fa-trash-can"></i></button>
                             </div>
@@ -259,8 +284,248 @@
         </main>
     </div>
 
+    <!-- Book Service Modal -->
+    <div id="bookServiceModal" class="fixed inset-0 z-50 hidden">
+        <div class="fixed inset-0 bg-black/50 backdrop-blur-sm" onclick="closeBookServiceModal()"></div>
+        <div class="fixed inset-0 flex items-center justify-center p-4">
+            <div class="bg-white dark:bg-dark-card rounded-3xl shadow-2xl w-full max-w-lg p-6 relative"
+                onclick="event.stopPropagation()">
+                <button onclick="closeBookServiceModal()"
+                    class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
+                    <i class="fa-solid fa-times text-xl"></i>
+                </button>
+                <h3 class="text-xl font-bold font-heading dark:text-white mb-6">Book New Service</h3>
+                <form onsubmit="submitBooking(event)">
+                    <div class="mb-4">
+                        <label class="block text-sm font-semibold text-gray-500 mb-2">Service Type</label>
+                        <select id="serviceType"
+                            class="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-800 dark:text-white border border-gray-100 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-primary-500"
+                            required>
+                            <option value="">Select a service</option>
+                            <option value="office-cleaning">Office Deep Cleaning</option>
+                            <option value="window-cleaning">Window Sanitization</option>
+                            <option value="carpet-cleaning">Carpet Cleaning</option>
+                            <option value="floor-waxing">Floor Waxing</option>
+                            <option value="green-cleaning">Green Cleaning</option>
+                            <option value="post-construction">Post-Construction Cleanup</option>
+                            <option value="sanitization">Sanitization Services</option>
+                        </select>
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-sm font-semibold text-gray-500 mb-2">Preferred Date</label>
+                        <input type="date" id="serviceDate"
+                            class="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-800 dark:text-white border border-gray-100 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-primary-500"
+                            required>
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-sm font-semibold text-gray-500 mb-2">Preferred Time</label>
+                        <select id="serviceTime"
+                            class="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-800 dark:text-white border border-gray-100 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-primary-500"
+                            required>
+                            <option value="">Select a time</option>
+                            <option value="08:00">8:00 AM</option>
+                            <option value="09:00">9:00 AM</option>
+                            <option value="10:00">10:00 AM</option>
+                            <option value="11:00">11:00 AM</option>
+                            <option value="12:00">12:00 PM</option>
+                            <option value="14:00">2:00 PM</option>
+                            <option value="15:00">3:00 PM</option>
+                            <option value="16:00">4:00 PM</option>
+                            <option value="17:00">5:00 PM</option>
+                            <option value="18:00">6:00 PM</option>
+                        </select>
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-sm font-semibold text-gray-500 mb-2">Special Instructions</label>
+                        <textarea id="serviceNotes" rows="3"
+                            class="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-800 dark:text-white border border-gray-100 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-primary-500"
+                            placeholder="Any special requirements..."></textarea>
+                    </div>
+                    <div class="flex space-x-3">
+                        <button type="button" onclick="closeBookServiceModal()"
+                            class="flex-1 px-4 py-3 rounded-xl bg-gray-100 dark:bg-gray-800 dark:text-white font-semibold hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">Cancel</button>
+                        <button type="submit"
+                            class="flex-1 px-4 py-3 rounded-xl bg-primary-500 text-white font-semibold hover:bg-primary-600 transition-colors">Book
+                            Now</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Calendar Modal -->
+    <div id="calendarModal" class="fixed inset-0 z-50 hidden">
+        <div class="fixed inset-0 bg-black/50 backdrop-blur-sm" onclick="closeCalendarModal()"></div>
+        <div class="fixed inset-0 flex items-center justify-center p-4">
+            <div class="bg-white dark:bg-dark-card rounded-3xl shadow-2xl w-full max-w-md p-6 relative"
+                onclick="event.stopPropagation()">
+                <button onclick="closeCalendarModal()"
+                    class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
+                    <i class="fa-solid fa-times text-xl"></i>
+                </button>
+                <div class="flex items-center space-x-4 mb-6">
+                    <div
+                        class="w-12 h-12 rounded-xl bg-blue-50 dark:bg-blue-900/30 text-blue-600 flex items-center justify-center">
+                        <i class="fa-solid fa-calendar-check text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold font-heading dark:text-white" id="calendarServiceName">Service Name
+                        </h3>
+                        <p class="text-sm text-gray-500" id="calendarFrequency">Frequency</p>
+                    </div>
+                </div>
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-3 p-4 bg-gray-50 dark:bg-gray-800 rounded-xl">
+                        <i class="fa-solid fa-location-dot text-primary-500"></i>
+                        <div>
+                            <p class="text-sm font-semibold dark:text-white" id="calendarLocation">Location</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-3 p-4 bg-gray-50 dark:bg-gray-800 rounded-xl">
+                        <i class="fa-solid fa-clock text-primary-500"></i>
+                        <div>
+                            <p class="text-sm font-semibold dark:text-white">Next Scheduled</p>
+                            <p class="text-xs text-gray-500">Monday & Thursday, 6:00 PM</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-3 p-4 bg-gray-50 dark:bg-gray-800 rounded-xl">
+                        <i class="fa-solid fa-user text-primary-500"></i>
+                        <div>
+                            <p class="text-sm font-semibold dark:text-white">Robert Smith</p>
+                            <p class="text-xs text-gray-500">Primary Contact</p>
+                        </div>
+                    </div>
+                </div>
+                <button onclick="closeCalendarModal()"
+                    class="w-full mt-6 px-4 py-3 rounded-xl bg-gray-100 dark:bg-gray-800 dark:text-white font-semibold hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div id="deleteModal" class="fixed inset-0 z-50 hidden">
+        <div class="fixed inset-0 bg-black/50 backdrop-blur-sm" onclick="closeDeleteModal()"></div>
+        <div class="fixed inset-0 flex items-center justify-center p-4">
+            <div class="bg-white dark:bg-dark-card rounded-3xl shadow-2xl w-full max-w-sm p-6 relative text-center"
+                onclick="event.stopPropagation()">
+                <div
+                    class="w-16 h-16 rounded-full bg-red-100 dark:bg-red-900/30 text-red-500 flex items-center justify-center mx-auto mb-4">
+                    <i class="fa-solid fa-triangle-exclamation text-2xl"></i>
+                </div>
+                <h3 class="text-lg font-bold font-heading dark:text-white mb-2">Delete Service?</h3>
+                <p class="text-gray-500 mb-6">Are you sure you want to remove <span id="deleteServiceName"
+                        class="font-semibold text-gray-700 dark:text-gray-300"></span> from your services? This action
+                    cannot be undone.</p>
+                <div class="flex space-x-3">
+                    <button onclick="closeDeleteModal()"
+                        class="flex-1 px-4 py-3 rounded-xl bg-gray-100 dark:bg-gray-800 dark:text-white font-semibold hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">Cancel</button>
+                    <button id="confirmDeleteBtn" onclick="deleteService()"
+                        class="flex-1 px-4 py-3 rounded-xl bg-red-500 text-white font-semibold hover:bg-red-600 transition-colors">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Toast -->
+    <div id="successToast" class="fixed bottom-6 right-6 z-50 hidden">
+        <div class="bg-green-500 text-white px-6 py-4 rounded-2xl shadow-lg flex items-center space-x-3">
+            <i class="fa-solid fa-check-circle text-xl"></i>
+            <span id="successMessage">Success!</span>
+        </div>
+    </div>
+
     <!-- Scripts -->
+    <script>
+        let deleteRow = null;
+
+        // Book Service Modal Functions
+        function openBookServiceModal() {
+            document.getElementById('bookServiceModal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeBookServiceModal() {
+            document.getElementById('bookServiceModal').classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        function submitBooking(event) {
+            event.preventDefault();
+            const serviceType = document.getElementById('serviceType').value;
+            const serviceDate = document.getElementById('serviceDate').value;
+            const serviceTime = document.getElementById('serviceTime').value;
+
+            if (serviceType && serviceDate && serviceTime) {
+                closeBookServiceModal();
+                showSuccess('Service booked successfully! Confirmation sent to your email.');
+                event.target.reset();
+            }
+        }
+
+        // Calendar Modal Functions
+        function viewCalendar(serviceName, frequency, location) {
+            document.getElementById('calendarServiceName').textContent = serviceName;
+            document.getElementById('calendarFrequency').textContent = frequency;
+            document.getElementById('calendarLocation').textContent = location;
+            document.getElementById('calendarModal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeCalendarModal() {
+            document.getElementById('calendarModal').classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        // Delete Confirmation Functions
+        function confirmDelete(serviceName, row) {
+            deleteRow = row;
+            document.getElementById('deleteServiceName').textContent = serviceName;
+            document.getElementById('deleteModal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeDeleteModal() {
+            document.getElementById('deleteModal').classList.add('hidden');
+            document.body.style.overflow = '';
+            deleteRow = null;
+        }
+
+        function deleteService() {
+            if (deleteRow) {
+                const card = deleteRow.closest('.rounded-2xl');
+                card.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+                card.style.opacity = '0';
+                card.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    card.remove();
+                    showSuccess('Service removed successfully');
+                }, 300);
+            }
+            closeDeleteModal();
+        }
+
+        // Success Toast Function
+        function showSuccess(message) {
+            const toast = document.getElementById('successToast');
+            document.getElementById('successMessage').textContent = message;
+            toast.classList.remove('hidden');
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 3000);
+        }
+
+        // Close modals on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeBookServiceModal();
+                closeCalendarModal();
+                closeDeleteModal();
+            }
+        });
+    </script>
     <script src="../assets/js/main.js"></script>
 </body>
+
+</html>
 
 </html>

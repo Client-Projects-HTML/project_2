@@ -1,10 +1,28 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr" data-theme="light" class="dark">
+<html lang="en" dir="ltr" data-theme="light">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - NovaSite Admin</title>
+
+    <!-- FOUC Prevention - Apply theme and RTL immediately -->
+    <script>
+        (function () {
+            // Apply theme
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const theme = savedTheme || (prefersDark ? 'dark' : 'light');
+            document.documentElement.classList.add(theme);
+            document.documentElement.setAttribute('data-theme', theme);
+
+            // Apply RTL direction
+            const savedDir = localStorage.getItem('dir') || 'ltr';
+            document.documentElement.setAttribute('dir', savedDir);
+        })();
+    </script>
+
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -39,7 +57,7 @@
     <div class="flex h-screen overflow-hidden">
         <!-- Sidebar -->
         <aside id="sidebar"
-            class="fixed inset-y-0 left-0 z-50 w-64 bg-white dark:bg-dark-sidebar border-r border-gray-100 dark:border-gray-800 transition-transform duration-300 transform lg:translate-x-0 -translate-x-full">
+            class="fixed inset-y-0 left-0 rtl:left-auto rtl:right-0 z-50 w-64 bg-white dark:bg-dark-sidebar border-r rtl:border-r-0 rtl:border-l border-gray-100 dark:border-gray-800 transition-transform duration-300 transform lg:translate-x-0 rtl:lg:translate-x-0 -translate-x-full rtl:translate-x-full">
             <div class="flex flex-col h-full">
                 <!-- Brand -->
                 <div class="p-6">
@@ -96,31 +114,23 @@
         </aside>
 
         <!-- Main Content -->
-        <main class="flex-1 flex flex-col min-w-0 lg:ml-64 transition-all duration-300">
+        <main class="flex-1 flex flex-col min-w-0 lg:ms-64 transition-all duration-300">
             <!-- Header -->
             <header
                 class="h-16 flex items-center justify-between px-6 bg-white dark:bg-dark-sidebar border-b border-gray-100 dark:border-gray-800">
                 <div class="flex items-center lg:hidden">
                     <button id="toggleSidebar" class="p-2 text-gray-500 hover:text-primary-500">
-                        <i class="fa-solid fa-bars-staggered text-xl"></i>
+                        <i class="fa-solid fa-bars-staggered text-xl rtl-flip"></i>
                     </button>
-                    <span class="ml-4 font-bold font-heading dark:text-white">NovaSite</span>
+                    <span class="ms-4 font-bold font-heading dark:text-white">NovaSite</span>
                 </div>
 
-                <div class="hidden md:flex items-center flex-1 max-w-md ml-4">
-                    <div class="relative w-full">
-                        <i
-                            class="fa-solid fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i>
-                        <input type="text" placeholder="Search orders, clients..."
-                            class="w-full pl-11 pr-4 py-2 bg-gray-50 dark:bg-gray-800 border-none rounded-xl focus:ring-2 focus:ring-primary-500 text-sm dark:text-white outline-none">
-                    </div>
-                </div>
-
-                <div class="flex items-center space-x-3 sm:space-x-4">
-                    <a href="settings.html" id="settings-btn"
+                <div class="ms-auto flex items-center gap-5 sm:gap-8">
+                    <button id="theme-toggle"
                         class="w-10 h-10 flex items-center justify-center rounded-xl bg-gray-50 dark:bg-gray-800 dark:text-white hover:bg-gray-100 transition-colors">
-                        <i class="fa-solid fa-gear"></i>
-                    </a>
+                        <i class="fa-solid fa-moon dark:hidden"></i>
+                        <i class="fa-solid fa-sun hidden dark:block"></i>
+                    </button>
                     <button id="rtl-toggle"
                         class="w-10 h-10 flex items-center justify-center rounded-xl bg-gray-50 dark:bg-gray-800 dark:text-white hover:bg-gray-100 transition-colors font-bold text-xs">
                         RTL
@@ -182,7 +192,7 @@
                     </div>
                     <div class="h-8 w-px bg-gray-100 dark:bg-gray-800 mx-1 hidden sm:block"></div>
 
-                    <div class="flex items-center space-x-3 pl-2">
+                    <div class="flex items-center gap-3 ps-2">
                         <div class="text-right hidden sm:block">
                             <p class="text-sm font-bold dark:text-white leading-none">John Doe</p>
                             <p class="text-[10px] text-gray-500 leading-none mt-1">Administrator</p>
@@ -275,7 +285,7 @@
                             All</a>
                     </div>
                     <div class="overflow-x-auto">
-                        <table class="w-full text-left">
+                        <table class="w-full text-start">
                             <thead>
                                 <tr class="bg-gray-50 dark:bg-gray-800/50">
                                     <th class="px-6 py-4 text-xs font-bold text-gray-500 uppercase">Order ID</th>
@@ -290,7 +300,7 @@
                                     <td class="px-6 py-4 dark:text-gray-300">#ORD-2584</td>
                                     <td class="px-6 py-4 flex items-center">
                                         <div
-                                            class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-bold text-xs mr-3">
+                                            class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-bold text-xs me-3">
                                             JD</div>
                                         <span class="dark:text-white">James Dean</span>
                                     </td>
@@ -305,7 +315,7 @@
                                     <td class="px-6 py-4 dark:text-gray-300">#ORD-2585</td>
                                     <td class="px-6 py-4 flex items-center">
                                         <div
-                                            class="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 font-bold text-xs mr-3">
+                                            class="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 font-bold text-xs me-3">
                                             SW</div>
                                         <span class="dark:text-white">Sarah Wilson</span>
                                     </td>
@@ -321,7 +331,7 @@
                     </div>
                     <div class="p-6 border-t border-gray-50 dark:border-gray-800 flex items-center justify-between">
                         <p class="text-sm text-gray-500">Showing 3 of 528 orders</p>
-                        <div class="flex space-x-2">
+                        <div class="flex gap-2">
                             <button id="prevPage"
                                 class="w-10 h-10 rounded-xl border border-gray-100 dark:border-gray-800 flex items-center justify-center text-gray-500 hover:bg-gray-50 dark:hover:bg-gray-800 transition-all"><i
                                     class="fa-solid fa-chevron-left"></i></button>
@@ -337,68 +347,10 @@
 
     <!-- Scripts -->
     <script>
-        // Sidebar Toggle for Mobile
-        const sidebar = document.getElementById('sidebar');
-        const toggleSidebar = document.getElementById('toggleSidebar');
-        const themeToggleBtn = document.getElementById('theme-toggle');
+        // Inline scripts removed - all functionality now in main.js
+    </script>
 
-        if (toggleSidebar) {
-            toggleSidebar.addEventListener('click', (e) => {
-                e.stopPropagation();
-                sidebar.classList.toggle('-translate-x-full');
-            });
-        }
-
-        // Close sidebar when clicking outside on mobile
-        document.addEventListener('click', (e) => {
-            if (window.innerWidth < 1024 && !sidebar.contains(e.target) && !toggleSidebar.contains(e.target)) {
-                sidebar.classList.add('-translate-x-full');
-            }
-        });
-
-        // Theme Toggle
-        if (themeToggleBtn) {
-            themeToggleBtn.addEventListener('click', () => {
-                document.documentElement.classList.toggle('dark');
-            });
-        }
-
-        // RTL Toggle
-        const rtlToggleBtn = document.getElementById('rtl-toggle');
-        if (rtlToggleBtn) {
-            rtlToggleBtn.addEventListener('click', () => {
-                const html = document.documentElement;
-                const currentDir = html.getAttribute('dir');
-
-                if (currentDir === 'rtl') {
-                    html.setAttribute('dir', 'ltr');
-                    rtlToggleBtn.textContent = 'RTL';
-                } else {
-                    html.setAttribute('dir', 'rtl');
-                    rtlToggleBtn.textContent = 'LTR';
-                }
-            });
-        }
-
-        // Notifications Dropdown Toggle
-        const notificationsToggle = document.getElementById('notifications-toggle');
-        const notificationsDropdown = document.getElementById('notifications-dropdown-admin');
-
-        if (notificationsToggle && notificationsDropdown) {
-            notificationsToggle.addEventListener('click', (e) => {
-                e.stopPropagation();
-                notificationsDropdown.classList.toggle('hidden');
-            });
-
-            // Close dropdown when clicking outside
-            document.addEventListener('click', (e) => {
-                if (!notificationsToggle.contains(e.target) && !notificationsDropdown.contains(e.target)) {
-                    notificationsDropdown.classList.add('hidden');
-                }
-            });
-        }
-
-
+    <script>
         // Charts Initialization
         const revenueCtx = document.getElementById('revenueChart').getContext('2d');
         if (revenueCtx) {

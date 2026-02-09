@@ -48,21 +48,17 @@
                 <a href="contact.html" class="hover:text-primary-500 transition-colors dark:text-gray-300">Contact</a>
             </div>
             <div class="flex items-center gap-4">
-                <a href="login.html"
-                    class="hidden lg:flex px-8 py-2.5 bg-nova-blue hover:bg-blue-600 text-white rounded-xl font-bold shadow-lg shadow-blue-500/30 transition-all active:scale-95 items-center space-x-2">
+                <a href="login.html" class="hidden lg:flex btn btn-nova btn-header">
                     <span>Login</span>
                 </a>
-                <button id="rtl-toggle"
-                    class="w-11 h-11 flex items-center justify-center rounded-xl bg-gray-100 dark:bg-gray-800 dark:text-white transition-all hover:bg-gray-200 dark:hover:bg-gray-700 shadow-sm font-bold text-xs">
+                <button id="rtl-toggle" class="btn-icon font-bold text-xs">
                     RTL
                 </button>
-                <button id="theme-toggle"
-                    class="w-11 h-11 flex items-center justify-center rounded-xl bg-gray-100 dark:bg-gray-800 dark:text-white transition-all hover:bg-gray-200 dark:hover:bg-gray-700 shadow-sm">
+                <button id="theme-toggle" class="btn-icon">
                     <i class="fa-solid fa-moon dark:hidden text-lg"></i>
                     <i class="fa-solid fa-sun hidden dark:block text-lg"></i>
                 </button>
-                <button id="mobile-menu-btn"
-                    class="lg:hidden w-11 h-11 flex items-center justify-center rounded-xl bg-gray-100 dark:bg-gray-800 dark:text-white transition-all hover:bg-gray-200 dark:hover:bg-gray-700 shadow-sm">
+                <button id="mobile-menu-btn" class="lg:hidden btn-icon">
                     <i class="fa-solid fa-bars text-lg"></i>
                 </button>
             </div>
@@ -91,8 +87,7 @@
                 <a href="pricing.html" class="block text-lg font-medium dark:text-gray-300">Pricing</a>
                 <a href="contact.html" class="block text-lg font-medium dark:text-gray-300">Contact</a>
                 <hr class="border-gray-100 dark:border-gray-800">
-                <a href="login.html"
-                    class="block w-full py-3 text-center bg-nova-blue text-white rounded-xl font-bold">Login</a>
+                <a href="login.html" class="btn btn-nova btn-full">Login</a>
             </div>
         </div>
     </div>
@@ -119,120 +114,28 @@
                 <div class="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
                     <div class="relative">
                         <i class="fa-solid fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
-                        <input type="text" placeholder="Search articles..."
+                        <input type="text" id="blog-search" placeholder="Search articles..."
                             class="pl-11 pr-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-800 border-none outline-none dark:text-white focus:ring-2 focus:ring-primary-500 w-full sm:w-64 shadow-sm">
                     </div>
-                    <select
+                    <select id="blog-category"
                         class="px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-800 border-none outline-none dark:text-white focus:ring-2 focus:ring-primary-500 shadow-sm">
-                        <option>All Categories</option>
-                        <option>Business</option>
-                        <option>Cleaning Tips</option>
-                        <option>Management</option>
+                        <option value="All">All Categories</option>
+                        <option value="Business">Business</option>
+                        <option value="Cleaning Tips">Cleaning Tips</option>
+                        <option value="Management">Management</option>
+                        <option value="Trends">Trends</option>
                     </select>
                 </div>
             </div>
 
             <!-- Blog Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-                <!-- Blog Post 1 -->
-                <article
-                    class="group bg-white dark:bg-dark-card rounded-[2rem] border border-gray-100 dark:border-gray-800 overflow-hidden hover:shadow-2xl transition-all duration-300">
-                    <div class="relative overflow-hidden aspect-video">
-                        <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6958?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                            alt="Clean Office Workspace"
-                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                        <span
-                            class="absolute top-4 left-4 px-3 py-1 bg-white/90 dark:bg-dark-card/90 backdrop-blur-md rounded-lg text-xs font-bold text-primary-600">Business</span>
-                    </div>
-                    <div class="p-8">
-                        <div class="flex items-center space-x-3 text-sm text-gray-500 dark:text-gray-400 mb-4">
-                            <span><i class="fa-solid fa-calendar mr-2"></i>Oct 15, 2025</span>
-                            <span><i class="fa-solid fa-user mr-2"></i>By Alex Morgan</span>
-                        </div>
-                        <h3
-                            class="text-xl font-bold mb-4 dark:text-white group-hover:text-primary-500 transition-colors">
-                            How Professional Cleaning Boosts Employee Morale</h3>
-                        <p class="text-gray-500 dark:text-gray-400 text-sm mb-6 line-clamp-2">A clean workspace is more
-                            than just aesthetics; it's a key driver for productivity and mental health in the
-                            workplace...</p>
-                        <a href="blog-details.html" class="flex items-center space-x-2 text-primary-600 font-bold">
-                            <span>Read Article</span>
-                            <i class="fa-solid fa-arrow-right text-sm"></i>
-                        </a>
-                    </div>
-                </article>
-
-                <!-- Blog Post 2 -->
-                <article
-                    class="group bg-white dark:bg-dark-card rounded-[2rem] border border-gray-100 dark:border-gray-800 overflow-hidden hover:shadow-2xl transition-all duration-300">
-                    <div class="relative overflow-hidden aspect-video">
-                        <img src="https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                            alt="Facilities Management"
-                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                        <span
-                            class="absolute top-4 left-4 px-3 py-1 bg-white/90 dark:bg-dark-card/90 backdrop-blur-md rounded-lg text-xs font-bold text-green-600">Economy</span>
-                    </div>
-                    <div class="p-8">
-                        <div class="flex items-center space-x-3 text-sm text-gray-500 dark:text-gray-400 mb-4">
-                            <span><i class="fa-solid fa-calendar mr-2"></i>Oct 12, 2025</span>
-                            <span><i class="fa-solid fa-user mr-2"></i>By Sarah Chen</span>
-                        </div>
-                        <h3
-                            class="text-xl font-bold mb-4 dark:text-white group-hover:text-primary-500 transition-colors">
-                            10 Cost-Saving Strategies for Office Facilities</h3>
-                        <p class="text-gray-500 dark:text-gray-400 text-sm mb-6 line-clamp-2">Managing large facilities
-                            doesn't have to break the bank. Discover how smart supply management can save you
-                            thousands...</p>
-                        <a href="blog-details.html" class="flex items-center space-x-2 text-primary-600 font-bold">
-                            <span>Read Article</span>
-                            <i class="fa-solid fa-arrow-right text-sm"></i>
-                        </a>
-                    </div>
-                </article>
-
-                <!-- Blog Post 3 -->
-                <article
-                    class="group bg-white dark:bg-dark-card rounded-[2rem] border border-gray-100 dark:border-gray-800 overflow-hidden hover:shadow-2xl transition-all duration-300">
-                    <div class="relative overflow-hidden aspect-video">
-                        <img src="https://images.unsplash.com/photo-1584622781564-1d9876a13d00?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                            alt="Sanitation Technology"
-                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                        <span
-                            class="absolute top-4 left-4 px-3 py-1 bg-white/90 dark:bg-dark-card/90 backdrop-blur-md rounded-lg text-xs font-bold text-purple-600">Trends</span>
-                    </div>
-                    <div class="p-8">
-                        <div class="flex items-center space-x-3 text-sm text-gray-500 dark:text-gray-400 mb-4">
-                            <span><i class="fa-solid fa-calendar mr-2"></i>Oct 09, 2025</span>
-                            <span><i class="fa-solid fa-user mr-2"></i>By David Poe</span>
-                        </div>
-                        <h3
-                            class="text-xl font-bold mb-4 dark:text-white group-hover:text-primary-500 transition-colors">
-                            The Future of Sanitation: 2026 and Beyond</h3>
-                        <p class="text-gray-500 dark:text-gray-400 text-sm mb-6 line-clamp-2">From robotic cleaners to
-                            UV-C sterilization, technology is revolutionizing how we keep our commercial spaces safe...
-                        </p>
-                        <a href="blog-details.html" class="flex items-center space-x-2 text-primary-600 font-bold">
-                            <span>Read Article</span>
-                            <i class="fa-solid fa-arrow-right text-sm"></i>
-                        </a>
-                    </div>
-                </article>
+            <div id="blog-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                <!-- Posts will be injected here by JavaScript -->
             </div>
 
             <!-- Pagination -->
-            <div class="flex items-center justify-center space-x-2 mt-16">
-                <button
-                    class="w-12 h-12 flex items-center justify-center rounded-xl bg-gray-50 dark:bg-gray-800 dark:text-white hover:bg-primary-500 hover:text-white transition-all"><i
-                        class="fa-solid fa-chevron-left"></i></button>
-                <button
-                    class="w-12 h-12 flex items-center justify-center rounded-xl bg-primary-500 text-white font-bold">1</button>
-                <button
-                    class="w-12 h-12 flex items-center justify-center rounded-xl bg-gray-50 dark:bg-gray-800 dark:text-white hover:bg-primary-500 hover:text-white transition-all font-bold">2</button>
-                <button
-                    class="w-12 h-12 flex items-center justify-center rounded-xl bg-gray-50 dark:bg-gray-800 dark:text-white hover:bg-primary-500 hover:text-white transition-all font-bold">3</button>
-                <button
-                    class="w-12 h-12 flex items-center justify-center rounded-xl bg-gray-50 dark:bg-gray-800 dark:text-white hover:bg-primary-500 hover:text-white transition-all"><i
-                        class="fa-solid fa-chevron-right"></i></button>
+            <div id="blog-pagination" class="flex items-center justify-center space-x-2 mt-16">
+                <!-- Pagination buttons will be injected here -->
             </div>
         </div>
     </main>
@@ -285,18 +188,30 @@
                 <div>
                     <h4 class="text-lg font-bold mb-6 dark:text-white">Services</h4>
                     <ul class="space-y-4">
-                        <li><a href="services.html"
+                        <li><a href="office-cleaning.html"
                                 class="text-gray-500 dark:text-gray-400 hover:text-nova-blue transition-colors">Office
                                 Cleaning</a></li>
                         <li><a href="industrial-cleaning.html"
                                 class="text-gray-500 dark:text-gray-400 hover:text-nova-blue transition-colors">Industrial
                                 Cleaning</a>
                         </li>
-                        <li><a href="404.html"
+                        <li><a href="sanitization-services.html"
                                 class="text-gray-500 dark:text-gray-400 hover:text-nova-blue transition-colors">Sanitization</a>
                         </li>
-                        <li><a href="coming-soon.html"
+                        <li><a href="window-cleaning.html"
                                 class="text-gray-500 dark:text-gray-400 hover:text-nova-blue transition-colors">Window
+                                Cleaning</a></li>
+                        <li><a href="carpet-cleaning.html"
+                                class="text-gray-500 dark:text-gray-400 hover:text-nova-blue transition-colors">Carpet
+                                Cleaning</a></li>
+                        <li><a href="floor-waxing.html"
+                                class="text-gray-500 dark:text-gray-400 hover:text-nova-blue transition-colors">Floor
+                                Waxing</a></li>
+                        <li><a href="post-construction.html"
+                                class="text-gray-500 dark:text-gray-400 hover:text-nova-blue transition-colors">Post-Construction</a>
+                        </li>
+                        <li><a href="green-cleaning.html"
+                                class="text-gray-500 dark:text-gray-400 hover:text-nova-blue transition-colors">Green
                                 Cleaning</a></li>
                     </ul>
                 </div>
@@ -314,13 +229,206 @@
                 </div>
             </div>
             <div class="pt-8 border-t border-gray-100 dark:border-gray-800 text-center">
-                <p class="text-gray-500 dark:text-gray-400">&copy; 2026 NovaSite. All rights reserved by Abhivorn
-                    Technologies.</p>
+                <p class="text-gray-500 dark:text-gray-400">&copy; 2026 NovaSite. All rights reserved by <a
+                        href="https://www.abhivorn.com/" target="_blank"
+                        class="hover:text-nova-blue transition-colors">Abhivorn Technologies</a>.</p>
             </div>
         </div>
     </footer>
 
     <script src="assets/js/main.js"></script>
+    <script>
+        // Blog Data
+        const blogPosts = [
+            {
+                id: 1,
+                title: "How Professional Cleaning Boosts Employee Morale",
+                category: "Business",
+                date: "Oct 15, 2025",
+                author: "Alex Morgan",
+                image: "https://images.unsplash.com/photo-1581578731548-c64695cc6958?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                excerpt: "A clean workspace is more than just aesthetics; it's a key driver for productivity and mental health in the workplace...",
+                badgeColor: "text-primary-600"
+            },
+            {
+                id: 2,
+                title: "10 Cost-Saving Strategies for Office Facilities",
+                category: "Management",
+                date: "Oct 12, 2025",
+                author: "Sarah Chen",
+                image: "https://images.unsplash.com/photo-1554415707-6e8cfc93ea23?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                excerpt: "Managing large facilities doesn't have to break the bank. Discover how smart supply management can save you thousands...",
+                badgeColor: "text-green-600"
+            },
+            {
+                id: 3,
+                title: "The Future of Sanitation: 2026 and Beyond",
+                category: "Trends",
+                date: "Oct 09, 2025",
+                author: "David Poe",
+                image: "https://images.unsplash.com/photo-1584622781564-1d9876a13d00?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                excerpt: "From robotic cleaners to UV-C sterilization, technology is revolutionizing how we keep our commercial spaces safe.",
+                badgeColor: "text-purple-600"
+            },
+            {
+                id: 4,
+                title: "Eco-Friendly Cleaning: A New Standard",
+                category: "Cleaning Tips",
+                date: "Oct 05, 2025",
+                author: "Maria Garcia",
+                image: "https://images.unsplash.com/photo-1556911220-e15224bbaf41?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                excerpt: "Switching to green cleaning isn't just good for the plant—it creates a healthier environment for your employees.",
+                badgeColor: "text-teal-600"
+            },
+            {
+                id: 5,
+                title: "Hospitality Sanitization Checklist",
+                category: "Management",
+                date: "Oct 01, 2025",
+                author: "James Wilson",
+                image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                excerpt: "Ensuring guest safety in hotels and restaurants requires a meticulous approach to surface disinfection and air quality.",
+                badgeColor: "text-orange-600"
+            },
+            {
+                id: 6,
+                title: "Winter Workspace Maintenance Tips",
+                category: "Cleaning Tips",
+                date: "Sep 28, 2025",
+                author: "Emma Thompson",
+                image: "https://images.unsplash.com/photo-1510017803434-a899398421b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                excerpt: "Prepare your facility for the colder months with these essential maintenance and deep cleaning strategies.",
+                badgeColor: "text-blue-600"
+            },
+            {
+                id: 7,
+                title: "The ROI of Commercial Cleaning",
+                category: "Business",
+                date: "Sep 25, 2025",
+                author: "Robert Green",
+                image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                excerpt: "Investing in professional cleaning isn't just an expense; it's a strategy that pays dividends in longevity and retention.",
+                badgeColor: "text-indigo-600"
+            }
+        ];
+
+        // State
+        let currentPage = 1;
+        const postsPerPage = 6;
+        let searchQuery = "";
+        let selectedCategory = "All";
+
+        // Elements
+        const blogGrid = document.getElementById('blog-grid');
+        const blogPagination = document.getElementById('blog-pagination');
+        const blogSearch = document.getElementById('blog-search');
+        const blogCategory = document.getElementById('blog-category');
+
+        function renderBlogPosts() {
+            // Filter
+            const filteredPosts = blogPosts.filter(post => {
+                const matchesSearch = post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                    post.excerpt.toLowerCase().includes(searchQuery.toLowerCase());
+                const matchesCategory = selectedCategory === "All" || post.category === selectedCategory;
+                return matchesSearch && matchesCategory;
+            });
+
+            // Pagination
+            const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
+            const startIndex = (currentPage - 1) * postsPerPage;
+            const paginatedPosts = filteredPosts.slice(startIndex, startIndex + postsPerPage);
+
+            // Render Grid
+            blogGrid.innerHTML = paginatedPosts.map(post => `
+                <article class="group bg-white dark:bg-dark-card rounded-[2rem] border border-gray-100 dark:border-gray-800 overflow-hidden hover:shadow-2xl transition-all duration-300">
+                    <div class="relative overflow-hidden aspect-video">
+                        <img src="${post.image}" alt="${post.title}" 
+                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                             onerror="this.src='assets/images/hero_cleaning.png'">
+                        <span class="absolute top-4 left-4 px-3 py-1 bg-white/90 dark:bg-dark-card/90 backdrop-blur-md rounded-lg text-xs font-bold ${post.badgeColor}">${post.category}</span>
+                    </div>
+                    <div class="p-8">
+                        <div class="flex items-center space-x-3 text-sm text-gray-500 dark:text-gray-400 mb-4">
+                            <span><i class="fa-solid fa-calendar mr-2"></i>${post.date}</span>
+                            <span><i class="fa-solid fa-user mr-2"></i>By ${post.author}</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-4 dark:text-white group-hover:text-primary-500 transition-colors">
+                            ${post.title}</h3>
+                        <p class="text-gray-500 dark:text-gray-400 text-sm mb-6 line-clamp-2">${post.excerpt}</p>
+                        <a href="blog-details.html" class="flex items-center space-x-2 text-primary-600 font-bold">
+                            <span>Read Article</span>
+                            <i class="fa-solid fa-arrow-right text-sm"></i>
+                        </a>
+                    </div>
+                </article>
+            `).join('');
+
+            if (paginatedPosts.length === 0) {
+                blogGrid.innerHTML = `
+                    <div class="col-span-full py-20 text-center">
+                        <i class="fa-solid fa-newspaper text-6xl text-gray-200 dark:text-gray-700 mb-4"></i>
+                        <h3 class="text-xl font-bold dark:text-white">No articles found</h3>
+                        <p class="text-gray-500 dark:text-gray-400">Try adjusting your search or filter.</p>
+                    </div>
+                `;
+            }
+
+            renderPagination(totalPages);
+        }
+
+        function renderPagination(totalPages) {
+            if (totalPages <= 1) {
+                blogPagination.innerHTML = '';
+                return;
+            }
+
+            let buttons = `
+                <button onclick="changePage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''} 
+                    class="w-12 h-12 flex items-center justify-center rounded-xl bg-gray-50 dark:bg-gray-800 dark:text-white hover:bg-primary-500 hover:text-white transition-all disabled:opacity-50 disabled:cursor-not-allowed">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </button>
+            `;
+
+            for (let i = 1; i <= totalPages; i++) {
+                buttons += `
+                    <button onclick="changePage(${i})" 
+                        class="w-12 h-12 flex items-center justify-center rounded-xl ${currentPage === i ? 'bg-primary-500 text-white font-bold' : 'bg-gray-50 dark:bg-gray-800 dark:text-white hover:bg-primary-500 hover:text-white transition-all font-bold'}">
+                        ${i}
+                    </button>
+                `;
+            }
+
+            buttons += `
+                <button onclick="changePage(${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''} 
+                    class="w-12 h-12 flex items-center justify-center rounded-xl bg-gray-50 dark:bg-gray-800 dark:text-white hover:bg-primary-500 hover:text-white transition-all disabled:opacity-50 disabled:cursor-not-allowed">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+            `;
+
+            blogPagination.innerHTML = buttons;
+        }
+
+        window.changePage = (page) => {
+            currentPage = page;
+            renderBlogPosts();
+            window.scrollTo({ top: 300, behavior: 'smooth' });
+        };
+
+        blogSearch.addEventListener('input', (e) => {
+            searchQuery = e.target.value;
+            currentPage = 1;
+            renderBlogPosts();
+        });
+
+        blogCategory.addEventListener('change', (e) => {
+            selectedCategory = e.target.value;
+            currentPage = 1;
+            renderBlogPosts();
+        });
+
+        // Initial Render
+        renderBlogPosts();
+    </script>
 </body>
 
 </html>

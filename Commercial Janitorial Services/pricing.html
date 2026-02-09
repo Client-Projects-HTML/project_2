@@ -28,6 +28,21 @@
             }
         }
     </script>
+    <!-- FOUC Prevention - Apply theme and RTL immediately -->
+    <script>
+            (function () {
+                // Apply theme
+                const savedTheme = localStorage.getItem('theme');
+                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                const theme = savedTheme || (prefersDark ? 'dark' : 'light');
+                document.documentElement.classList.add(theme);
+                document.documentElement.setAttribute('data-theme', theme);
+
+                // Apply RTL direction
+                const savedDir = localStorage.getItem('dir') || 'ltr';
+                document.documentElement.setAttribute('dir', savedDir);
+            })();
+    </script>
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -52,21 +67,17 @@
                 <a href="contact.html" class="hover:text-primary-500 transition-colors dark:text-gray-300">Contact</a>
             </div>
             <div class="flex items-center gap-4">
-                <a href="login.html"
-                    class="hidden lg:flex px-8 py-2.5 bg-nova-blue hover:bg-blue-600 text-white rounded-xl font-bold shadow-lg shadow-blue-500/30 transition-all active:scale-95 items-center space-x-2">
+                <a href="login.html" class="hidden lg:flex btn btn-nova btn-header">
                     <span>Login</span>
                 </a>
-                <button id="rtl-toggle"
-                    class="w-11 h-11 flex items-center justify-center rounded-xl bg-gray-100 dark:bg-gray-800 dark:text-white transition-all hover:bg-gray-200 dark:hover:bg-gray-700 shadow-sm font-bold text-xs">
+                <button id="rtl-toggle" class="btn-icon font-bold text-xs">
                     RTL
                 </button>
-                <button id="theme-toggle"
-                    class="w-11 h-11 flex items-center justify-center rounded-xl bg-gray-100 dark:bg-gray-800 dark:text-white transition-all hover:bg-gray-200 dark:hover:bg-gray-700 shadow-sm">
+                <button id="theme-toggle" class="btn-icon">
                     <i class="fa-solid fa-moon dark:hidden text-lg"></i>
                     <i class="fa-solid fa-sun hidden dark:block text-lg"></i>
                 </button>
-                <button id="mobile-menu-btn"
-                    class="lg:hidden w-11 h-11 flex items-center justify-center rounded-xl bg-gray-100 dark:bg-gray-800 dark:text-white transition-all hover:bg-gray-200 dark:hover:bg-gray-700 shadow-sm">
+                <button id="mobile-menu-btn" class="lg:hidden btn-icon">
                     <i class="fa-solid fa-bars text-lg"></i>
                 </button>
             </div>
@@ -95,8 +106,7 @@
                 <a href="pricing.html" class="block text-lg font-medium text-primary-500">Pricing</a>
                 <a href="contact.html" class="block text-lg font-medium dark:text-gray-300">Contact</a>
                 <hr class="border-gray-100 dark:border-gray-800">
-                <a href="login.html"
-                    class="block w-full py-3 text-center bg-nova-blue text-white rounded-xl font-bold">Login</a>
+                <a href="login.html" class="btn btn-nova btn-full">Login</a>
             </div>
         </div>
     </div>
@@ -121,8 +131,10 @@
                 <!-- Toggle Monthly/Yearly -->
                 <div class="flex items-center justify-center mt-8 space-x-4">
                     <span class="text-gray-600 dark:text-gray-400 font-medium">Monthly</span>
-                    <button class="w-14 h-7 rounded-full bg-gray-200 dark:bg-gray-700 relative p-1 transition-all">
-                        <div class="w-5 h-5 rounded-full bg-white shadow-sm transition-all translate-x-0"></div>
+                    <button id="pricing-toggle"
+                        class="w-14 h-7 rounded-full bg-gray-200 dark:bg-gray-700 relative p-1 transition-all">
+                        <div id="toggle-knob"
+                            class="w-5 h-5 rounded-full bg-white shadow-sm transition-all translate-x-0"></div>
                     </button>
                     <span class="text-gray-600 dark:text-gray-400 font-medium">Yearly <span
                             class="text-green-500 text-sm">(Save 20%)</span></span>
@@ -140,7 +152,7 @@
                     <h3 class="text-xl font-bold mb-2 dark:text-white">Standard Office</h3>
                     <p class="text-gray-500 dark:text-gray-400 mb-6 font-medium">For small business offices</p>
                     <div class="flex items-baseline mb-8">
-                        <span class="text-4xl font-bold dark:text-white font-heading">$199</span>
+                        <span id="price-standard" class="text-4xl font-bold dark:text-white font-heading">$199</span>
                         <span class="text-gray-500 ml-2">/month</span>
                     </div>
                     <ul class="space-y-4 mb-8">
@@ -161,9 +173,7 @@
                             Carpet Steam Cleaning
                         </li>
                     </ul>
-                    <a href="contact.html"
-                        class="block text-center py-3 border-2 border-primary-500 text-primary-500 font-bold rounded-xl hover:bg-primary-500 hover:text-white transition-all">Get
-                        Quote</a>
+                    <a href="contact.html" class="btn btn-secondary btn-full">Get Quote</a>
                 </div>
 
                 <!-- Pro Plan -->
@@ -179,7 +189,7 @@
                     <h3 class="text-xl font-bold mb-2 dark:text-white">Commercial Pro</h3>
                     <p class="text-gray-500 dark:text-gray-400 mb-6 font-medium">For medium corporations</p>
                     <div class="flex items-baseline mb-8">
-                        <span class="text-4xl font-bold dark:text-white font-heading">$449</span>
+                        <span id="price-pro" class="text-4xl font-bold dark:text-white font-heading">$449</span>
                         <span class="text-gray-500 ml-2">/month</span>
                     </div>
                     <ul class="space-y-4 mb-8">
@@ -200,9 +210,7 @@
                             Floor Stripping & Waxing
                         </li>
                     </ul>
-                    <a href="contact.html"
-                        class="block text-center py-4 gradient-primary text-white font-bold rounded-xl shadow-lg shadow-primary-500/30 transition-all hover:scale-105">Book
-                        Inspection</a>
+                    <a href="contact.html" class="btn btn-primary btn-full">Book Inspection</a>
                 </div>
 
                 <!-- Enterprise Plan -->
@@ -235,9 +243,7 @@
                             Dedicated Site Manager
                         </li>
                     </ul>
-                    <a href="contact.html"
-                        class="block text-center py-3 border-2 border-primary-500 text-primary-500 font-bold rounded-xl hover:bg-primary-500 hover:text-white transition-all">Contact
-                        Sales</a>
+                    <a href="contact.html" class="btn btn-secondary btn-full">Contact Sales</a>
                 </div>
             </div>
         </div>
@@ -291,18 +297,30 @@
                 <div>
                     <h4 class="text-lg font-bold mb-6 dark:text-white">Services</h4>
                     <ul class="space-y-4">
-                        <li><a href="services.html"
+                        <li><a href="office-cleaning.html"
                                 class="text-gray-500 dark:text-gray-400 hover:text-nova-blue transition-colors">Office
                                 Cleaning</a></li>
                         <li><a href="industrial-cleaning.html"
                                 class="text-gray-500 dark:text-gray-400 hover:text-nova-blue transition-colors">Industrial
                                 Cleaning</a>
                         </li>
-                        <li><a href="404.html"
+                        <li><a href="sanitization-services.html"
                                 class="text-gray-500 dark:text-gray-400 hover:text-nova-blue transition-colors">Sanitization</a>
                         </li>
-                        <li><a href="coming-soon.html"
+                        <li><a href="window-cleaning.html"
                                 class="text-gray-500 dark:text-gray-400 hover:text-nova-blue transition-colors">Window
+                                Cleaning</a></li>
+                        <li><a href="carpet-cleaning.html"
+                                class="text-gray-500 dark:text-gray-400 hover:text-nova-blue transition-colors">Carpet
+                                Cleaning</a></li>
+                        <li><a href="floor-waxing.html"
+                                class="text-gray-500 dark:text-gray-400 hover:text-nova-blue transition-colors">Floor
+                                Waxing</a></li>
+                        <li><a href="post-construction.html"
+                                class="text-gray-500 dark:text-gray-400 hover:text-nova-blue transition-colors">Post-Construction</a>
+                        </li>
+                        <li><a href="green-cleaning.html"
+                                class="text-gray-500 dark:text-gray-400 hover:text-nova-blue transition-colors">Green
                                 Cleaning</a></li>
                     </ul>
                 </div>
@@ -320,13 +338,60 @@
                 </div>
             </div>
             <div class="pt-8 border-t border-gray-100 dark:border-gray-800 text-center">
-                <p class="text-gray-500 dark:text-gray-400">&copy; 2026 NovaSite. All rights reserved by Abhivorn
-                    Technologies.</p>
+                <p class="text-gray-500 dark:text-gray-400">&copy; 2026 NovaSite. All rights reserved by <a
+                        href="https://www.abhivorn.com/" target="_blank"
+                        class="hover:text-nova-blue transition-colors">Abhivorn Technologies</a>.</p>
             </div>
         </div>
     </footer>
 
     <script src="assets/js/main.js"></script>
+    <script>
+        const pricingToggle = document.getElementById('pricing-toggle');
+        const toggleKnob = document.getElementById('toggle-knob');
+        const priceStandard = document.getElementById('price-standard');
+        const pricePro = document.getElementById('price-pro');
+
+        let isYearly = false;
+
+        const prices = {
+            monthly: { standard: '$199', pro: '$449' },
+            yearly: { standard: '$159', pro: '$359' }
+        };
+
+        pricingToggle.addEventListener('click', () => {
+            isYearly = !isYearly;
+
+            // Toggle knob position
+            if (isYearly) {
+                toggleKnob.classList.add('translate-x-7');
+                toggleKnob.classList.remove('translate-x-0');
+            } else {
+                toggleKnob.classList.add('translate-x-0');
+                toggleKnob.classList.remove('translate-x-7');
+            }
+
+            // Update prices
+            const currentPrices = isYearly ? prices.yearly : prices.monthly;
+
+            // Simple animation effect
+            [priceStandard, pricePro].forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(-10px)';
+            });
+
+            setTimeout(() => {
+                priceStandard.textContent = currentPrices.standard;
+                pricePro.textContent = currentPrices.pro;
+
+                [priceStandard, pricePro].forEach(el => {
+                    el.style.transition = 'all 0.3s ease';
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                });
+            }, 200);
+        });
+    </script>
 </body>
 
 </html>

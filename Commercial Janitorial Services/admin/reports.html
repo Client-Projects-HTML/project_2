@@ -1,10 +1,28 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr" data-theme="dark" class="dark">
+<html lang="en" dir="ltr" data-theme="dark">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quality Reports - NovaSite Admin</title>
+
+    <!-- FOUC Prevention - Apply theme and RTL immediately -->
+    <script>
+        (function () {
+            // Apply theme
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const theme = savedTheme || (prefersDark ? 'dark' : 'light');
+            document.documentElement.classList.add(theme);
+            document.documentElement.setAttribute('data-theme', theme);
+
+            // Apply RTL direction
+            const savedDir = localStorage.getItem('dir') || 'ltr';
+            document.documentElement.setAttribute('dir', savedDir);
+        })();
+    </script>
+
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -34,7 +52,7 @@
     <div class="flex h-screen overflow-hidden">
         <!-- Sidebar (Reused) -->
         <aside id="sidebar"
-            class="fixed inset-y-0 left-0 z-50 w-64 bg-white dark:bg-dark-sidebar border-r border-gray-100 dark:border-gray-800 lg:translate-x-0 transition-transform duration-300 transform">
+            class="fixed inset-y-0 left-0 rtl:left-auto rtl:right-0 z-50 w-64 bg-white dark:bg-dark-sidebar border-r rtl:border-r-0 rtl:border-l border-gray-100 dark:border-gray-800 transition-transform duration-300 transform lg:translate-x-0 rtl:lg:translate-x-0 -translate-x-full rtl:translate-x-full">
             <div class="flex flex-col h-full">
                 <div class="p-6">
                     <a href="../index.html" class="flex items-center space-x-3">
@@ -88,30 +106,22 @@
         </aside>
 
         <!-- Main Content -->
-        <main class="flex-1 flex flex-col min-w-0 lg:ml-64">
+        <main class="flex-1 flex flex-col min-w-0 lg:ms-64 transition-all duration-300">
             <header
                 class="h-16 flex items-center justify-between px-6 bg-white dark:bg-dark-sidebar border-b border-gray-100 dark:border-gray-800">
                 <div class="flex items-center lg:hidden">
                     <button id="toggleSidebar" class="p-2 text-gray-500 hover:text-primary-500">
-                        <i class="fa-solid fa-bars-staggered text-xl"></i>
+                        <i class="fa-solid fa-bars-staggered text-xl rtl-flip"></i>
                     </button>
-                    <span class="ml-4 font-bold font-heading dark:text-white">NovaSite</span>
+                    <span class="ms-4 font-bold font-heading dark:text-white">NovaSite</span>
                 </div>
 
-                <div class="hidden md:flex items-center flex-1 max-w-md ml-4">
-                    <div class="relative w-full">
-                        <i
-                            class="fa-solid fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i>
-                        <input type="text" placeholder="Search reports, inspections..."
-                            class="w-full pl-11 pr-4 py-2 bg-gray-50 dark:bg-gray-800 border-none rounded-xl focus:ring-2 focus:ring-primary-500 text-sm dark:text-white outline-none">
-                    </div>
-                </div>
-
-                <div class="flex items-center space-x-3 sm:space-x-4">
-                    <a href="settings.html" id="settings-btn"
+                <div class="ms-auto flex items-center gap-5 sm:gap-8">
+                    <button id="theme-toggle"
                         class="w-10 h-10 flex items-center justify-center rounded-xl bg-gray-50 dark:bg-gray-800 dark:text-white hover:bg-gray-100 transition-colors">
-                        <i class="fa-solid fa-gear"></i>
-                    </a>
+                        <i class="fa-solid fa-moon dark:hidden"></i>
+                        <i class="fa-solid fa-sun hidden dark:block"></i>
+                    </button>
                     <button id="rtl-toggle"
                         class="w-10 h-10 flex items-center justify-center rounded-xl bg-gray-50 dark:bg-gray-800 dark:text-white hover:bg-gray-100 transition-colors font-bold text-xs">
                         RTL
@@ -173,7 +183,7 @@
                     </div>
                     <div class="h-8 w-px bg-gray-100 dark:bg-gray-800 mx-1 hidden sm:block"></div>
 
-                    <div class="flex items-center space-x-3 pl-2">
+                    <div class="flex items-center gap-3 ps-2">
                         <div class="text-right hidden sm:block">
                             <p class="text-sm font-bold dark:text-white leading-none">John Doe</p>
                             <p class="text-[10px] text-gray-500 leading-none mt-1">Administrator</p>
@@ -223,7 +233,7 @@
 
                     <!-- Report Card 2 -->
                     <div
-                        class="bg-white dark:bg-dark-card rounded-3xl border border-gray-100 dark:border-gray-800 shadow-sm overflow-hidden group hover:shadow-xl transition-all border-l-4 border-l-orange-500">
+                        class="bg-white dark:bg-dark-card rounded-3xl border border-gray-100 dark:border-gray-800 shadow-sm overflow-hidden group hover:shadow-xl transition-all border-s-4 border-s-orange-500">
                         <div class="h-32 bg-gray-100 dark:bg-gray-800 relative">
                             <img src="https://images.unsplash.com/photo-1517502884422-41eaead166d4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
                                 alt="Site" class="w-full h-full object-cover">
@@ -258,68 +268,7 @@
         </main>
     </div>
 
-    <script>
-        // Sidebar Toggle for Mobile
-        const sidebar = document.getElementById('sidebar');
-        const toggleSidebar = document.getElementById('toggleSidebar');
-        const themeToggleBtn = document.getElementById('theme-toggle');
-
-        if (toggleSidebar) {
-            toggleSidebar.addEventListener('click', (e) => {
-                e.stopPropagation();
-                sidebar.classList.toggle('-translate-x-full');
-            });
-        }
-
-        // Close sidebar when clicking outside on mobile
-        document.addEventListener('click', (e) => {
-            if (window.innerWidth < 1024 && sidebar && !sidebar.contains(e.target) && !toggleSidebar.contains(e.target)) {
-                sidebar.classList.add('-translate-x-full');
-            }
-        });
-
-        // Theme Toggle
-        if (themeToggleBtn) {
-            themeToggleBtn.addEventListener('click', () => {
-                document.documentElement.classList.toggle('dark');
-            });
-        }
-
-        // RTL Toggle
-        const rtlToggleBtn = document.getElementById('rtl-toggle');
-        if (rtlToggleBtn) {
-            rtlToggleBtn.addEventListener('click', () => {
-                const html = document.documentElement;
-                const currentDir = html.getAttribute('dir');
-
-                if (currentDir === 'rtl') {
-                    html.setAttribute('dir', 'ltr');
-                    rtlToggleBtn.textContent = 'RTL';
-                } else {
-                    html.setAttribute('dir', 'rtl');
-                    rtlToggleBtn.textContent = 'LTR';
-                }
-            });
-        }
-
-        // Notifications Dropdown Toggle
-        const notificationsToggle = document.getElementById('notifications-toggle');
-        const notificationsDropdown = document.getElementById('notifications-dropdown-reports');
-
-        if (notificationsToggle && notificationsDropdown) {
-            notificationsToggle.addEventListener('click', (e) => {
-                e.stopPropagation();
-                notificationsDropdown.classList.toggle('hidden');
-            });
-
-            // Close dropdown when clicking outside
-            document.addEventListener('click', (e) => {
-                if (!notificationsToggle.contains(e.target) && !notificationsDropdown.contains(e.target)) {
-                    notificationsDropdown.classList.add('hidden');
-                }
-            });
-        }
-    </script>
+    <script src="../assets/js/main.js"></script>
 </body>
 
 </html>

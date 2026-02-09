@@ -28,6 +28,21 @@
             }
         }
     </script>
+    <!-- FOUC Prevention - Apply theme and RTL immediately -->
+    <script>
+            (function () {
+                // Apply theme
+                const savedTheme = localStorage.getItem('theme');
+                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                const theme = savedTheme || (prefersDark ? 'dark' : 'light');
+                document.documentElement.classList.add(theme);
+                document.documentElement.setAttribute('data-theme', theme);
+
+                // Apply RTL direction
+                const savedDir = localStorage.getItem('dir') || 'ltr';
+                document.documentElement.setAttribute('dir', savedDir);
+            })();
+    </script>
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -52,21 +67,17 @@
                 <a href="contact.html" class="hover:text-primary-500 transition-colors dark:text-gray-300">Contact</a>
             </div>
             <div class="flex items-center gap-4">
-                <a href="login.html"
-                    class="hidden lg:flex px-8 py-2.5 bg-nova-blue hover:bg-blue-600 text-white rounded-xl font-bold shadow-lg shadow-blue-500/30 transition-all active:scale-95 items-center space-x-2">
+                <a href="login.html" class="hidden lg:flex btn btn-nova btn-header">
                     <span>Login</span>
                 </a>
-                <button id="rtl-toggle"
-                    class="w-11 h-11 flex items-center justify-center rounded-xl bg-gray-100 dark:bg-gray-800 dark:text-white transition-all hover:bg-gray-200 dark:hover:bg-gray-700 shadow-sm font-bold text-xs">
+                <button id="rtl-toggle" class="btn-icon font-bold text-xs">
                     RTL
                 </button>
-                <button id="theme-toggle"
-                    class="w-11 h-11 flex items-center justify-center rounded-xl bg-gray-100 dark:bg-gray-800 dark:text-white transition-all hover:bg-gray-200 dark:hover:bg-gray-700 shadow-sm">
+                <button id="theme-toggle" class="btn-icon">
                     <i class="fa-solid fa-moon dark:hidden text-lg"></i>
                     <i class="fa-solid fa-sun hidden dark:block text-lg"></i>
                 </button>
-                <button id="mobile-menu-btn"
-                    class="lg:hidden w-11 h-11 flex items-center justify-center rounded-xl bg-gray-100 dark:bg-gray-800 dark:text-white transition-all hover:bg-gray-200 dark:hover:bg-gray-700 shadow-sm">
+                <button id="mobile-menu-btn" class="lg:hidden btn-icon">
                     <i class="fa-solid fa-bars text-lg"></i>
                 </button>
             </div>
@@ -95,8 +106,7 @@
                 <a href="pricing.html" class="block text-lg font-medium dark:text-gray-300">Pricing</a>
                 <a href="contact.html" class="block text-lg font-medium dark:text-gray-300">Contact</a>
                 <hr class="border-gray-100 dark:border-gray-800">
-                <a href="login.html"
-                    class="block w-full py-3 text-center bg-nova-blue text-white rounded-xl font-bold">Login</a>
+                <a href="login.html" class="btn btn-nova btn-full">Login</a>
             </div>
         </div>
     </div>
@@ -129,7 +139,7 @@
                 <h3 class="text-xl font-bold mb-4 dark:text-white">Office Cleaning</h3>
                 <p class="text-gray-500 dark:text-gray-400 mb-6">Daily and weekly specialized cleaning for corporate
                     spaces, ensuring a hygienic workspace for your employees.</p>
-                <a href="service-details.html" class="text-primary-500 font-bold flex items-center space-x-2">
+                <a href="office-cleaning.html" class="text-primary-500 font-bold flex items-center space-x-2">
                     <span>Learn More</span>
                     <i class="fa-solid fa-arrow-right"></i>
                 </a>
@@ -146,7 +156,7 @@
                 <h3 class="text-xl font-bold mb-4 dark:text-white">Window Cleaning</h3>
                 <p class="text-gray-500 dark:text-gray-400 mb-6">Crystal clear window cleaning for high-rise buildings
                     and commercial offices with eco-friendly solutions.</p>
-                <a href="coming-soon.html"
+                <a href="window-cleaning.html"
                     class="text-purple-500 font-bold flex items-center space-x-2 hover:text-purple-600 transition-colors group/link">
                     <span>Learn More</span>
                     <i class="fa-solid fa-arrow-right text-sm group-hover/link:translate-x-1 transition-transform"></i>
@@ -163,13 +173,43 @@
                 <h3 class="text-xl font-bold mb-4 dark:text-white">Carpet Cleaning</h3>
                 <p class="text-gray-500 dark:text-gray-400 mb-6">Deep steam cleaning for commercial carpets to remove
                     allergens, dirt, and stubborn stains effectively.</p>
-                <a href="service-details.html" class="text-green-500 font-bold flex items-center space-x-2">
+                <a href="carpet-cleaning.html" class="text-green-500 font-bold flex items-center space-x-2">
                     <span>Learn More</span>
                     <i class="fa-solid fa-arrow-right"></i>
                 </a>
             </div>
 
-            <!-- More services... -->
+            <!-- Service Item -->
+            <div class="group p-8 bg-white dark:bg-dark-card rounded-[2.5rem] shadow-sm hover:shadow-2xl transition-all duration-500 border border-gray-100 dark:border-gray-800"
+                data-aos="fade-up" data-aos-delay="50">
+                <div class="relative overflow-hidden rounded-3xl mb-8 h-64">
+                    <img src="assets/images/industrial_cleaning.png" alt="Industrial Cleaning"
+                        class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                </div>
+                <h3 class="text-xl font-bold mb-4 dark:text-white">Industrial Cleaning</h3>
+                <p class="text-gray-500 dark:text-gray-400 mb-6">Heavy-duty cleaning for warehouses and factories using
+                    industry-grade equipment and safety protocols.</p>
+                <a href="industrial-cleaning.html" class="text-blue-500 font-bold flex items-center space-x-2">
+                    <span>Learn More</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <!-- Service Item -->
+            <div class="group p-8 bg-white dark:bg-dark-card rounded-[2.5rem] shadow-sm hover:shadow-2xl transition-all duration-500 border border-gray-100 dark:border-gray-800"
+                data-aos="fade-up" data-aos-delay="100">
+                <div class="relative overflow-hidden rounded-3xl mb-8 h-64">
+                    <img src="assets/images/sanitization.png" alt="Sanitization Services"
+                        class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                </div>
+                <h3 class="text-xl font-bold mb-4 dark:text-white">Sanitization Services</h3>
+                <p class="text-gray-500 dark:text-gray-400 mb-6">Advanced disinfection and sanitization services using
+                    hospital-grade products for maximum safety.</p>
+                <a href="sanitization-services.html" class="text-orange-500 font-bold flex items-center space-x-2">
+                    <span>Learn More</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
             <!-- Service Item -->
             <div class="group p-8 bg-white dark:bg-dark-card rounded-[2.5rem] shadow-sm hover:shadow-2xl transition-all duration-500 border border-gray-100 dark:border-gray-800"
                 data-aos="fade-up" data-aos-delay="300">
@@ -180,7 +220,7 @@
                 <h3 class="text-xl font-bold mb-4 dark:text-white">Floor Waxing</h3>
                 <p class="text-gray-500 dark:text-gray-400 mb-6">Professional stripping and waxing services to protect
                     your floors and give them a brilliant shine.</p>
-                <a href="service-details.html" class="text-yellow-500 font-bold flex items-center space-x-2">
+                <a href="floor-waxing.html" class="text-yellow-500 font-bold flex items-center space-x-2">
                     <span>Learn More</span>
                     <i class="fa-solid fa-arrow-right"></i>
                 </a>
@@ -196,7 +236,7 @@
                 <h3 class="text-xl font-bold mb-4 dark:text-white">Post-Construction</h3>
                 <p class="text-gray-500 dark:text-gray-400 mb-6">Thorough cleanup for new constructions and renovations,
                     removal of debris, dust, and final polishing.</p>
-                <a href="service-details.html" class="text-pink-500 font-bold flex items-center space-x-2">
+                <a href="post-construction.html" class="text-pink-500 font-bold flex items-center space-x-2">
                     <span>Learn More</span>
                     <i class="fa-solid fa-arrow-right"></i>
                 </a>
@@ -212,7 +252,7 @@
                 <h3 class="text-xl font-bold mb-4 dark:text-white">Green Cleaning</h3>
                 <p class="text-gray-500 dark:text-gray-400 mb-6">Eco-friendly cleaning services using sustainable
                     products and methods to protect the environment and health.</p>
-                <a href="service-details.html" class="text-indigo-500 font-bold flex items-center space-x-2">
+                <a href="green-cleaning.html" class="text-indigo-500 font-bold flex items-center space-x-2">
                     <span>Learn More</span>
                     <i class="fa-solid fa-arrow-right"></i>
                 </a>
@@ -268,18 +308,30 @@
                 <div>
                     <h4 class="text-lg font-bold mb-6 dark:text-white">Services</h4>
                     <ul class="space-y-4">
-                        <li><a href="services.html"
+                        <li><a href="office-cleaning.html"
                                 class="text-gray-500 dark:text-gray-400 hover:text-nova-blue transition-colors">Office
                                 Cleaning</a></li>
                         <li><a href="industrial-cleaning.html"
                                 class="text-gray-500 dark:text-gray-400 hover:text-nova-blue transition-colors">Industrial
                                 Cleaning</a>
                         </li>
-                        <li><a href="404.html"
+                        <li><a href="sanitization-services.html"
                                 class="text-gray-500 dark:text-gray-400 hover:text-nova-blue transition-colors">Sanitization</a>
                         </li>
-                        <li><a href="coming-soon.html"
+                        <li><a href="window-cleaning.html"
                                 class="text-gray-500 dark:text-gray-400 hover:text-nova-blue transition-colors">Window
+                                Cleaning</a></li>
+                        <li><a href="carpet-cleaning.html"
+                                class="text-gray-500 dark:text-gray-400 hover:text-nova-blue transition-colors">Carpet
+                                Cleaning</a></li>
+                        <li><a href="floor-waxing.html"
+                                class="text-gray-500 dark:text-gray-400 hover:text-nova-blue transition-colors">Floor
+                                Waxing</a></li>
+                        <li><a href="post-construction.html"
+                                class="text-gray-500 dark:text-gray-400 hover:text-nova-blue transition-colors">Post-Construction</a>
+                        </li>
+                        <li><a href="green-cleaning.html"
+                                class="text-gray-500 dark:text-gray-400 hover:text-nova-blue transition-colors">Green
                                 Cleaning</a></li>
                     </ul>
                 </div>
@@ -297,8 +349,9 @@
                 </div>
             </div>
             <div class="pt-8 border-t border-gray-100 dark:border-gray-800 text-center">
-                <p class="text-gray-500 dark:text-gray-400">&copy; 2026 NovaSite. All rights reserved by Abhivorn
-                    Technologies.</p>
+                <p class="text-gray-500 dark:text-gray-400">&copy; 2026 NovaSite. All rights reserved by <a
+                        href="https://www.abhivorn.com/" target="_blank"
+                        class="hover:text-nova-blue transition-colors">Abhivorn Technologies</a>.</p>
             </div>
         </div>
     </footer>
