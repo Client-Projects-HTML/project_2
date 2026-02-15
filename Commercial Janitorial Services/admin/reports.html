@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quality Reports - NovaSite Admin</title>
 
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg">
+
     <!-- FOUC Prevention - Apply theme and RTL immediately -->
     <script>
         (function () {
@@ -108,12 +111,27 @@
                     </a>
 
                     <!-- Mobile-only Notifications -->
-                    <a href="#"
-                        class="lg:hidden flex items-center px-4 py-3 text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800/50 rounded-xl transition-all">
-                        <i class="fa-solid fa-bell w-6"></i>
-                        <span>Notifications</span>
-                        <span class="ms-auto w-2 h-2 bg-red-500 rounded-full"></span>
-                    </a>
+                    <div class="lg:hidden">
+                        <button id="notifications-toggle"
+                            class="w-full flex items-center px-4 py-3 text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800/50 rounded-xl transition-all">
+                            <i class="fa-solid fa-bell w-6"></i>
+                            <span>Notifications</span>
+                            <span class="ms-auto w-2 h-2 bg-red-500 rounded-full"></span>
+                        </button>
+                        <div id="notifications-dropdown-mobile"
+                            class="hidden pl-10 pr-4 py-2 space-y-4 border-l-2 border-primary-100 dark:border-primary-900/30 ms-4 mt-2">
+                            <div class="py-1">
+                                <p class="text-sm font-semibold dark:text-gray-200">New Client Registered</p>
+                                <p class="text-xs text-gray-500">2 mins ago</p>
+                            </div>
+                            <div class="py-1">
+                                <p class="text-sm font-semibold dark:text-gray-200">Database Backup</p>
+                                <p class="text-xs text-gray-500">1 hour ago</p>
+                            </div>
+                            <a href="#" class="block text-xs text-primary-500 font-bold hover:underline py-2">View all
+                                notifications</a>
+                        </div>
+                    </div>
 
                     <!-- Mobile-only Preferences -->
                     <div class="lg:hidden mt-8 pt-8 border-t border-gray-100 dark:border-gray-800">
@@ -262,7 +280,7 @@
                                     <span class="font-bold text-blue-500">Good</span>
                                 </div>
                             </div>
-                            <button
+                            <button onclick="showToast('Preparing your PDF report for download...', 'info')"
                                 class="w-full py-2.5 bg-gray-50 dark:bg-gray-800 dark:text-gray-300 rounded-xl text-xs font-bold hover:bg-primary-500 hover:text-white transition-all">Download
                                 PDF</button>
                         </div>
@@ -295,7 +313,7 @@
                                     <span class="font-bold text-red-500">Unsatisfactory</span>
                                 </div>
                             </div>
-                            <button
+                            <button onclick="showToast('Re-clean has been scheduled for this site.', 'success')"
                                 class="w-full py-2.5 bg-orange-500 text-white rounded-xl text-xs font-bold hover:bg-orange-600 transition-all shadow-lg shadow-orange-500/20">Schedule
                                 Re-clean</button>
                         </div>

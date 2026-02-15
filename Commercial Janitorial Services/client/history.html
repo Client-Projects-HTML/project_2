@@ -4,7 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Service History - NovaSite</title>
+    <title>Service History - NovaSite Client</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg">
 
     <!-- FOUC Prevention - Apply theme and RTL immediately -->
     <script>
@@ -110,12 +113,27 @@
                     </a>
 
                     <!-- Mobile-only Notifications -->
-                    <a href="#"
-                        class="lg:hidden flex items-center px-4 py-3 text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800/50 rounded-xl transition-all">
-                        <i class="fa-solid fa-bell w-6"></i>
-                        <span>Notifications</span>
-                        <span class="ms-auto w-2 h-2 bg-red-500 rounded-full"></span>
-                    </a>
+                    <div class="lg:hidden">
+                        <button id="notifications-toggle"
+                            class="w-full flex items-center px-4 py-3 text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800/50 rounded-xl transition-all">
+                            <i class="fa-solid fa-bell w-6"></i>
+                            <span>Notifications</span>
+                            <span class="ms-auto w-2 h-2 bg-red-500 rounded-full"></span>
+                        </button>
+                        <div id="notifications-dropdown-mobile"
+                            class="hidden pl-10 pr-4 py-2 space-y-4 border-l-2 border-primary-100 dark:border-primary-900/30 ms-4 mt-2">
+                            <div class="py-1">
+                                <p class="text-sm font-semibold dark:text-gray-200">Cleaning Scheduled</p>
+                                <p class="text-xs text-gray-500">1 hour ago</p>
+                            </div>
+                            <div class="py-1">
+                                <p class="text-sm font-semibold dark:text-gray-200">Invoice Generated</p>
+                                <p class="text-xs text-gray-500">3 hours ago</p>
+                            </div>
+                            <a href="#" class="block text-xs text-primary-500 font-bold hover:underline py-2">View all
+                                notifications</a>
+                        </div>
+                    </div>
 
                     <!-- Mobile-only Preferences -->
                     <div class="lg:hidden mt-8 pt-8 border-t border-gray-100 dark:border-gray-800">
@@ -180,14 +198,14 @@
             </header>
 
             <!-- Scrollable Content -->
-            <div class="flex-1 overflow-y-auto p-6">
-                <div class="flex items-center justify-between mb-8">
+            <div class="flex-1 overflow-y-auto p-4 sm:p-6">
+                <div class="flex flex-col sm:flex-row items-center justify-between mb-8 gap-4 text-center sm:text-left">
                     <div>
                         <h2 class="text-2xl font-bold font-heading dark:text-white">Service History</h2>
                         <p class="text-gray-500 mt-1">View all your past cleaning services</p>
                     </div>
                     <button onclick="openBookServiceModal()"
-                        class="px-6 py-3 bg-primary-500 text-white font-bold rounded-xl hover:bg-primary-600 transition-all flex items-center space-x-2">
+                        class="w-full sm:w-auto px-6 py-3 bg-primary-500 text-white font-bold rounded-xl hover:bg-primary-600 transition-all flex items-center justify-center space-x-2">
                         <i class="fa-solid fa-plus"></i>
                         <span>Book New Service</span>
                     </button>
@@ -197,23 +215,24 @@
                 <div
                     class="bg-white dark:bg-dark-card rounded-3xl border border-gray-100 dark:border-gray-800 shadow-sm p-4 mb-6">
                     <div class="flex flex-wrap gap-4 items-center">
-                        <div class="flex-1 min-w-[200px]">
-                            <input type="text" placeholder="Search services..."
+                        <div class="flex-1 min-w-[200px] w-full">
+                            <input type="text" placeholder="Search services..." data-search="#historyTable"
                                 class="w-full px-4 py-2 rounded-xl bg-gray-50 dark:bg-gray-800 dark:text-white border border-gray-100 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-primary-500">
                         </div>
-                        <select
-                            class="px-4 py-2 rounded-xl bg-gray-50 dark:bg-gray-800 dark:text-white border border-gray-100 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-primary-500">
-                            <option>All Status</option>
-                            <option>Completed</option>
-                            <option>Cancelled</option>
-                        </select>
-                        <select
-                            class="px-4 py-2 rounded-xl bg-gray-50 dark:bg-gray-800 dark:text-white border border-gray-100 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-primary-500">
-                            <option>All Time</option>
-                            <option>Last 30 Days</option>
-                            <option>Last 90 Days</option>
-                            <option>Last Year</option>
-                        </select>
+                        <div class="flex gap-2 w-full sm:w-auto">
+                            <select onchange="filterHistory()" id="statusFilter"
+                                class="flex-1 sm:flex-none px-4 py-2 text-sm rounded-xl bg-gray-50 dark:bg-gray-800 dark:text-white border border-gray-100 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-primary-500">
+                                <option value="all">All Status</option>
+                                <option value="completed">Completed</option>
+                                <option value="cancelled">Cancelled</option>
+                            </select>
+                            <select onchange="filterHistory()" id="timeFilter"
+                                class="flex-1 sm:flex-none px-4 py-2 text-sm rounded-xl bg-gray-50 dark:bg-gray-800 dark:text-white border border-gray-100 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-primary-500">
+                                <option value="all">All Time</option>
+                                <option value="30">Last 30 Days</option>
+                                <option value="90">Last 90 Days</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
 
@@ -221,7 +240,7 @@
                 <div
                     class="bg-white dark:bg-dark-card rounded-3xl border border-gray-100 dark:border-gray-800 shadow-sm overflow-hidden">
                     <div class="overflow-x-auto">
-                        <table class="w-full text-left">
+                        <table class="w-full text-left min-w-[800px]" id="historyTable">
                             <thead class="bg-gray-50 dark:bg-gray-800/50">
                                 <tr>
                                     <th class="px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">
@@ -447,21 +466,21 @@
                 </div>
 
                 <!-- Book Service Modal -->
-                <div id="bookServiceModal" class="fixed inset-0 z-50 hidden">
+                <div id="bookServiceModal" class="fixed inset-0 z-50 hidden overflow-y-auto scrollbar-hide">
                     <div class="fixed inset-0 bg-black/50 backdrop-blur-sm" onclick="closeBookServiceModal()"></div>
-                    <div class="fixed inset-0 flex items-center justify-center p-4">
-                        <div class="bg-white dark:bg-dark-card rounded-3xl shadow-2xl w-full max-w-lg p-6 relative"
+                    <div class="flex min-h-full items-center justify-center p-3 pointer-events-none">
+                        <div class="bg-white dark:bg-dark-card rounded-2xl shadow-2xl w-full max-w-[290px] sm:max-w-lg p-4 sm:p-8 relative pointer-events-auto"
                             onclick="event.stopPropagation()">
                             <button onclick="closeBookServiceModal()"
-                                class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
-                                <i class="fa-solid fa-times text-xl"></i>
+                                class="absolute top-3 right-3 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
+                                <i class="fa-solid fa-times text-lg"></i>
                             </button>
-                            <h3 class="text-xl font-bold font-heading dark:text-white mb-6">Book New Service</h3>
+                            <h3 class="text-lg font-bold font-heading dark:text-white mb-4">Book New Service</h3>
                             <form onsubmit="submitBooking(event)">
-                                <div class="mb-4">
-                                    <label class="block text-sm font-semibold text-gray-500 mb-2">Service Type</label>
+                                <div class="mb-3">
+                                    <label class="block text-xs font-semibold text-gray-500 mb-1">Service Type</label>
                                     <select id="serviceType"
-                                        class="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-800 dark:text-white border border-gray-100 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-primary-500"
+                                        class="w-full px-3 py-2 text-sm rounded-xl bg-gray-50 dark:bg-gray-800 dark:text-white border border-gray-100 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-primary-500"
                                         required>
                                         <option value="">Select a service</option>
                                         <option value="office-cleaning">Office Deep Cleaning</option>
@@ -473,16 +492,16 @@
                                         <option value="sanitization">Sanitization Services</option>
                                     </select>
                                 </div>
-                                <div class="mb-4">
-                                    <label class="block text-sm font-semibold text-gray-500 mb-2">Preferred Date</label>
+                                <div class="mb-3">
+                                    <label class="block text-xs font-semibold text-gray-500 mb-1">Preferred Date</label>
                                     <input type="date" id="serviceDate"
-                                        class="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-800 dark:text-white border border-gray-100 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-primary-500"
+                                        class="w-full px-3 py-2 text-sm rounded-xl bg-gray-50 dark:bg-gray-800 dark:text-white border border-gray-100 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-primary-500"
                                         required>
                                 </div>
-                                <div class="mb-4">
-                                    <label class="block text-sm font-semibold text-gray-500 mb-2">Preferred Time</label>
+                                <div class="mb-3">
+                                    <label class="block text-xs font-semibold text-gray-500 mb-1">Preferred Time</label>
                                     <select id="serviceTime"
-                                        class="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-800 dark:text-white border border-gray-100 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-primary-500"
+                                        class="w-full px-3 py-2 text-sm rounded-xl bg-gray-50 dark:bg-gray-800 dark:text-white border border-gray-100 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-primary-500"
                                         required>
                                         <option value="">Select a time</option>
                                         <option value="08:00">8:00 AM</option>
@@ -497,19 +516,18 @@
                                         <option value="18:00">6:00 PM</option>
                                     </select>
                                 </div>
-                                <div class="mb-6">
-                                    <label class="block text-sm font-semibold text-gray-500 mb-2">Special
+                                <div class="mb-4">
+                                    <label class="block text-xs font-semibold text-gray-500 mb-1">Special
                                         Instructions</label>
-                                    <textarea id="serviceNotes" rows="3"
-                                        class="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-800 dark:text-white border border-gray-100 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-primary-500"
-                                        placeholder="Any special requirements..."></textarea>
+                                    <textarea id="serviceNotes" rows="2"
+                                        class="w-full px-3 py-2 text-sm rounded-xl bg-gray-50 dark:bg-gray-800 dark:text-white border border-gray-100 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-primary-500"
+                                        placeholder="Any requirements..."></textarea>
                                 </div>
-                                <div class="flex space-x-3">
+                                <div class="flex space-x-2">
                                     <button type="button" onclick="closeBookServiceModal()"
-                                        class="flex-1 px-4 py-3 rounded-xl bg-gray-100 dark:bg-gray-800 dark:text-white font-semibold hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">Cancel</button>
+                                        class="flex-1 px-4 py-2 text-sm rounded-xl bg-gray-100 dark:bg-gray-800 dark:text-white font-semibold hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">Cancel</button>
                                     <button type="submit"
-                                        class="flex-1 px-4 py-3 rounded-xl bg-primary-500 text-white font-semibold hover:bg-primary-600 transition-colors">Book
-                                        Now</button>
+                                        class="flex-1 px-4 py-2 text-sm rounded-xl bg-primary-500 text-white font-semibold hover:bg-primary-600 transition-all">Book</button>
                                 </div>
                             </form>
                         </div>
@@ -604,6 +622,28 @@
     <!-- Scripts -->
     <script>
         let deleteRow = null;
+
+        // Filter History Function
+        function filterHistory() {
+            const status = document.getElementById('statusFilter').value.toLowerCase();
+            const time = document.getElementById('timeFilter').value;
+            const rows = document.querySelectorAll('#historyTable tbody tr');
+
+            rows.forEach(row => {
+                const rowStatus = row.querySelector('span').textContent.toLowerCase();
+                const statusMatch = status === 'all' || rowStatus === status;
+
+                // For simplicity in this demo, time filter just shows everything if 'all' or simulates 
+                // In a real app we'd parse the date
+                const timeMatch = true;
+
+                row.style.display = (statusMatch && timeMatch) ? '' : 'none';
+            });
+
+            if (window.showToast) {
+                window.showToast('Filter applied', 'info');
+            }
+        }
 
         // Book Service Modal Functions
         function openBookServiceModal() {

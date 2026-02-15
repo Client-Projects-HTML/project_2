@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Settings - NovaSite Admin</title>
 
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg">
+
     <!-- FOUC Prevention - Apply theme and RTL immediately -->
     <script>
         (function () {
@@ -109,12 +112,27 @@
                     </a>
                     <div class="h-4"></div>
                     <!-- Mobile-only Notifications -->
-                    <a href="#"
-                        class="lg:hidden flex items-center px-4 py-3 text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800/50 rounded-xl transition-all">
-                        <i class="fa-solid fa-bell w-6"></i>
-                        <span>Notifications</span>
-                        <span class="ms-auto w-2 h-2 bg-red-500 rounded-full"></span>
-                    </a>
+                    <div class="lg:hidden">
+                        <button id="notifications-toggle"
+                            class="w-full flex items-center px-4 py-3 text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800/50 rounded-xl transition-all">
+                            <i class="fa-solid fa-bell w-6"></i>
+                            <span>Notifications</span>
+                            <span class="ms-auto w-2 h-2 bg-red-500 rounded-full"></span>
+                        </button>
+                        <div id="notifications-dropdown-mobile"
+                            class="hidden pl-10 pr-4 py-2 space-y-4 border-l-2 border-primary-100 dark:border-primary-900/30 ms-4 mt-2">
+                            <div class="py-1">
+                                <p class="text-sm font-semibold dark:text-gray-200">New Client Registered</p>
+                                <p class="text-xs text-gray-500">2 mins ago</p>
+                            </div>
+                            <div class="py-1">
+                                <p class="text-sm font-semibold dark:text-gray-200">Database Backup</p>
+                                <p class="text-xs text-gray-500">1 hour ago</p>
+                            </div>
+                            <a href="#" class="block text-xs text-primary-500 font-bold hover:underline py-2">View all
+                                notifications</a>
+                        </div>
+                    </div>
 
                     <!-- Mobile-only Preferences -->
                     <div class="lg:hidden mt-8 pt-8 border-t border-gray-100 dark:border-gray-800">
@@ -303,6 +321,7 @@
                                     <p class="text-sm text-gray-500">Add an extra layer of security to your account.</p>
                                 </div>
                                 <button
+                                    onclick="this.classList.toggle('bg-primary-500'); this.querySelector('div').classList.toggle('left-7'); this.querySelector('div').classList.toggle('left-1'); showToast('Two-Factor Authentication state updated.', 'info')"
                                     class="w-12 h-6 bg-gray-200 dark:bg-gray-700 rounded-full relative transition-all">
                                     <div class="absolute left-1 top-1 w-4 h-4 bg-white rounded-full transition-all">
                                     </div>
@@ -311,9 +330,9 @@
                         </div>
 
                         <div class="flex justify-end space-x-4 mt-8">
-                            <button
+                            <button onclick="window.location.reload()"
                                 class="px-8 py-3 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-white font-bold rounded-xl hover:bg-gray-200 transition-all">Cancel</button>
-                            <button
+                            <button onclick="showToast('Settings saved successfully!', 'success')"
                                 class="px-8 py-3 gradient-primary text-white font-bold rounded-xl shadow-lg shadow-primary-500/30 hover:scale-[1.02] transition-all">Save
                                 Changes</button>
                         </div>

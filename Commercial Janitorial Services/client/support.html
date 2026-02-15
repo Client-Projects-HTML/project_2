@@ -4,7 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Support Center - NovaSite Client</title>
+    <title>Customer Support - NovaSite Client</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg">
 
     <!-- FOUC Prevention - Apply theme and RTL immediately -->
     <script>
@@ -114,12 +117,27 @@
                     </a>
 
                     <!-- Mobile-only Notifications -->
-                    <a href="#"
-                        class="lg:hidden flex items-center px-4 py-3 text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800/50 rounded-xl transition-all">
-                        <i class="fa-solid fa-bell w-6"></i>
-                        <span>Notifications</span>
-                        <span class="ms-auto w-2 h-2 bg-red-500 rounded-full"></span>
-                    </a>
+                    <div class="lg:hidden">
+                        <button id="notifications-toggle"
+                            class="w-full flex items-center px-4 py-3 text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800/50 rounded-xl transition-all">
+                            <i class="fa-solid fa-bell w-6"></i>
+                            <span>Notifications</span>
+                            <span class="ms-auto w-2 h-2 bg-red-500 rounded-full"></span>
+                        </button>
+                        <div id="notifications-dropdown-mobile"
+                            class="hidden pl-10 pr-4 py-2 space-y-4 border-l-2 border-primary-100 dark:border-primary-900/30 ms-4 mt-2">
+                            <div class="py-1">
+                                <p class="text-sm font-semibold dark:text-gray-200">Cleaning Scheduled</p>
+                                <p class="text-xs text-gray-500">1 hour ago</p>
+                            </div>
+                            <div class="py-1">
+                                <p class="text-sm font-semibold dark:text-gray-200">Invoice Generated</p>
+                                <p class="text-xs text-gray-500">3 hours ago</p>
+                            </div>
+                            <a href="#" class="block text-xs text-primary-500 font-bold hover:underline py-2">View all
+                                notifications</a>
+                        </div>
+                    </div>
 
                     <!-- Mobile-only Preferences -->
                     <div class="lg:hidden mt-8 pt-8 border-t border-gray-100 dark:border-gray-800">
@@ -254,7 +272,7 @@
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
                         <div
-                            class="bg-white dark:bg-dark-card p-8 rounded-[2rem] border border-gray-100 dark:border-gray-800 shadow-sm text-center">
+                            class="bg-white dark:bg-dark-card p-5 sm:p-8 rounded-[2rem] border border-gray-100 dark:border-gray-800 shadow-sm text-center">
                             <div
                                 class="w-16 h-16 rounded-2xl bg-primary-50 dark:bg-primary-900/30 text-primary-600 flex items-center justify-center mx-auto mb-6">
                                 <i class="fa-solid fa-comments text-2xl"></i>
@@ -266,7 +284,7 @@
                                 Chat</button>
                         </div>
                         <div
-                            class="bg-white dark:bg-dark-card p-8 rounded-[2rem] border border-gray-100 dark:border-gray-800 shadow-sm text-center">
+                            class="bg-white dark:bg-dark-card p-5 sm:p-8 rounded-[2rem] border border-gray-100 dark:border-gray-800 shadow-sm text-center">
                             <div
                                 class="w-16 h-16 rounded-2xl bg-purple-50 dark:bg-purple-900/30 text-purple-600 flex items-center justify-center mx-auto mb-6">
                                 <i class="fa-solid fa-envelope-open-text text-2xl"></i>
@@ -280,7 +298,7 @@
                     </div>
 
                     <div
-                        class="bg-white dark:bg-dark-card rounded-[2rem] border border-gray-100 dark:border-gray-800 shadow-sm p-8">
+                        class="bg-white dark:bg-dark-card rounded-[2rem] border border-gray-100 dark:border-gray-800 shadow-sm p-5 sm:p-8">
                         <h4 class="text-xl font-bold dark:text-white mb-6">Frequently Asked Questions</h4>
                         <div class="space-y-4">
                             <details class="group border-b border-gray-50 dark:border-gray-800 pb-4">
@@ -288,9 +306,10 @@
                                     <span class="font-semibold dark:text-white">How do I change my cleaning
                                         schedule?</span>
                                     <i
-                                        class="fa-solid fa-chevron-down text-gray-400 group-open:rotate-180 transition-transform"></i>
+                                        class="fa-solid fa-chevron-down text-gray-400 rotate-0 transition-transform duration-300"></i>
                                 </summary>
-                                <p class="text-gray-500 text-sm mt-4">You can change your schedule in the "My Services"
+                                <p class="text-gray-600 dark:text-gray-400 text-sm mt-4">You can change your schedule in
+                                    the "My Services"
                                     tab by clicking the calendar icon next to your active subscription.</p>
                             </details>
                             <details class="group border-b border-gray-50 dark:border-gray-800 pb-4">
@@ -298,9 +317,10 @@
                                     <span class="font-semibold dark:text-white">What is included in the Pro Monthly
                                         plan?</span>
                                     <i
-                                        class="fa-solid fa-chevron-down text-gray-400 group-open:rotate-180 transition-transform"></i>
+                                        class="fa-solid fa-chevron-down text-gray-400 rotate-0 transition-transform duration-300"></i>
                                 </summary>
-                                <p class="text-gray-500 text-sm mt-4">The Pro Monthly plan includes twice-weekly deep
+                                <p class="text-gray-600 dark:text-gray-400 text-sm mt-4">The Pro Monthly plan includes
+                                    twice-weekly deep
                                     cleaning, trash removal, and basic window sanitization for up to 5,000 sq ft.</p>
                             </details>
                         </div>
@@ -313,63 +333,67 @@
     <!-- Scripts -->
 
     <!-- Chat & Ticket Modal -->
-    <div id="ticketModal" class="fixed inset-0 bg-black/50 z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white dark:bg-dark-card rounded-2xl w-full max-w-lg p-6 relative">
-            <button onclick="closeTicketModal()"
-                class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
-                <i class="fa-solid fa-xmark text-xl"></i>
-            </button>
-            <h3 class="text-xl font-bold dark:text-white mb-4">Open Support Ticket</h3>
-            <form id="ticketForm" onsubmit="submitTicket(event)">
-                <div class="mb-4">
-                    <label class="block text-sm font-semibold dark:text-gray-300 mb-2">Issue Type</label>
-                    <select id="ticketType" required
-                        class="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent">
-                        <option value="">Select issue type...</option>
-                        <option value="scheduling">Scheduling Issue</option>
-                        <option value="billing">Billing Question</option>
-                        <option value="quality">Service Quality</option>
-                        <option value="technical">Technical Problem</option>
-                        <option value="other">Other</option>
-                    </select>
-                </div>
-                <div class="mb-4">
-                    <label class="block text-sm font-semibold dark:text-gray-300 mb-2">Subject</label>
-                    <input type="text" id="ticketSubject" required placeholder="Brief description of your issue"
-                        class="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent">
-                </div>
-                <div class="mb-4">
-                    <label class="block text-sm font-semibold dark:text-gray-300 mb-2">Description</label>
-                    <textarea id="ticketDescription" required rows="4" placeholder="Please provide more details..."
-                        class="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent resize-none"></textarea>
-                </div>
-                <div class="flex gap-3">
-                    <button type="button" onclick="closeTicketModal()"
-                        class="flex-1 py-3 border border-gray-200 dark:border-gray-700 dark:text-white rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800 transition-all">Cancel</button>
-                    <button type="submit"
-                        class="flex-1 py-3 gradient-primary text-white font-bold rounded-xl shadow-lg">Submit
-                        Ticket</button>
-                </div>
-            </form>
+    <div id="ticketModal" class="fixed inset-0 z-50 hidden overflow-y-auto scrollbar-hide">
+        <div class="fixed inset-0 bg-black/50 backdrop-blur-sm" onclick="closeTicketModal()"></div>
+        <div class="flex min-h-full items-center justify-center p-3 pointer-events-none">
+            <div class="bg-white dark:bg-dark-card rounded-2xl shadow-2xl w-full max-w-[290px] sm:max-w-lg p-4 sm:p-8 relative pointer-events-auto"
+                onclick="event.stopPropagation()">
+                <button onclick="closeTicketModal()"
+                    class="absolute top-3 right-3 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+                <h3 class="text-lg font-bold dark:text-white mb-4">Open Support Ticket</h3>
+                <form id="ticketForm" onsubmit="submitTicket(event)">
+                    <div class="mb-3">
+                        <label class="block text-xs font-semibold dark:text-gray-300 mb-1">Issue Type</label>
+                        <select id="ticketType" required
+                            class="w-full px-3 py-2 text-sm rounded-xl border border-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                            <option value="">Select issue type...</option>
+                            <option value="scheduling">Scheduling Issue</option>
+                            <option value="billing">Billing Question</option>
+                            <option value="quality">Service Quality</option>
+                            <option value="technical">Technical Problem</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="block text-xs font-semibold dark:text-gray-300 mb-1">Subject</label>
+                        <input type="text" id="ticketSubject" required placeholder="Description..."
+                            class="w-full px-3 py-2 text-sm rounded-xl border border-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-xs font-semibold dark:text-gray-300 mb-1">Description</label>
+                        <textarea id="ticketDescription" required rows="2" placeholder="More details..."
+                            class="w-full px-3 py-2 text-sm rounded-xl border border-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent resize-none"></textarea>
+                    </div>
+                    <div class="flex gap-2">
+                        <button type="button" onclick="closeTicketModal()"
+                            class="flex-1 py-2 text-sm border border-gray-200 dark:border-gray-700 dark:text-white rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800 transition-all">Cancel</button>
+                        <button type="submit"
+                            class="flex-1 py-2 text-sm gradient-primary text-white font-bold rounded-xl shadow-lg">Submit</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 
     <script>
-        // Start Chat function with confirm dialog
+        // Start Chat function
         function startChat() {
-            if (confirm('Are you sure you want to start a live chat with our support team?\n\nA support agent will be with you shortly.')) {
-                // Initialize chat session
-                console.log('Chat session started');
-                alert('Connecting to support chat...\n\nPlease wait while we connect you with an agent.');
-                // Here you can add actual chat initialization code
+            if (window.showToast) {
+                window.showToast('Connecting to a live support agent...', 'info');
+                setTimeout(() => {
+                    window.showToast('Agent Sarah has joined the chat.', 'success');
+                }, 1500);
             }
         }
 
         // Open Ticket prompt
         function openTicketPrompt() {
-            if (confirm('Would you like to open a support ticket?\n\nClick OK to continue or Cancel to go back.')) {
-                document.getElementById('ticketModal').classList.remove('hidden');
-                document.body.style.overflow = 'hidden';
+            document.getElementById('ticketModal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            if (window.showToast) {
+                window.showToast('Opening ticket submission form', 'info');
             }
         }
 
@@ -382,15 +406,16 @@
         // Submit ticket form
         function submitTicket(event) {
             event.preventDefault();
-            const ticketType = document.getElementById('ticketType').value;
-            const ticketSubject = document.getElementById('ticketSubject').value;
-            const ticketDescription = document.getElementById('ticketDescription').value;
+            const ticketId = Math.floor(Math.random() * 100000);
 
-            if (confirm('Are you ready to submit this ticket?\n\nType: ' + ticketType + '\nSubject: ' + ticketSubject)) {
-                alert('Your ticket has been submitted successfully!\n\nTicket ID: #' + Math.floor(Math.random() * 100000) + '\n\nWe will respond within 24 hours.');
-                closeTicketModal();
-                document.getElementById('ticketForm').reset();
+            closeTicketModal();
+            if (window.showToast) {
+                window.showToast(`Ticket #${ticketId} submitted successfully!`, 'success');
+                setTimeout(() => {
+                    window.showToast('We will respond within 24 hours.', 'info');
+                }, 1000);
             }
+            document.getElementById('ticketForm').reset();
         }
 
         // Close modal on backdrop click

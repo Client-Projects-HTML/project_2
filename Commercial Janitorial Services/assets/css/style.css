@@ -109,6 +109,18 @@ h6 {
     transform: rotate(180deg);
 }
 
+details summary::-webkit-details-marker {
+    display: none;
+}
+
+details summary {
+    list-style: none;
+}
+
+details[open] .fa-chevron-down {
+    transform: rotate(180deg);
+}
+
 .text-glow {
     text-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
 }

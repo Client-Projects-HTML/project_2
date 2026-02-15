@@ -436,18 +436,17 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
     // ========== FAQ ACCORDION ==========
-    const faqItems = document.querySelectorAll('.cursor-pointer');
+    const faqItems = document.querySelectorAll('.faq-trigger');
     faqItems.forEach(item => {
         item.addEventListener('click', () => {
             const container = item.parentElement;
             const answer = container.querySelector('p');
             const icon = item.querySelector('i');
 
-            // Toggle answer visibility
             if (answer) {
                 const isHidden = answer.classList.contains('hidden');
 
-                // Optional: Close other FAQs in the same group
+                // Close other FAQs in the same group
                 const group = container.parentElement;
                 if (group) {
                     group.querySelectorAll('p').forEach(p => p.classList.add('hidden'));

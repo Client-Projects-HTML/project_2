@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Profile - NovaSite Client</title>
 
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg">
+
     <!-- FOUC Prevention - Apply theme and RTL immediately -->
     <script>
         (function () {
@@ -114,12 +117,27 @@
                     </a>
 
                     <!-- Mobile-only Notifications -->
-                    <a href="#"
-                        class="lg:hidden flex items-center px-4 py-3 text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800/50 rounded-xl transition-all">
-                        <i class="fa-solid fa-bell w-6"></i>
-                        <span>Notifications</span>
-                        <span class="ms-auto w-2 h-2 bg-red-500 rounded-full"></span>
-                    </a>
+                    <div class="lg:hidden">
+                        <button id="notifications-toggle"
+                            class="w-full flex items-center px-4 py-3 text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800/50 rounded-xl transition-all">
+                            <i class="fa-solid fa-bell w-6"></i>
+                            <span>Notifications</span>
+                            <span class="ms-auto w-2 h-2 bg-red-500 rounded-full"></span>
+                        </button>
+                        <div id="notifications-dropdown-mobile"
+                            class="hidden pl-10 pr-4 py-2 space-y-4 border-l-2 border-primary-100 dark:border-primary-900/30 ms-4 mt-2">
+                            <div class="py-1">
+                                <p class="text-sm font-semibold dark:text-gray-200">Cleaning Scheduled</p>
+                                <p class="text-xs text-gray-500">1 hour ago</p>
+                            </div>
+                            <div class="py-1">
+                                <p class="text-sm font-semibold dark:text-gray-200">Invoice Generated</p>
+                                <p class="text-xs text-gray-500">3 hours ago</p>
+                            </div>
+                            <a href="#" class="block text-xs text-primary-500 font-bold hover:underline py-2">View all
+                                notifications</a>
+                        </div>
+                    </div>
 
                     <!-- Mobile-only Preferences -->
                     <div class="lg:hidden mt-8 pt-8 border-t border-gray-100 dark:border-gray-800">
@@ -253,20 +271,26 @@
 
                     <div
                         class="bg-white dark:bg-dark-card rounded-[2rem] border border-gray-100 dark:border-gray-800 shadow-sm overflow-hidden">
-                        <div class="p-8 border-b border-gray-50 dark:border-gray-800 flex items-center space-x-6">
-                            <div class="relative">
-                                <img src="https://ui-avatars.com/api/?name=Client+User&background=3b82f6&color=fff"
-                                    class="w-24 h-24 rounded-3xl" alt="Profile">
-                                <button
-                                    class="absolute -bottom-2 -right-2 w-8 h-8 rounded-lg bg-primary-500 text-white flex items-center justify-center shadow-lg"><i
-                                        class="fa-solid fa-camera text-xs"></i></button>
+                        <div
+                            class="p-5 sm:p-8 border-b border-gray-50 dark:border-gray-800 flex items-center space-x-6">
+                            <div class="relative group">
+                                <img id="profileImage"
+                                    src="https://ui-avatars.com/api/?name=Robert+Smith&background=3b82f6&color=fff"
+                                    class="w-24 h-24 rounded-3xl object-cover border-4 border-white dark:border-gray-800 shadow-lg"
+                                    alt="Profile">
+                                <input type="file" id="profileUpload" class="hidden" accept="image/*"
+                                    onchange="handleImageUpload(event)">
+                                <button onclick="document.getElementById('profileUpload').click()"
+                                    class="absolute -bottom-2 -right-2 w-8 h-8 rounded-lg bg-primary-500 text-white flex items-center justify-center shadow-lg hover:bg-primary-600 hover:scale-110 transition-all border-2 border-white dark:border-gray-800">
+                                    <i class="fa-solid fa-camera text-xs"></i>
+                                </button>
                             </div>
                             <div>
                                 <h3 class="text-xl font-bold dark:text-white">Robert Smith</h3>
                                 <p class="text-gray-500">Client since Oct 2024</p>
                             </div>
                         </div>
-                        <div class="p-8 space-y-6">
+                        <div class="p-5 sm:p-8 space-y-6">
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div>
                                     <label class="block text-xs font-bold text-gray-400 uppercase mb-2">Full
@@ -294,7 +318,7 @@
                                 </div>
                             </div>
                             <div class="pt-6 border-t border-gray-50 dark:border-gray-800 flex justify-end">
-                                <button
+                                <button onclick="showToast('Profile updated successfully!', 'success')"
                                     class="px-6 py-3 gradient-primary text-white font-bold rounded-xl shadow-lg shadow-primary-500/30 hover:scale-105 transition-all">Save
                                     Changes</button>
                             </div>
@@ -306,6 +330,21 @@
     </div>
 
     <!-- Scripts -->
+    <script>
+        function handleImageUpload(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    document.getElementById('profileImage').src = e.target.result;
+                    if (window.showToast) {
+                        window.showToast('Profile picture updated successfully!', 'success');
+                    }
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+    </script>
     <script src="../assets/js/main.js"></script>
 </body>
 
