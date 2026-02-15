@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const htmlElement = document.documentElement;
 
     // ========== THEME TOGGLE FUNCTIONALITY ==========
-    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggles = document.querySelectorAll('#theme-toggle');
     const initialTheme = localStorage.getItem('theme') || 'light';
     applyTheme(initialTheme);
 
@@ -19,9 +19,9 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function updateThemeIcons(theme) {
-        if (themeToggle) {
-            const moonIcon = themeToggle.querySelector('.fa-moon');
-            const sunIcon = themeToggle.querySelector('.fa-sun');
+        themeToggles.forEach(toggle => {
+            const moonIcon = toggle.querySelector('.fa-moon');
+            const sunIcon = toggle.querySelector('.fa-sun');
             if (moonIcon && sunIcon) {
                 if (theme === 'dark') {
                     moonIcon.classList.add('hidden');
@@ -31,45 +31,44 @@ document.addEventListener('DOMContentLoaded', function () {
                     sunIcon.classList.add('hidden');
                 }
             }
-        }
+        });
     }
 
     // Update theme icons on initial load
     updateThemeIcons(initialTheme);
 
-    if (themeToggle) {
-        themeToggle.addEventListener('click', () => {
+    themeToggles.forEach(toggle => {
+        toggle.addEventListener('click', () => {
             const currentTheme = htmlElement.getAttribute('data-theme');
             const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
             applyTheme(newTheme);
         });
-    }
+    });
 
     // ========== RTL TOGGLE FUNCTIONALITY ==========
-    const rtlToggle = document.getElementById('rtl-toggle');
+    const rtlToggles = document.querySelectorAll('#rtl-toggle');
     const savedDir = localStorage.getItem('dir') || 'ltr';
     htmlElement.setAttribute('dir', savedDir);
 
-    function updateRtlButton() {
-        if (rtlToggle) {
+    function updateRtlButtons() {
+        rtlToggles.forEach(toggle => {
             const isRtl = htmlElement.getAttribute('dir') === 'rtl';
-            // Clean text as requested previously
-            rtlToggle.textContent = isRtl ? 'LTR' : 'RTL';
-            rtlToggle.setAttribute('title', isRtl ? 'Switch to Left-to-Right' : 'Switch to Right-to-Left');
-        }
+            toggle.textContent = isRtl ? 'LTR' : 'RTL';
+            toggle.setAttribute('title', isRtl ? 'Switch to Left-to-Right' : 'Switch to Right-to-Left');
+        });
     }
 
-    // Update RTL button on page load
-    updateRtlButton();
+    // Update RTL buttons on page load
+    updateRtlButtons();
 
-    if (rtlToggle) {
-        rtlToggle.addEventListener('click', () => {
+    rtlToggles.forEach(toggle => {
+        toggle.addEventListener('click', () => {
             const currentDir = htmlElement.getAttribute('dir');
             const newDir = currentDir === 'rtl' ? 'ltr' : 'rtl';
 
             htmlElement.setAttribute('dir', newDir);
             localStorage.setItem('dir', newDir);
-            updateRtlButton();
+            updateRtlButtons();
             updateDropdownPositions();
 
             // ========== RE-SYNC SIDEBAR STATE ==========
@@ -110,7 +109,7 @@ document.addEventListener('DOMContentLoaded', function () {
             // Trigger custom event for other scripts
             window.dispatchEvent(new CustomEvent('rtlChanged', { detail: { direction: newDir } }));
         });
-    }
+    });
 
     // ========== DROPDOWN POSITIONING FOR RTL ==========
     function updateDropdownPositions() {
@@ -162,9 +161,9 @@ document.addEventListener('DOMContentLoaded', function () {
     if (header) {
         window.addEventListener('scroll', () => {
             if (window.scrollY > 50) {
-                header.classList.add('bg-white/80', 'dark:bg-slate-900/80', 'backdrop-blur-md', 'shadow-sm');
+                header.classList.add('shadow-md');
             } else {
-                header.classList.remove('bg-white/80', 'dark:bg-slate-900/80', 'backdrop-blur-md', 'shadow-sm');
+                header.classList.remove('shadow-md');
             }
         });
     }
@@ -245,6 +244,14 @@ document.addEventListener('DOMContentLoaded', function () {
             e.stopPropagation();
             toggleSidebarState();
         });
+
+        const closeSidebarBtn = document.getElementById('closeSidebar');
+        if (closeSidebarBtn) {
+            closeSidebarBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                toggleSidebarState();
+            });
+        }
 
         backdrop.addEventListener('click', () => {
             const isRtl = document.documentElement.getAttribute('dir') === 'rtl';
@@ -427,5 +434,61 @@ document.addEventListener('DOMContentLoaded', function () {
         if (!localStorage.getItem('theme')) {
             applyTheme(e.matches ? 'dark' : 'light');
         }
+    });
+    // ========== FAQ ACCORDION ==========
+    const faqItems = document.querySelectorAll('.cursor-pointer');
+    faqItems.forEach(item => {
+        item.addEventListener('click', () => {
+            const container = item.parentElement;
+            const answer = container.querySelector('p');
+            const icon = item.querySelector('i');
+
+            // Toggle answer visibility
+            if (answer) {
+                const isHidden = answer.classList.contains('hidden');
+
+                // Optional: Close other FAQs in the same group
+                const group = container.parentElement;
+                if (group) {
+                    group.querySelectorAll('p').forEach(p => p.classList.add('hidden'));
+                    group.querySelectorAll('i.fa-chevron-down').forEach(i => i.classList.remove('rotate-180'));
+                }
+
+                if (isHidden) {
+                    answer.classList.remove('hidden');
+                    if (icon) icon.classList.add('rotate-180');
+                } else {
+                    answer.classList.add('hidden');
+                    if (icon) icon.classList.remove('rotate-180');
+                }
+            }
+        });
+    });
+
+    // ========== BOOKING FORM ==========
+    const bookingForm = document.querySelector('.booking-form');
+    if (bookingForm) {
+        bookingForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            // Show success notification
+            showToast('Your appointment request has been sent successfully!', 'success');
+            // Reset the form
+            bookingForm.reset();
+        });
+    }
+
+    // ========== NEWSLETTER FORM ==========
+    const newsletterForms = document.querySelectorAll('.newsletter-form');
+    newsletterForms.forEach(form => {
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const input = form.querySelector('input[type="email"]');
+            if (input && input.value) {
+                showToast('Thank you for subscribing to our newsletter!', 'success');
+                input.value = '';
+            } else {
+                showToast('Please enter a valid email address.', 'warning');
+            }
+        });
     });
 });

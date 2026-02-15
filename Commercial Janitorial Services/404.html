@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>404 - Page Not Found | NovaSite</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
     <meta name="description" content="Oops! The page you're looking for doesn't exist. Return to NovaSite homepage.">
 
     <!-- Tailwind CSS -->
@@ -88,36 +90,10 @@
 
 <body class="selection:bg-primary-500 selection:text-white overflow-x-hidden">
 
-    <!-- Minimal Header -->
-    <header class="fixed top-0 w-full z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md shadow-sm">
-        <nav class="container mx-auto px-6 py-4 flex items-center justify-between">
-            <a href="index.html" class="flex items-center gap-2">
-                <div
-                    class="w-10 h-10 logo-box rounded-xl flex items-center justify-center text-white text-xl font-bold transition-transform hover:scale-105">
-                    N</div>
-                <span class="text-2xl font-bold font-heading dark:text-white">NovaSite</span>
-            </a>
 
-            <div class="flex items-center gap-4">
-                <button id="theme-toggle"
-                    class="w-11 h-11 flex items-center justify-center rounded-xl bg-gray-100 dark:bg-gray-800 dark:text-white transition-all hover:bg-gray-200 dark:hover:bg-gray-700 shadow-sm text-xl">
-                    <span id="theme-icon">🌙</span>
-                </button>
-                <button id="rtl-toggle"
-                    class="w-11 h-11 flex items-center justify-center rounded-xl bg-gray-100 dark:bg-gray-800 dark:text-white transition-all hover:bg-gray-200 dark:hover:bg-gray-700 shadow-sm font-bold text-xs">
-                    RTL
-                </button>
-                <a href="index.html"
-                    class="hidden sm:inline-flex px-6 py-2.5 bg-nova-blue hover:bg-blue-600 text-white rounded-xl font-bold shadow-lg shadow-blue-500/30 transition-all active:scale-95">
-                    Go Home
-                </a>
-            </div>
-        </nav>
-    </header>
 
     <!-- Main 404 Content -->
-    <main
-        class="min-h-screen flex items-center justify-center relative overflow-hidden bg-gray-50 dark:bg-dark-body pt-20">
+    <main class="min-h-screen flex items-center justify-center relative overflow-hidden bg-gray-50 dark:bg-dark-body">
         <!-- Animated Background Blobs -->
         <div
             class="absolute top-[10%] right-[-5%] w-[400px] h-[400px] bg-blue-400 rounded-full gradient-blob animate-float opacity-20">
@@ -130,42 +106,42 @@
         <div class="container mx-auto px-6 relative z-10">
             <div class="max-w-4xl mx-auto text-center">
                 <!-- 404 Number -->
-                <div class="mb-8">
+                <div class="mb-4">
                     <h1
-                        class="text-[180px] md:text-[250px] font-black font-heading leading-none gradient-404 number-shadow select-none">
+                        class="text-9xl md:text-[180px] font-black font-heading leading-none gradient-404 number-shadow select-none">
                         404
                     </h1>
                 </div>
 
                 <!-- Illustration/Icon -->
-                <div class="mb-8 flex justify-center">
+                <div class="mb-6 flex justify-center">
                     <div class="relative">
                         <div
-                            class="w-48 h-48 rounded-full bg-gradient-to-br from-primary-500 to-purple-600 flex items-center justify-center shadow-2xl shadow-primary-500/30 animate-pulse-glow">
-                            <i class="fa-solid fa-broom text-white text-7xl"></i>
+                            class="w-32 h-32 rounded-full bg-gradient-to-br from-primary-500 to-purple-600 flex items-center justify-center shadow-2xl shadow-primary-500/30 animate-pulse-glow">
+                            <i class="fa-solid fa-broom text-white text-5xl"></i>
                         </div>
                         <!-- Floating particles -->
                         <div
-                            class="absolute -top-4 -right-4 w-16 h-16 bg-yellow-400 rounded-full opacity-70 animate-float">
+                            class="absolute -top-2 -right-2 w-10 h-10 bg-yellow-400 rounded-full opacity-70 animate-float">
                         </div>
-                        <div class="absolute -bottom-4 -left-4 w-12 h-12 bg-pink-400 rounded-full opacity-70 animate-float"
+                        <div class="absolute -bottom-2 -left-2 w-8 h-8 bg-pink-400 rounded-full opacity-70 animate-float"
                             style="animation-delay: -2s"></div>
                     </div>
                 </div>
 
                 <!-- Error Message -->
-                <div class="mb-12">
-                    <h2 class="text-4xl md:text-5xl font-bold font-heading mb-4 dark:text-white">
+                <div class="mb-10">
+                    <h2 class="text-3xl md:text-4xl font-bold font-heading mb-3 dark:text-white">
                         Oops! Page Not Found
                     </h2>
-                    <p class="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
+                    <p class="text-lg text-gray-600 dark:text-gray-400 max-w-xl mx-auto leading-relaxed">
                         We've swept through our entire site, but couldn't find the page you're looking for.
-                        It might have been cleaned up, moved, or never existed.
+                        It might have been cleaned up or moved.
                     </p>
                 </div>
 
                 <!-- Action Buttons -->
-                <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
                     <a href="index.html"
                         class="w-full sm:w-auto px-8 py-4 gradient-primary text-white rounded-2xl font-semibold shadow-xl shadow-primary-500/40 hover:scale-105 transition-transform flex items-center justify-center gap-2">
                         <i class="fa-solid fa-home"></i>
@@ -183,73 +159,13 @@
                     </a>
                 </div>
 
-                <!-- Quick Links -->
-                <div
-                    class="bg-white dark:bg-dark-card rounded-3xl p-8 shadow-lg border border-gray-100 dark:border-gray-800 max-w-2xl mx-auto">
-                    <h3 class="text-xl font-bold mb-6 dark:text-white">Popular Pages</h3>
-                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                        <a href="about.html"
-                            class="group p-4 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-all">
-                            <i
-                                class="fa-solid fa-info-circle text-3xl text-primary-500 mb-2 group-hover:scale-110 transition-transform inline-block"></i>
-                            <p class="text-sm font-semibold dark:text-white">About Us</p>
-                        </a>
-                        <a href="services.html"
-                            class="group p-4 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-all">
-                            <i
-                                class="fa-solid fa-sparkles text-3xl text-purple-500 mb-2 group-hover:scale-110 transition-transform inline-block"></i>
-                            <p class="text-sm font-semibold dark:text-white">Services</p>
-                        </a>
-                        <a href="pricing.html"
-                            class="group p-4 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-all">
-                            <i
-                                class="fa-solid fa-tag text-3xl text-green-500 mb-2 group-hover:scale-110 transition-transform inline-block"></i>
-                            <p class="text-sm font-semibold dark:text-white">Pricing</p>
-                        </a>
-                        <a href="blog.html"
-                            class="group p-4 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-all">
-                            <i
-                                class="fa-solid fa-newspaper text-3xl text-orange-500 mb-2 group-hover:scale-110 transition-transform inline-block"></i>
-                            <p class="text-sm font-semibold dark:text-white">Blog</p>
-                        </a>
-                    </div>
-                </div>
             </div>
         </div>
     </main>
 
-    <!-- Minimal Footer -->
-    <footer class="py-8 bg-white dark:bg-dark-body border-t border-gray-100 dark:border-gray-800">
-        <div class="container mx-auto px-6 text-center">
-            <p class="text-gray-500 dark:text-gray-400">&copy; 2026 NovaSite. All rights reserved by <a
-                    href="https://www.abhivorn.com/" target="_blank"
-                    class="hover:text-nova-blue transition-colors">Abhivorn Technologies</a>.</p>
-        </div>
-    </footer>
-
     <!-- Scripts -->
     <script src="assets/js/main.js"></script>
-    <script>
-        // Update theme icon based on current theme
-        function updateThemeIcon() {
-            const themeIcon = document.getElementById('theme-icon');
-            const isDark = document.documentElement.classList.contains('dark');
-            if (themeIcon) {
-                themeIcon.textContent = isDark ? '☀️' : '🌙';
-            }
-        }
 
-        // Update icon on page load
-        updateThemeIcon();
-
-        // Update icon when theme changes
-        const themeToggleBtn = document.getElementById('theme-toggle');
-        if (themeToggleBtn) {
-            themeToggleBtn.addEventListener('click', () => {
-                setTimeout(updateThemeIcon, 50); // Small delay to let theme switch complete
-            });
-        }
-    </script>
 </body>
 
 </html>

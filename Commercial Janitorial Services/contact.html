@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us - NovaSite</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -35,7 +37,7 @@
 <body class="selection:bg-primary-500 selection:text-white dark:bg-dark-body">
 
     <!-- Header Navigation -->
-    <header class="fixed top-0 w-full z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md shadow-sm">
+    <header class="fixed top-0 w-full z-50 bg-white dark:bg-slate-900 shadow-sm">
         <nav class="container mx-auto px-6 py-4 flex items-center justify-between">
             <a href="index.html" class="flex items-center space-x-2">
                 <div
@@ -52,16 +54,16 @@
                 <a href="contact.html" class="text-primary-600 font-medium">Contact</a>
             </div>
             <div class="flex items-center gap-4">
-                <a href="login.html" class="hidden lg:flex btn btn-nova btn-header">
-                    <span>Login</span>
-                </a>
-                <button id="rtl-toggle" class="btn-icon font-bold text-xs">
+                <button id="rtl-toggle" class="hidden lg:flex btn-icon font-bold text-xs">
                     RTL
                 </button>
-                <button id="theme-toggle" class="btn-icon">
+                <button id="theme-toggle" class="hidden lg:flex btn-icon">
                     <i class="fa-solid fa-moon dark:hidden text-lg"></i>
                     <i class="fa-solid fa-sun hidden dark:block text-lg"></i>
                 </button>
+                <a href="login.html" class="hidden lg:flex btn btn-nova btn-header">
+                    <span>Login</span>
+                </a>
                 <button id="mobile-menu-btn" class="lg:hidden btn-icon">
                     <i class="fa-solid fa-bars text-lg"></i>
                 </button>
@@ -92,6 +94,23 @@
                 <a href="contact.html" class="block text-lg font-medium text-primary-500">Contact</a>
                 <hr class="border-gray-100 dark:border-gray-800">
                 <a href="login.html" class="btn btn-nova btn-full">Login</a>
+
+                <!-- Mobile-only Preferences -->
+                <div class="mt-8 pt-6 border-t border-gray-100 dark:border-gray-800">
+                    <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-4">Preferences</p>
+                    <div class="flex items-center gap-4">
+                        <button id="theme-toggle"
+                            class="flex-1 h-12 flex items-center justify-center rounded-xl bg-gray-50 dark:bg-gray-800 dark:text-white hover:bg-gray-100 transition-colors border border-gray-100 dark:border-gray-700">
+                            <i class="fa-solid fa-moon dark:hidden"></i>
+                            <i class="fa-solid fa-sun hidden dark:block"></i>
+                            <span class="ms-2 text-sm font-medium">Theme</span>
+                        </button>
+                        <button id="rtl-toggle"
+                            class="flex-1 h-12 flex items-center justify-center rounded-xl bg-gray-50 dark:bg-gray-800 dark:text-white hover:bg-gray-100 transition-colors font-bold text-xs border border-gray-100 dark:border-gray-700">
+                            RTL
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -113,9 +132,9 @@
                     project? We'd love to hear from you. Reach out through any of the channels below.</p>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
                 <!-- Contact Info & Map -->
-                <div class="space-y-8">
+                <div class="flex flex-col space-y-8 h-full">
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         <div
                             class="p-8 bg-white dark:bg-dark-card rounded-3xl border border-gray-100 dark:border-gray-800 shadow-sm">
@@ -135,7 +154,7 @@
 
                     <!-- Map Placeholder -->
                     <div
-                        class="w-full h-80 rounded-[2rem] overflow-hidden grayscale dark:invert-[0.9] dark:hue-rotate-180 border border-gray-100 dark:border-gray-800">
+                        class="w-full flex-1 min-h-[400px] rounded-[2rem] overflow-hidden grayscale dark:invert-[0.9] dark:hue-rotate-180 border border-gray-100 dark:border-gray-800">
                         <iframe
                             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d193595.15830869428!2d-74.119763973046!3d40.69766374874431!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew%20York%2C%20NY!5e0!3m2!1sen!2sus!4v1680000000000!5m2!1sen!2sus"
                             width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy">
@@ -145,20 +164,20 @@
 
                 <!-- Contact Form / Booking -->
                 <div
-                    class="bg-white dark:bg-dark-card p-10 rounded-[2.5rem] shadow-2xl border border-gray-100 dark:border-gray-800">
+                    class="bg-white dark:bg-dark-card p-10 rounded-[2.5rem] shadow-2xl border border-gray-100 dark:border-gray-800 h-full flex flex-col">
                     <h3 class="text-2xl font-bold font-heading mb-6 dark:text-white">Book an Appointment</h3>
-                    <form class="space-y-6">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <form class="space-y-6 booking-form">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">First
                                     Name</label>
-                                <input type="text" placeholder="John"
+                                <input type="text" placeholder="John" required
                                     class="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-800 border-none outline-none dark:text-white focus:ring-2 focus:ring-primary-500">
                             </div>
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Last
                                     Name</label>
-                                <input type="text" placeholder="Doe"
+                                <input type="text" placeholder="Doe" required
                                     class="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-800 border-none outline-none dark:text-white focus:ring-2 focus:ring-primary-500">
                             </div>
                         </div>
@@ -166,15 +185,16 @@
                         <div>
                             <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Your
                                 Email</label>
-                            <input type="email" placeholder="john@example.com"
+                            <input type="email" placeholder="john@example.com" required
                                 class="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-800 border-none outline-none dark:text-white focus:ring-2 focus:ring-primary-500">
                         </div>
 
                         <div>
                             <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Service
                                 Type</label>
-                            <select
+                            <select required
                                 class="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-800 border-none outline-none dark:text-white focus:ring-2 focus:ring-primary-500">
+                                <option value="">Select a service</option>
                                 <option>Commercial Cleaning</option>
                                 <option>Residential Cleaning</option>
                                 <option>Supplies Management</option>
@@ -185,7 +205,7 @@
                         <div>
                             <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Preferred
                                 Date</label>
-                            <input type="date"
+                            <input type="date" required
                                 class="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-800 border-none outline-none dark:text-white focus:ring-2 focus:ring-primary-500">
                         </div>
 
@@ -247,6 +267,12 @@
                         <li><a href="contact.html"
                                 class="text-gray-500 dark:text-gray-400 hover:text-nova-blue transition-colors">Contact
                                 Us</a></li>
+                        <li><a href="404.html"
+                                class="text-gray-500 dark:text-gray-400 hover:text-nova-blue transition-colors">Careers</a>
+                        </li>
+                        <li><a href="coming-soon.html"
+                                class="text-gray-500 dark:text-gray-400 hover:text-nova-blue transition-colors">Events</a>
+                        </li>
                     </ul>
                 </div>
                 <div>
@@ -282,9 +308,10 @@
                 <div>
                     <h4 class="text-lg font-bold mb-6 dark:text-white">Newsletter</h4>
                     <p class="text-gray-500 dark:text-gray-400 mb-4">Subscribe to our newsletter for latest updates.</p>
-                    <form class="relative">
+                    <form class="relative newsletter-form">
                         <input type="email" placeholder="Email Address"
-                            class="w-full px-4 py-3 rounded-xl bg-gray-100 dark:bg-gray-800 border-none focus:ring-2 focus:ring-nova-blue dark:text-white outline-none">
+                            class="w-full px-4 py-3 rounded-xl bg-gray-100 dark:bg-gray-800 border-none focus:ring-2 focus:ring-nova-blue dark:text-white outline-none"
+                            required>
                         <button type="submit"
                             class="absolute right-2 top-2 w-10 h-10 bg-nova-blue text-white rounded-lg flex items-center justify-center shadow-lg shadow-blue-500/30">
                             <i class="fa-solid fa-paper-plane"></i>

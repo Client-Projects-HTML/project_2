@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog - NovaSite</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -31,7 +33,7 @@
 <body class="selection:bg-primary-500 selection:text-white dark:bg-dark-body">
 
     <!-- Header Navigation -->
-    <header class="fixed top-0 w-full z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md shadow-sm">
+    <header class="fixed top-0 w-full z-50 bg-white dark:bg-slate-900 shadow-sm">
         <nav class="container mx-auto px-6 py-4 flex items-center justify-between">
             <a href="index.html" class="flex items-center space-x-2">
                 <div
@@ -48,16 +50,16 @@
                 <a href="contact.html" class="hover:text-primary-500 transition-colors dark:text-gray-300">Contact</a>
             </div>
             <div class="flex items-center gap-4">
-                <a href="login.html" class="hidden lg:flex btn btn-nova btn-header">
-                    <span>Login</span>
-                </a>
-                <button id="rtl-toggle" class="btn-icon font-bold text-xs">
+                <button id="rtl-toggle" class="hidden lg:flex btn-icon font-bold text-xs">
                     RTL
                 </button>
-                <button id="theme-toggle" class="btn-icon">
+                <button id="theme-toggle" class="hidden lg:flex btn-icon">
                     <i class="fa-solid fa-moon dark:hidden text-lg"></i>
                     <i class="fa-solid fa-sun hidden dark:block text-lg"></i>
                 </button>
+                <a href="login.html" class="hidden lg:flex btn btn-nova btn-header">
+                    <span>Login</span>
+                </a>
                 <button id="mobile-menu-btn" class="lg:hidden btn-icon">
                     <i class="fa-solid fa-bars text-lg"></i>
                 </button>
@@ -88,6 +90,23 @@
                 <a href="contact.html" class="block text-lg font-medium dark:text-gray-300">Contact</a>
                 <hr class="border-gray-100 dark:border-gray-800">
                 <a href="login.html" class="btn btn-nova btn-full">Login</a>
+
+                <!-- Mobile-only Preferences -->
+                <div class="mt-8 pt-6 border-t border-gray-100 dark:border-gray-800">
+                    <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-4">Preferences</p>
+                    <div class="flex items-center gap-4">
+                        <button id="theme-toggle"
+                            class="flex-1 h-12 flex items-center justify-center rounded-xl bg-gray-50 dark:bg-gray-800 dark:text-white hover:bg-gray-100 transition-colors border border-gray-100 dark:border-gray-700">
+                            <i class="fa-solid fa-moon dark:hidden"></i>
+                            <i class="fa-solid fa-sun hidden dark:block"></i>
+                            <span class="ms-2 text-sm font-medium">Theme</span>
+                        </button>
+                        <button id="rtl-toggle"
+                            class="flex-1 h-12 flex items-center justify-center rounded-xl bg-gray-50 dark:bg-gray-800 dark:text-white hover:bg-gray-100 transition-colors font-bold text-xs border border-gray-100 dark:border-gray-700">
+                            RTL
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -129,7 +148,7 @@
             </div>
 
             <!-- Blog Grid -->
-            <div id="blog-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+            <div id="blog-grid" class="flex flex-wrap justify-center gap-10">
                 <!-- Posts will be injected here by JavaScript -->
             </div>
 
@@ -183,6 +202,12 @@
                         <li><a href="contact.html"
                                 class="text-gray-500 dark:text-gray-400 hover:text-nova-blue transition-colors">Contact
                                 Us</a></li>
+                        <li><a href="404.html"
+                                class="text-gray-500 dark:text-gray-400 hover:text-nova-blue transition-colors">Careers</a>
+                        </li>
+                        <li><a href="coming-soon.html"
+                                class="text-gray-500 dark:text-gray-400 hover:text-nova-blue transition-colors">Events</a>
+                        </li>
                     </ul>
                 </div>
                 <div>
@@ -218,9 +243,10 @@
                 <div>
                     <h4 class="text-lg font-bold mb-6 dark:text-white">Newsletter</h4>
                     <p class="text-gray-500 dark:text-gray-400 mb-4">Subscribe to our newsletter for latest updates.</p>
-                    <form class="relative">
+                    <form class="relative newsletter-form">
                         <input type="email" placeholder="Email Address"
-                            class="w-full px-4 py-3 rounded-xl bg-gray-100 dark:bg-gray-800 border-none focus:ring-2 focus:ring-nova-blue dark:text-white outline-none">
+                            class="w-full px-4 py-3 rounded-xl bg-gray-100 dark:bg-gray-800 border-none focus:ring-2 focus:ring-nova-blue dark:text-white outline-none"
+                            required>
                         <button type="submit"
                             class="absolute right-2 top-2 w-10 h-10 bg-nova-blue text-white rounded-lg flex items-center justify-center shadow-lg shadow-blue-500/30">
                             <i class="fa-solid fa-paper-plane"></i>
@@ -246,7 +272,7 @@
                 category: "Business",
                 date: "Oct 15, 2025",
                 author: "Alex Morgan",
-                image: "https://images.unsplash.com/photo-1581578731548-c64695cc6958?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                image: "https://images.unsplash.com/photo-1556761175-b413da4baf72?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
                 excerpt: "A clean workspace is more than just aesthetics; it's a key driver for productivity and mental health in the workplace...",
                 badgeColor: "text-primary-600"
             },
@@ -256,7 +282,7 @@
                 category: "Management",
                 date: "Oct 12, 2025",
                 author: "Sarah Chen",
-                image: "https://images.unsplash.com/photo-1554415707-6e8cfc93ea23?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                image: "https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
                 excerpt: "Managing large facilities doesn't have to break the bank. Discover how smart supply management can save you thousands...",
                 badgeColor: "text-green-600"
             },
@@ -266,7 +292,7 @@
                 category: "Trends",
                 date: "Oct 09, 2025",
                 author: "David Poe",
-                image: "https://images.unsplash.com/photo-1584622781564-1d9876a13d00?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                image: "https://images.unsplash.com/photo-1585832770485-e68a5dbfad52?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
                 excerpt: "From robotic cleaners to UV-C sterilization, technology is revolutionizing how we keep our commercial spaces safe.",
                 badgeColor: "text-purple-600"
             },
@@ -276,7 +302,7 @@
                 category: "Cleaning Tips",
                 date: "Oct 05, 2025",
                 author: "Maria Garcia",
-                image: "https://images.unsplash.com/photo-1556911220-e15224bbaf41?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                image: "https://images.unsplash.com/photo-1558403194-611308249627?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
                 excerpt: "Switching to green cleaning isn't just good for the plant—it creates a healthier environment for your employees.",
                 badgeColor: "text-teal-600"
             },
@@ -286,7 +312,7 @@
                 category: "Management",
                 date: "Oct 01, 2025",
                 author: "James Wilson",
-                image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                image: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
                 excerpt: "Ensuring guest safety in hotels and restaurants requires a meticulous approach to surface disinfection and air quality.",
                 badgeColor: "text-orange-600"
             },
@@ -296,7 +322,7 @@
                 category: "Cleaning Tips",
                 date: "Sep 28, 2025",
                 author: "Emma Thompson",
-                image: "https://images.unsplash.com/photo-1510017803434-a899398421b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                image: "https://images.unsplash.com/photo-1485988412941-77a35537dae4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
                 excerpt: "Prepare your facility for the colder months with these essential maintenance and deep cleaning strategies.",
                 badgeColor: "text-blue-600"
             },
@@ -306,9 +332,29 @@
                 category: "Business",
                 date: "Sep 25, 2025",
                 author: "Robert Green",
-                image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
                 excerpt: "Investing in professional cleaning isn't just an expense; it's a strategy that pays dividends in longevity and retention.",
                 badgeColor: "text-indigo-600"
+            },
+            {
+                id: 8,
+                title: "Advanced Bio-Hazard Cleanup Protocols",
+                category: "Trends",
+                date: "Sep 20, 2025",
+                author: "Dr. Linda Rhodes",
+                image: "https://images.unsplash.com/photo-1584622781564-2ed26920f7a0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                excerpt: "Understanding the science behind deep-level sanitization is crucial for high-traffic public healthcare environments.",
+                badgeColor: "text-red-500"
+            },
+            {
+                id: 9,
+                title: "Industrial Floor Care & Longevity",
+                category: "Management",
+                date: "Sep 18, 2025",
+                author: "Marcus Aurelius",
+                image: "https://images.unsplash.com/photo-1534073828943-f801091bb18c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                excerpt: "Maximize the life-cycle of your industrial flooring with these professional stripping, waxing, and maintenance schedules.",
+                badgeColor: "text-blue-500"
             }
         ];
 
@@ -340,7 +386,7 @@
 
             // Render Grid
             blogGrid.innerHTML = paginatedPosts.map(post => `
-                <article class="group bg-white dark:bg-dark-card rounded-[2rem] border border-gray-100 dark:border-gray-800 overflow-hidden hover:shadow-2xl transition-all duration-300">
+                <article class="group bg-white dark:bg-dark-card rounded-[2rem] border border-gray-100 dark:border-gray-800 overflow-hidden hover:shadow-2xl transition-all duration-300 w-full md:w-[calc(50%-1.25rem)] lg:w-[calc(33.333%-1.667rem)] flex-shrink-0">
                     <div class="relative overflow-hidden aspect-video">
                         <img src="${post.image}" alt="${post.title}" 
                              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
