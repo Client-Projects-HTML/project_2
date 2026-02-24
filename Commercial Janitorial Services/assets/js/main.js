@@ -156,6 +156,74 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    // ========== LOGIN DROPDOWN LOGIC ==========
+    const loginToggle = document.getElementById('login-dropdown-toggle');
+    const loginDropdown = document.getElementById('login-dropdown');
+
+    if (loginToggle && loginDropdown) {
+        loginToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            loginDropdown.classList.toggle('hidden');
+            const icon = loginToggle.querySelector('.fa-chevron-down');
+            if (icon) icon.classList.toggle('rotate-180');
+        });
+    }
+
+    const mobileLoginToggle = document.getElementById('mobile-login-toggle');
+    const mobileLoginDropdown = document.getElementById('mobile-login-dropdown');
+
+    if (mobileLoginToggle && mobileLoginDropdown) {
+        mobileLoginToggle.addEventListener('click', () => {
+            mobileLoginDropdown.classList.toggle('hidden');
+            const icon = mobileLoginToggle.querySelector('.fa-chevron-down');
+            if (icon) icon.classList.toggle('rotate-180');
+        });
+    }
+
+    // ========== HOME DROPDOWN LOGIC ==========
+    const homeToggle = document.getElementById('home-dropdown-toggle');
+    const homeDropdown = document.getElementById('home-dropdown');
+
+    if (homeToggle && homeDropdown) {
+        // Toggle on click
+        homeToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            homeDropdown.classList.toggle('hidden');
+            const icon = homeToggle.querySelector('.fa-chevron-down');
+            if (icon) icon.classList.toggle('rotate-180');
+        });
+
+        // Optional: Show on hover for desktop
+        const homeContainer = document.getElementById('home-menu-container');
+        if (homeContainer) {
+            homeContainer.addEventListener('mouseenter', () => {
+                if (window.innerWidth >= 1024) {
+                    homeDropdown.classList.remove('hidden');
+                    const icon = homeToggle.querySelector('.fa-chevron-down');
+                    if (icon) icon.classList.add('rotate-180');
+                }
+            });
+            homeContainer.addEventListener('mouseleave', () => {
+                if (window.innerWidth >= 1024) {
+                    homeDropdown.classList.add('hidden');
+                    const icon = homeToggle.querySelector('.fa-chevron-down');
+                    if (icon) icon.classList.remove('rotate-180');
+                }
+            });
+        }
+    }
+
+    const mobileHomeToggle = document.getElementById('mobile-home-toggle');
+    const mobileHomeDropdown = document.getElementById('mobile-home-dropdown');
+
+    if (mobileHomeToggle && mobileHomeDropdown) {
+        mobileHomeToggle.addEventListener('click', () => {
+            mobileHomeDropdown.classList.toggle('hidden');
+            const icon = mobileHomeToggle.querySelector('.fa-chevron-down');
+            if (icon) icon.classList.toggle('rotate-180');
+        });
+    }
+
     // ========== STICKY HEADER ==========
     const header = document.querySelector('header');
     if (header) {
@@ -193,9 +261,22 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // ========== CLOSE DROPDOWNS ON CLICK OUTSIDE ==========
     document.addEventListener('click', (e) => {
-        document.querySelectorAll('[id^="notifications-dropdown"]').forEach(dropdown => {
+        const allDropdowns = document.querySelectorAll('[id^="notifications-dropdown"], #login-dropdown, #home-dropdown');
+        allDropdowns.forEach(dropdown => {
             if (!dropdown.classList.contains('hidden') && !dropdown.contains(e.target)) {
                 dropdown.classList.add('hidden');
+
+                // Reset toggle icons
+                if (dropdown.id === 'login-dropdown') {
+                    const toggle = document.getElementById('login-dropdown-toggle');
+                    const icon = toggle ? toggle.querySelector('.fa-chevron-down') : null;
+                    if (icon) icon.classList.remove('rotate-180');
+                }
+                if (dropdown.id === 'home-dropdown') {
+                    const toggle = document.getElementById('home-dropdown-toggle');
+                    const icon = toggle ? toggle.querySelector('.fa-chevron-down') : null;
+                    if (icon) icon.classList.remove('rotate-180');
+                }
             }
         });
     });

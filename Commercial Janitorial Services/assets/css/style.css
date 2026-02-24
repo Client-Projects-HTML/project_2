@@ -371,6 +371,16 @@ details[open] .fa-chevron-down {
     background: var(--primary-dark);
 }
 
+/* Hide scrollbar utility */
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
 /* Button System */
 .btn {
     display: inline-flex;
@@ -495,9 +505,53 @@ details[open] .fa-chevron-down {
     font-size: 0.875rem;
 }
 
+/* Split Button Unit */
+.btn-split-container {
+    display: inline-flex;
+    align-items: stretch;
+    background-color: var(--nova-blue);
+    border-radius: 0.75rem;
+    box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.3);
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.btn-split-container:hover {
+    filter: brightness(1.1);
+    box-shadow: 0 20px 25px -5px rgba(59, 130, 246, 0.4);
+}
+
+.btn-split-container .btn {
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+}
+
+.btn-split-container .btn-header-left {
+    padding: 0.625rem 1rem 0.625rem 1.5rem;
+    font-size: 0.875rem;
+}
+
+.btn-split-container .btn-header-right {
+    padding: 0.625rem 0.75rem;
+    font-size: 0.875rem;
+    border-left: 1px solid rgba(255, 255, 255, 0.15) !important;
+}
+
 @media (min-width: 1024px) {
     .btn-header {
         padding: 0.75rem 2rem;
+        font-size: 0.9375rem;
+    }
+
+    .btn-split-container .btn-header-left {
+        padding: 0.75rem 1.25rem 0.75rem 2rem;
+        font-size: 0.9375rem;
+    }
+
+    .btn-split-container .btn-header-right {
+        padding: 0.75rem 1rem;
         font-size: 0.9375rem;
     }
 }

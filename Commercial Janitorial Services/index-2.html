@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NovaSite Advanced - Next-Gen Facility Solutions</title>
+    <meta name="description"
+        content="Advanced janitorial and facility management solutions using smart technology and data-driven sanitation.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff', 100: '#dbeafe', 200: '#bfdbfe', 300: '#93c5fd', 400: '#60a5fa', 500: '#3b82f6', 600: '#2563eb', 700: '#1d4ed8', 800: '#1e40af', 900: '#1e3a8a',
+                        },
+                        dark: {
+                            card: '#1e293b',
+                            body: '#0f172a',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- FOUC Prevention -->
+    <script>
+            (function () {
+                const savedTheme = localStorage.getItem('theme');
+                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                const theme = savedTheme || (prefersDark ? 'dark' : 'light');
+                document.documentElement.classList.add(theme);
+                document.documentElement.setAttribute('data-theme', theme);
+                const savedDir = localStorage.getItem('dir') || 'ltr';
+                document.documentElement.setAttribute('dir', savedDir);
+            })();
+    </script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .dark .glass-card {
+            background: rgba(15, 23, 42, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        @keyframes marquee {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .animate-marquee {
+            animation: marquee 30s linear infinite;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #3b82f6 0%, #a855f7 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+
+<body class="selection:bg-primary-500 selection:text-white bg-white dark:bg-dark-body">
+
+    <!-- Header Navigation -->
+    <header
+        class="fixed top-0 w-full z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md shadow-sm transition-all duration-300">
+        <nav class="container mx-auto px-6 py-4 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-2">
+                <div
+                    class="w-10 h-10 logo-box rounded-xl flex items-center justify-center text-white text-xl font-bold transition-transform hover:scale-105">
+                    N</div>
+                <span class="text-2xl font-bold font-heading dark:text-white">NovaSite</span>
+            </a>
+
+            <!-- Desktop Menu -->
+            <div class="hidden lg:flex items-center gap-8">
+                <div class="relative group" id="home-menu-container">
+                    <button id="home-dropdown-toggle"
+                        class="flex items-center gap-1 text-primary-600 font-medium hover:text-primary-500 transition-colors py-4">
+                        <span>Home</span>
+                        <i class="fa-solid fa-chevron-down text-[10px] transition-transform duration-300"></i>
+                    </button>
+                    <!-- Home Dropdown -->
+                    <div id="home-dropdown"
+                        class="absolute left-0 top-full w-56 bg-white dark:bg-slate-800 rounded-2xl shadow-xl border border-gray-100 dark:border-gray-700 py-2 hidden z-50 animate-fade-in">
+                        <a href="index.html"
+                            class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-primary-50 dark:hover:bg-primary-900/20 hover:text-primary-600 dark:hover:text-primary-400 transition-all border-l-4 border-transparent">
+                            <span>Modern (Home 1)</span>
+                        </a>
+                        <a href="index-2.html"
+                            class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-primary-600 bg-primary-50 dark:bg-primary-900/20 border-l-4 border-primary-500 transition-all">
+                            <span>Advanced (Home 2)</span>
+                        </a>
+                    </div>
+                </div>
+                <a href="about.html" class="hover:text-primary-500 transition-colors dark:text-gray-300">About</a>
+                <a href="services.html" class="hover:text-primary-500 transition-colors dark:text-gray-300">Services</a>
+                <a href="blog.html" class="hover:text-primary-500 transition-colors dark:text-gray-300">Blog</a>
+                <a href="pricing.html" class="hover:text-primary-500 transition-colors dark:text-gray-300">Pricing</a>
+                <a href="contact.html" class="hover:text-primary-500 transition-colors dark:text-gray-300">Contact</a>
+            </div>
+
+            <!-- Right Side Actions -->
+            <div class="flex items-center gap-4">
+                <button id="theme-toggle" class="hidden lg:flex btn-icon">
+                    <i class="fa-solid fa-moon dark:hidden text-lg"></i>
+                    <i class="fa-solid fa-sun hidden dark:block text-lg"></i>
+                </button>
+                <div class="relative hidden lg:flex items-stretch">
+                    <div class="btn-split-unit btn-split-container">
+                        <a href="login.html" id="login-nav-link" class="btn btn-header-left flex items-center">
+                            <span>Login</span>
+                        </a>
+                        <button id="login-dropdown-toggle"
+                            class="btn btn-header-right flex items-center justify-center px-3">
+                            <i class="fa-solid fa-chevron-down text-xs transition-transform duration-300"></i>
+                        </button>
+                    </div>
+                    <div id="login-dropdown"
+                        class="absolute right-0 top-full mt-2 w-64 bg-white dark:bg-slate-800 rounded-2xl shadow-2xl border border-gray-100 dark:border-gray-700 py-3 hidden z-50 animate-fade-in">
+                        <a href="client/index.html"
+                            class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-primary-50 dark:hover:bg-primary-900/20 hover:text-primary-600 dark:hover:text-primary-400 transition-all">
+                            <div
+                                class="w-8 h-8 rounded-lg bg-green-100 dark:bg-green-900/30 flex items-center justify-center">
+                                <i class="fa-solid fa-user-tie text-green-600"></i>
+                            </div>
+                            <span>Client Dashboard</span>
+                        </a>
+                        <a href="admin/index.html"
+                            class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-primary-50 dark:hover:bg-primary-900/20 hover:text-primary-600 dark:hover:text-primary-400 transition-all">
+                            <div
+                                class="w-8 h-8 rounded-lg bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center">
+                                <i class="fa-solid fa-user-shield text-purple-600"></i>
+                            </div>
+                            <span>Admin Dashboard</span>
+                        </a>
+                    </div>
+                </div>
+                <button id="mobile-menu-btn" class="lg:hidden btn-icon">
+                    <i class="fa-solid fa-bars text-lg"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="fixed inset-0 z-[60] hidden">
+        <div class="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
+        <div
+            class="absolute right-0 top-0 h-full w-4/5 max-w-sm bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl p-8 shadow-2xl overflow-y-auto no-scrollbar">
+            <div class="flex items-center justify-between mb-8">
+                <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 logo-box rounded-lg flex items-center justify-center text-white font-bold">N
+                    </div>
+                    <span class="text-xl font-bold font-heading dark:text-white">NovaSite</span>
+                </div>
+                <button id="mobile-menu-close" class="text-gray-500 dark:text-gray-400">
+                    <i class="fa-solid fa-xmark text-2xl"></i>
+                </button>
+            </div>
+            <div class="space-y-4">
+                <div class="space-y-2">
+                    <div class="flex items-center justify-between">
+                        <span class="text-lg font-medium text-primary-500">Home</span>
+                        <button id="mobile-home-toggle" class="p-2 text-primary-500">
+                            <i class="fa-solid fa-chevron-down text-sm transition-transform duration-300"></i>
+                        </button>
+                    </div>
+                    <div id="mobile-home-dropdown" class="hidden space-y-2 pl-4 border-l-2 border-primary-500/20 ml-2">
+                        <a href="index.html"
+                            class="block py-2 text-gray-600 dark:text-gray-400 hover:text-primary-500 font-medium transition-colors">Modern
+                            (Home 1)</a>
+                        <a href="index-2.html" class="block py-2 text-primary-600 font-medium">Advanced (Home 2)</a>
+                    </div>
+                </div>
+                <a href="about.html" class="block text-lg font-medium dark:text-gray-300">About</a>
+                <a href="services.html" class="block text-lg font-medium dark:text-gray-300">Services</a>
+                <a href="blog.html" class="block text-lg font-medium dark:text-gray-300">Blog</a>
+                <a href="pricing.html" class="block text-lg font-medium dark:text-gray-300">Pricing</a>
+                <a href="contact.html" class="block text-lg font-medium dark:text-gray-300">Contact</a>
+                <hr class="border-gray-100 dark:border-gray-800">
+                <div class="pt-2">
+                    <div class="flex items-center gap-2">
+                        <a href="login.html" class="btn btn-nova flex-1">Login</a>
+                        <button id="mobile-login-toggle"
+                            class="btn btn-secondary w-12 h-12 p-0 flex items-center justify-center">
+                            <i class="fa-solid fa-chevron-down text-xs transition-transform duration-300"></i>
+                        </button>
+                    </div>
+                    <div id="mobile-login-dropdown"
+                        class="hidden mt-2 space-y-1 pl-4 border-l-2 border-primary-500/20 ml-2">
+                        <a href="client/index.html"
+                            class="block py-3 text-gray-600 dark:text-gray-400 hover:text-primary-500 font-medium transition-colors">Client
+                            Dashboard</a>
+                        <a href="admin/index.html"
+                            class="block py-3 text-gray-600 dark:text-gray-400 hover:text-primary-500 font-medium transition-colors">Admin
+                            Dashboard</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Advanced Hero Section -->
+    <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <div
+                class="absolute top-[10%] right-[5%] w-[600px] h-[600px] bg-primary-500/20 rounded-full blur-[120px] animate-pulse">
+            </div>
+            <div class="absolute bottom-[10%] left-[5%] w-[400px] h-[400px] bg-purple-500/20 rounded-full blur-[100px] animate-pulse"
+                style="animation-delay: 2s"></div>
+        </div>
+
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="flex flex-col lg:flex-row items-center gap-16">
+                <div class="lg:w-1/2" data-aos="fade-right">
+                    <div
+                        class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-100 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 text-sm font-bold mb-8">
+                        <span class="flex h-2 w-2 rounded-full bg-primary-600 animate-ping"></span>
+                        Next-Gen Facility Management 2026
+                    </div>
+                    <h1 class="text-5xl lg:text-7xl font-black font-heading mb-8 leading-[1.1] dark:text-white">
+                        Smart <span class="gradient-text">Sanitation</span> for Modern Enterprise
+                    </h1>
+                    <p class="text-xl text-gray-600 dark:text-gray-400 mb-10 leading-relaxed max-w-xl">
+                        Apex Advanced leverages IoT-enabled cleaning, real-time reporting, and zero-toxin chemicals to
+                        maintain your high-performance workspace.
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#calculator" class="btn btn-nova px-8 py-4 shadow-xl shadow-primary-500/20">
+                            Book Smart Audit
+                        </a>
+                        <a href="services.html"
+                            class="btn btn-secondary px-8 py-4 bg-white/10 backdrop-blur-md border hover:bg-white/20">
+                            Explore Solutions
+                        </a>
+                    </div>
+
+                    <div class="mt-12 flex items-center gap-8">
+                        <div>
+                            <p class="text-3xl font-bold dark:text-white">500+</p>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">Smart Sites</p>
+                        </div>
+                        <div class="w-px h-10 bg-gray-200 dark:bg-gray-800"></div>
+                        <div>
+                            <p class="text-3xl font-bold dark:text-white">99.8%</p>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">Uptime Rate</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:w-1/2 relative" data-aos="fade-left">
+                    <div
+                        class="relative p-2 bg-gradient-to-tr from-primary-500/20 to-purple-500/20 rounded-[3rem] backdrop-blur-xl border border-white/10">
+                        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2070&auto=format&fit=crop"
+                            alt="Smart Cleaning Tech"
+                            class="rounded-[2.5rem] shadow-2xl w-full object-cover aspect-[4/3]">
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trusted By Marquee -->
+    <section class="py-12 border-y border-gray-100 dark:border-gray-800 overflow-hidden">
+        <div class="container mx-auto px-6 mb-8 text-center">
+            <p class="text-sm font-bold text-gray-400 uppercase tracking-widest">Powering Productivity for Global
+                Leaders</p>
+        </div>
+        <div class="relative flex overflow-x-hidden">
+            <div class="flex animate-marquee whitespace-nowrap gap-16 items-center">
+                <span
+                    class="text-3xl font-black text-gray-300 dark:text-gray-700 hover:text-primary-500 transition-colors cursor-default">TEKSOFT</span>
+                <span
+                    class="text-3xl font-black text-gray-300 dark:text-gray-700 hover:text-primary-500 transition-colors cursor-default">NOVA-X</span>
+                <span
+                    class="text-3xl font-black text-gray-300 dark:text-gray-700 hover:text-primary-500 transition-colors cursor-default">GLOBAL-FLY</span>
+                <span
+                    class="text-3xl font-black text-gray-300 dark:text-gray-700 hover:text-primary-500 transition-colors cursor-default">PRIME-SaaS</span>
+                <span
+                    class="text-3xl font-black text-gray-300 dark:text-gray-700 hover:text-primary-500 transition-colors cursor-default">DATACORE</span>
+                <span
+                    class="text-3xl font-black text-gray-300 dark:text-gray-700 hover:text-primary-500 transition-colors cursor-default">ZENITH
+                    AI</span>
+                <!-- Duplicate for seamless loop -->
+                <span
+                    class="text-3xl font-black text-gray-300 dark:text-gray-700 hover:text-primary-500 transition-colors cursor-default">TEKSOFT</span>
+                <span
+                    class="text-3xl font-black text-gray-300 dark:text-gray-700 hover:text-primary-500 transition-colors cursor-default">NOVA-X</span>
+                <span
+                    class="text-3xl font-black text-gray-300 dark:text-gray-700 hover:text-primary-500 transition-colors cursor-default">GLOBAL-FLY</span>
+                <span
+                    class="text-3xl font-black text-gray-300 dark:text-gray-700 hover:text-primary-500 transition-colors cursor-default">PRIME-SaaS</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive ROI Calculator -->
+    <section id="calculator" class="py-24 bg-gray-50 dark:bg-slate-900/30">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col lg:flex-row items-stretch gap-12">
+                <div class="lg:w-1/2" data-aos="fade-up">
+                    <h2 class="text-4xl font-bold font-heading mb-6 dark:text-white">Calculate Your <span
+                            class="text-primary-500">Facility ROI</span></h2>
+                    <p class="text-lg text-gray-500 dark:text-gray-400 mb-8 leading-relaxed">
+                        Data shows that optimized sanitation reduces employee sick leave by up to 24%. Use our advanced
+                        calculator to see your potential savings.
+                    </p>
+                    <div
+                        class="space-y-8 bg-white dark:bg-dark-card p-10 rounded-3xl border border-gray-100 dark:border-gray-800 shadow-xl">
+                        <div>
+                            <label class="block text-sm font-bold mb-4 dark:text-white uppercase tracking-widest">Office
+                                Area (sq. ft)</label>
+                            <input type="range" min="1000" max="50000" value="15000"
+                                class="w-full h-2 bg-gray-100 dark:bg-gray-800 rounded-lg appearance-none cursor-pointer accent-primary-500"
+                                id="sqft-range">
+                            <div class="flex justify-between mt-2 font-bold text-primary-500" id="sqft-value">15,000
+                                sq.ft</div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold mb-4 dark:text-white uppercase tracking-widest">Staff
+                                Count</label>
+                            <input type="range" min="10" max="500" value="120"
+                                class="w-full h-2 bg-gray-100 dark:bg-gray-800 rounded-lg appearance-none cursor-pointer accent-purple-500"
+                                id="staff-range">
+                            <div class="flex justify-between mt-2 font-bold text-purple-500" id="staff-value">120
+                                Employees</div>
+                        </div>
+                        <div class="pt-6 border-t border-gray-100 dark:border-gray-800">
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="text-gray-500">Estimated Monthly Savings</span>
+                                <span class="text-2xl font-black text-green-500" id="savings-value">$2,450</span>
+                            </div>
+                            <p class="text-xs text-gray-400">*Based on average productivity increase and health spend
+                                reduction.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:w-1/2" data-aos="fade-up" data-aos-delay="200">
+                    <div
+                        class="h-full bg-primary-600 rounded-[2.5rem] p-12 text-white flex flex-col justify-between relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -mr-32 -mt-32">
+                        </div>
+                        <div class="relative z-10">
+                            <h3 class="text-3xl font-bold mb-6">Why Apex Advanced?</h3>
+                            <ul class="space-y-6">
+                                <li class="flex items-start gap-4">
+                                    <div
+                                        class="w-8 h-8 rounded-lg bg-white/20 flex items-center justify-center flex-shrink-0">
+                                        <i class="fa-solid fa-microchip"></i>
+                                    </div>
+                                    <p class="text-primary-50 font-medium">IoT-Integrated sensors detect high-traffic
+                                        areas for dynamic cleaning schedules.</p>
+                                </li>
+                                <li class="flex items-start gap-4">
+                                    <div
+                                        class="w-8 h-8 rounded-lg bg-white/20 flex items-center justify-center flex-shrink-0">
+                                        <i class="fa-solid fa-leaf"></i>
+                                    </div>
+                                    <p class="text-primary-50 font-medium">NASA-grade air purification and probiotic
+                                        surface solutions.</p>
+                                </li>
+                                <li class="flex items-start gap-4">
+                                    <div
+                                        class="w-8 h-8 rounded-lg bg-white/20 flex items-center justify-center flex-shrink-0">
+                                        <i class="fa-solid fa-chart-line"></i>
+                                    </div>
+                                    <p class="text-primary-50 font-medium">Weekly data audits with custom dashboards for
+                                        facility managers.</p>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="relative z-10 mt-12">
+                            <button
+                                class="w-full bg-white text-primary-600 font-black py-5 rounded-2xl hover:scale-105 transition-transform shadow-2xl">
+                                Request Advanced Proposal
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Grid (Advanced Styles) -->
+    <section class="py-24 bg-white dark:bg-dark-body">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-20" data-aos="fade-up">
+                <h2 class="text-4xl lg:text-5xl font-black font-heading mb-6 dark:text-white">Industrial Verticals</h2>
+                <p class="text-gray-500 dark:text-gray-400 max-w-2xl mx-auto text-lg leading-relaxed">
+                    We specialize in high-stakes environments where sanitation is a mission-critical component of
+                    operation.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                <!-- Vertical 1 -->
+                <div
+                    class="group p-10 bg-gray-50 dark:bg-dark-card rounded-[2.5rem] hover:bg-white dark:hover:bg-slate-800 hover:shadow-2xl transition-all duration-500 border border-transparent hover:border-primary-500/10">
+                    <div
+                        class="w-16 h-16 rounded-2xl bg-primary-100 dark:bg-primary-900/30 flex items-center justify-center text-primary-600 mb-10 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-server text-3xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-6 dark:text-white">Data Centers</h3>
+                    <p class="text-gray-500 dark:text-gray-400 mb-8 leading-relaxed">ISO 14644-1 certified subfloor
+                        cleaning and sub-micron particle removal for mission-critical hardware.</p>
+                    <a href="#"
+                        class="inline-flex items-center gap-2 text-primary-600 font-bold group-hover:gap-3 transition-all">
+                        Deep Specs <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <!-- Vertical 2 -->
+                <div
+                    class="group p-10 bg-gray-50 dark:bg-dark-card rounded-[2.5rem] hover:bg-white dark:hover:bg-slate-800 hover:shadow-2xl transition-all duration-500 border border-transparent hover:border-purple-500/10">
+                    <div
+                        class="w-16 h-16 rounded-2xl bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center text-purple-600 mb-10 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-flask-vial text-3xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-6 dark:text-white">Life Sciences</h3>
+                    <p class="text-gray-500 dark:text-gray-400 mb-8 leading-relaxed">Bio-hazard containment and sterile
+                        cleaning for labs, pharmaceutical and medical manufacturing facilities.</p>
+                    <a href="#"
+                        class="inline-flex items-center gap-2 text-purple-600 font-bold group-hover:gap-3 transition-all">
+                        Compliance Docs <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <!-- Vertical 3 -->
+                <div
+                    class="group p-10 bg-gray-50 dark:bg-dark-card rounded-[2.5rem] hover:bg-white dark:hover:bg-slate-800 hover:shadow-2xl transition-all duration-500 border border-transparent hover:border-orange-500/10">
+                    <div
+                        class="w-16 h-16 rounded-2xl bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center text-orange-600 mb-10 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-building-shield text-3xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-6 dark:text-white">Government</h3>
+                    <p class="text-gray-500 dark:text-gray-400 mb-8 leading-relaxed">Secured facility maintenance with
+                        SCIF experienced personnel and stringent background screening.</p>
+                    <a href="#"
+                        class="inline-flex items-center gap-2 text-orange-600 font-bold group-hover:gap-3 transition-all">
+                        Security Clearance <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTW - Advanced Stats Footer -->
+    <section class="py-24 relative overflow-hidden bg-slate-900 text-white">
+        <div class="absolute inset-0 bg-gradient-to-br from-primary-900/40 to-dark-body/40"></div>
+        <div class="container mx-auto px-6 relative z-10 text-center">
+            <h2 class="text-4xl lg:text-6xl font-black mb-12" data-aos="fade-up">Ready for a <span
+                    class="gradient-text">Clean Future?</span></h2>
+            <div class="max-w-4xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+                <div>
+                    <p class="text-4xl lg:text-5xl font-black mb-2">$5M+</p>
+                    <p class="text-primary-300 uppercase tracking-widest text-xs font-black">Audit Savings</p>
+                </div>
+                <div>
+                    <p class="text-4xl lg:text-5xl font-black mb-2">15ms</p>
+                    <p class="text-primary-300 uppercase tracking-widest text-xs font-black">IoT Response</p>
+                </div>
+                <div>
+                    <p class="text-4xl lg:text-5xl font-black mb-2">Zero</p>
+                    <p class="text-primary-300 uppercase tracking-widest text-xs font-black">Carbon Footprint</p>
+                </div>
+                <div>
+                    <p class="text-4xl lg:text-5xl font-black mb-2">24/7</p>
+                    <p class="text-primary-300 uppercase tracking-widest text-xs font-black">AI Monitoring</p>
+                </div>
+            </div>
+            <a href="contact.html" class="btn btn-nova px-12 py-5 text-lg shadow-2xl">
+                Start Next-Gen Partnership
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="pt-20 pb-10 bg-white dark:bg-dark-body border-t border-gray-100 dark:border-gray-800">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+                <div>
+                    <a href="index.html" class="flex items-center gap-2 mb-6">
+                        <div
+                            class="w-10 h-10 logo-box rounded-xl flex items-center justify-center text-white text-xl font-bold transition-transform hover:scale-105">
+                            N</div>
+                        <span class="text-2xl font-bold font-heading dark:text-white">NovaSite</span>
+                    </a>
+                    <p class="text-gray-500 dark:text-gray-400 mb-6">The leading choice for smart, data-driven facility
+                        management and enterprise sanitation.</p>
+                    <div class="flex space-x-4">
+                        <a href="#"
+                            class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center hover:bg-nova-blue hover:text-white transition-all text-gray-600 dark:text-gray-400">
+                            <i class="fa-brands fa-linkedin-in"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center hover:bg-nova-blue hover:text-white transition-all text-gray-600 dark:text-gray-400">
+                            <i class="fa-brands fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-6 dark:text-white">Platform</h4>
+                    <ul class="space-y-4">
+                        <li><a href="#"
+                                class="text-gray-500 dark:text-gray-400 hover:text-nova-blue transition-colors">Solutions</a>
+                        </li>
+                        <li><a href="#"
+                                class="text-gray-500 dark:text-gray-400 hover:text-nova-blue transition-colors">IoT
+                                Integration</a></li>
+                        <li><a href="blog.html"
+                                class="text-gray-500 dark:text-gray-400 hover:text-nova-blue transition-colors">Case
+                                Studies</a></li>
+                        <li><a href="pricing.html"
+                                class="text-gray-500 dark:text-gray-400 hover:text-nova-blue transition-colors">Pricing</a>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-6 dark:text-white">Developer</h4>
+                    <ul class="space-y-4">
+                        <li><a href="#"
+                                class="text-gray-500 dark:text-gray-400 hover:text-nova-blue transition-colors">API
+                                Docs</a></li>
+                        <li><a href="#"
+                                class="text-gray-500 dark:text-gray-400 hover:text-nova-blue transition-colors">Global
+                                Status</a></li>
+                        <li><a href="#"
+                                class="text-gray-500 dark:text-gray-400 hover:text-nova-blue transition-colors">Open
+                                Source</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-6 dark:text-white">Get Smart Updates</h4>
+                    <form class="relative newsletter-form">
+                        <input type="email" placeholder="work@company.com"
+                            class="w-full px-4 py-3 rounded-xl bg-gray-100 dark:bg-gray-800 border-none focus:ring-2 focus:ring-nova-blue dark:text-white outline-none"
+                            required>
+                        <button type="submit"
+                            class="absolute right-2 top-2 w-10 h-10 bg-nova-blue text-white rounded-lg flex items-center justify-center shadow-lg shadow-blue-500/30">
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div class="pt-8 border-t border-gray-100 dark:border-gray-800 text-center">
+                <p class="text-gray-500 dark:text-gray-400">&copy; 2026 NovaSite. All rights reserved by <a
+                        href="https://www.abhivorn.com/" target="_blank"
+                        class="hover:text-nova-blue transition-colors">Abhivorn Technologies</a>.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script>
+        AOS.init();
+
+        // Interactive Calculator Logic
+        const sqftRange = document.getElementById('sqft-range');
+        const staffRange = document.getElementById('staff-range');
+        const sqftValue = document.getElementById('sqft-value');
+        const staffValue = document.getElementById('staff-value');
+        const savingsValue = document.getElementById('savings-value');
+
+        function updateCalculator() {
+            const sqft = parseInt(sqftRange.value);
+            const staff = parseInt(staffRange.value);
+
+            sqftValue.innerText = sqft.toLocaleString() + ' sq.ft';
+            staffValue.innerText = staff.toLocaleString() + ' Employees';
+
+            // Artificial formula for ROI
+            const savings = (sqft * 0.1) + (staff * 15);
+            savingsValue.innerText = '$' + Math.round(savings).toLocaleString();
+        }
+
+        sqftRange.addEventListener('input', updateCalculator);
+        staffRange.addEventListener('input', updateCalculator);
+        updateCalculator();
+    </script>
+</body>
+
+</html>
